@@ -1,0 +1,51 @@
+    source ~/files/sec/mutt
+
+# SERVER config
+## SSL
+    set ssl_starttls=yes
+    set ssl_force_tls=yes
+    set certificate_file ="~/.mutt/accounts/$my_acc_4/certificates"
+## IMAP
+    set imap_user = "$my_email_4"
+    set imap_pass = "$my_pass_4"
+    unset imap_passive
+    unset imap_peek
+## SMTP
+    set smtp_url="smtps://$my_email_4@$my_smtp_4:465/"
+    set smtp_pass = "$my_pass_4"
+## connecting the folders
+    unmailboxes *
+    set from = "$my_email_4"
+    set folder = "imaps://$my_imap_4"
+    set spoolfile = "=Inbox"
+    set postponed = "=Drafts"
+    set record = "=Sent"
+    set trash = "=Trash"
+    set header_cache = ~/.mutt/accounts/$my_acc_4/cache/headers
+    set message_cachedir = ~/.mutt/accounts/$my_acc_4/cache/bodies 
+
+# MAIL config
+## status bar format. including signature
+    set status_format = "$my_email_4 %f | Messages: %m, %l"
+    set signature = "~/.mutt/accounts/$my_acc_4/signature"
+    set sig_dashes=yes
+## setting the colorscheme
+    source ~/.mutt/accounts/$my_acc_4/colors
+## Sidebar
+### start with visible sidebar. sidebar width. sidebar format.
+    set sidebar_visible=yes
+    set sidebar_width=20
+    set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+    set sidebar_divider_char = ' '
+    set mail_check_stats=no
+###  mailboxes listed in the sidebar
+    mailboxes =Inbox 
+    mailboxes =Drafts 
+    mailboxes =Sent 
+    mailboxes =Trash 
+    mailboxes ~/tmp/attach
+### simplify the mailboxes names
+    set sidebar_short_path 
+    set sidebar_delim_chars="/" 
+
+

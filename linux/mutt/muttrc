@@ -1,0 +1,27 @@
+# ACCOUNTS config
+## including accounts
+    folder-hook '1rc' 'source mutt/accounts/1rc'
+    folder-hook '2rc' 'source mutt/accounts/2rc'
+    folder-hook '3rc' 'source mutt/accounts/3rc'
+    folder-hook '4rc' 'source mutt/accounts/4rc'
+## defining default account
+    source ~/.mutt/accounts/1rc         
+## "tab" to switch between accounts
+    macro generic \Cx| "<enter-command>source"
+    macro generic \Cx& "<enter-command>macro index \\t \"\\Cx"
+    macro index <tab> "\Cx0"
+    macro generic \Cx1 "\Cx| ~/.mutt/accounts/1rc\"\n\Cx&2\"<enter><change-folder>!<enter>"
+    macro generic \Cx2 "\Cx| ~/.mutt/accounts/2rc\"\n\Cx&3\"<enter><change-folder>!<enter>"
+    macro generic \Cx3 "\Cx| ~/.mutt/accounts/3rc\"\n\Cx&4\"<enter><change-folder>!<enter>"
+    macro generic \Cx4 "\Cx| ~/.mutt/accounts/4rc\"\n\Cx&1\"<enter><change-folder>!<enter>"
+    
+## "\i" to jump tp ith account
+    macro index,pager \\1 "\Cx1" 
+    macro index,pager \\2 "\Cx2"
+    macro index,pager \\3 "\Cx3"
+    macro index,pager \\4 "\Cx4"
+
+# SETTINGS
+## including additional settings
+    source ~/.mutt/settings
+

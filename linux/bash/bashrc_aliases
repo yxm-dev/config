@@ -1,0 +1,72 @@
+#! /bin/bash
+
+# SYSTEM
+## "ls" to list colored files
+    alias ls="ls --color=auto"
+## "la" to list hidden files
+    alias la="ls -a"
+## "bash" to open "bashrc" file 
+    alias bash="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc"
+## "basha" to open "bashrc_alias" file
+    alias basha="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_aliases"
+## "bashp" to open "bashrc_particular" file
+    alias bashp="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_particular"
+## running "makepkg" as a root 
+    function mkp(){
+        x=/home/build
+        function aux(){
+            chgrp nobody $x
+            chmod g+ws $x
+            cp -r $1 $x
+            cd $x
+            sudo -u nobody makepkg $1
+            cd $HOME
+        } 
+        if [[ -d "$x" ]]; then
+            aux $1
+        else
+            mkdir $x
+            aux $1
+        fi
+        unset -f aux
+    }
+## "shutdown" to shutdown quickly
+    alias shutdown="sudo shutdown -h now"
+## "shtdw" and "shdw" to push, make a bkp and then shutdown quickly 
+    alias shtdw="synca && syncp && bkps && shutdown -h now"
+    alias shdw="synca && syncp && bkps && shutdown -h now"
+## "kill" to kill applications
+    alias kill="pkill -9"
+
+# APPLICATIONS
+## "vi" and "v" to open vim with Netrw. 
+    alias vi="vim -c ":Lexplore" ~/.tmp"
+    alias v="vi"
+## "z" to open .pdf with Zathura in the background
+    function z(){
+        zathura $1 & disown 
+    }
+## "m" to open "Mutt" in default account. "mi" to open "ith" account.
+    alias m="mutt"
+    alias m1="mutt -e 'source ~/.mutt/accounts/1rc'"
+    alias m2="mutt -e 'source ~/.mutt/accounts/2rc'"
+    alias m3="mutt -e 'source ~/.mutt/accounts/3rc'"
+    alias m4="mutt -e 'source ~/.mutt/accounts/4rc'"
+    alias m5="mutt -e 'source ~/.mutt/accounts/5rc'"
+    alias m6="mutt -e 'source ~/.mutt/accounts/6rc'"
+## "calc", "clc" to open "bc" in the interactive mode
+    function calc(){
+        echo "Welcome to bc calculator. Type \"quit\" to exit."
+        bc -q -i -l $@
+    }
+    alias clc="calc"
+## display the 256 colors
+    function 256(){
+        for i in {0..255} ; do
+            printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
+            if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
+                printf "\n";
+            fi
+        done
+    }
+

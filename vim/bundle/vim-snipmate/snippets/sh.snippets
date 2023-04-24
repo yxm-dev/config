@@ -1,0 +1,89 @@
+# PREAMBLE
+snippet #! define script
+	#! /bin/bash
+
+# DATA
+## function
+snippet f function
+	function $0(){
+	
+	}
+snippet fun function
+	function $0(){
+	
+	}
+snippet func function
+	function $0(){
+	
+	}
+## array
+snippet $[ def array
+	$1=[$2]
+snippet $( def array
+	$0=($1 )
+snippet ${ call array
+	${$0[$1]}
+snippet $! call array
+	${!$0[@]}
+snippet $* call array
+	${$0[*]}
+snippet $@ call array
+	${$0[@]}
+snippet $i call array
+	${$0[$i]}
+	
+## declare
+snippet d declare
+	declare $0
+snippet df declare function
+	declare -f $0
+snippet da declare array
+	declare -a $0
+snippet dA declare associative array
+	declare -A $0
+snippet dec declare
+	declare $0
+snippet decf declare function
+	declare -f $0
+snippet deca declare array
+	declare -a $0
+snippet decA declare associative array
+	declare -A $0
+
+# LOOPS
+## if
+snippet if
+	if $0; then
+
+	fi
+snippet ef
+	elif $0; then
+snippet elif
+	elif $0; then
+snippet el
+	else
+## for
+snippet for
+	for $0; do
+
+	done
+## while
+snippet wh
+	while $0; do
+
+	done
+snippet whi
+	while $0; do
+
+	done
+snippet while
+	while $0; do
+
+	done
+## conditionals
+snippet [=
+	[[ "$0" == "$1" ]] 
+snippet [~
+	[[ "$0" =~ "$1" ]] 
+
+

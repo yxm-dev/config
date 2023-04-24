@@ -1,0 +1,77 @@
+" BASIC config
+"> Modes  
+">> do not use vi compatibility mode.  
+    set nocompatible 
+"> Cursor and Mouse  
+">> show cursor in any mode. allow use of mouse in any mode. fast scroll. 
+    set ruler
+    set mouse=a
+    set ttyfast
+"> Search
+">> make search case-insensitive. capital letters make search case-sensitive
+    set ignorecase 
+    set smartcase
+"> Window
+">> show line numbers. show current mode. allow reuse the same windows.   
+    set number 
+    set laststatus=2 
+    set hidden 
+">> set left margin. Show filename in the terminal tab/window title 
+    set numberwidth=2 
+    set title
+"> Other 
+">> open hyperlinks in zathura 
+    let g:netrw_browsex_viewer= "zathura" 
+">> skip .swp files message 
+    autocmd SwapExists * let v:swapchoice = "e"
+">> use bash in interactive mode to access .bashrc from vim
+    set shellcmdflag=-ic
+ 
+"TEXT config
+"> Indentation
+">> auto indent for plugins and files. allow backspacing auto indented paragraphs.
+    filetype plugin indent on  
+    filetype indent on
+    set autoindent
+    set breakindent
+    set backspace=indent,eol,start
+    set shiftwidth=4 
+">> tab maximal/default space size. convert tab space in white space.  
+    set tabstop=8                 
+    set softtabstop=4           
+    set expandtab
+"> Folding and Canceal
+">> prevent folding
+    set nofoldenable
+"> Highlight
+">> enable 256-colors. allow syntax/search highlight. highlight cursor line.
+    set t_co=256
+    syntax enable
+    set hlsearch
+    set cursorline    
+">> set default color scheme.
+    colorscheme essence
+">> allowing to set a color scheme for a fixed filetype.
+    autocmd BufWinEnter,FileType tex colorscheme vimtex-colors
+"> Spelling
+">> enable spell checker in specific programming languages. setting spelling languages.
+    autocmd FileType tex,md,markdown,vimwiki setlocal spell
+    set spelllang=en_us,pt_br
+">> '\\n' to add word to dictionary. '\\m' to display the spell hints
+    nnoremap \\n zgi
+    inoremap \\n <esc>zg i
+    nnoremap \\m z=i
+    inoremap \\m <esc>z=i
+"> Mailing
+">> set up syntax highlighting for mutt
+    au bufread,bufnewfile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail
+
+" KEYBIND config 
+    source $HOME/files/config/vim/vimrc_keybind
+" PLUGIN config
+"> Pathogen as the Plugin Installer 
+    execute pathogen#infect()
+"> Include config file
+    source $HOME/files/config/vim/vimrc_plugin
+
+

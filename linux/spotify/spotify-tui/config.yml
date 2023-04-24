@@ -1,0 +1,49 @@
+theme:
+  active: Magenta  # current playing song in list
+  banner: Green # the "spotify-tui" banner on launch
+  error_border: Red # error dialog border
+  error_text: Red # error message text (e.g. "Spotify API reported error 404")
+  hint: Green # hint text in errors
+  hovered: Green # hovered pane border
+  inactive: "38, 38, 38" # borders of inactive panes
+  playbar_background: "38, 38, 38"
+  playbar_progress: White # filled-in part of the progress bar
+  playbar_progress_text: White # song length and time played/left indicator in the progress bar
+  playbar_text: White # artist name in player pane
+  selected: Green # a) selected pane border, b) hovered item in list, & c) track title in player
+  text: White # text in panes
+  header: White # header text in panes (e.g. 'Title', 'Artist', etc.)
+
+behavior:
+  seek_milliseconds: 5000
+  volume_increment: 10
+  # rate of "frames per second".
+  tick_rate_milliseconds: 250
+  # Enable text emphasis 
+  enable_text_emphasis: false
+  # enable to show loading indicator
+  show_loading_indicator: false
+  # disables to use responsive search bar
+  enforce_wide_search_bar: false
+
+keybindings:
+  back: "ctrl-q"
+  next_page: "n"
+  previous_page: "N"
+  jump_to_artist_album: "A"
+  manage_devices: "d"
+  decrease_volume: "-"
+  increase_volume: "="
+  seek_backwards: "<"
+  seek_forwards: ">"
+  next_track: "["
+  previous_track: "]"
+  copy_song_url: "y"
+  copy_album_url: "Y"
+  help: "?"
+  shuffle: "s"
+  repeat: "r"
+  search: "ctrl-f"
+  basic_view: "b"
+  add_item_to_queue: "a"
+  save_album: "s"

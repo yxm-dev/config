@@ -1,0 +1,93 @@
+%LANGUAGE
+\usepackage[portuguese]{babel}
+
+% STRUCTURE
+%% Title Page
+\usepackage{titling}
+    \newcommand{\subtitle}[1]{%
+        \posttitle{%
+            \vskip2em
+            \par \end{center}
+        \begin{center}\large#1\end{center}
+        \vskip5em}%
+    }
+%% Header and Footer
+%\usepackage{fancyhdr}
+%    \pagestyle{fancy}
+%    \fancyhf[rh]{}% right header
+%    \fancyhf[lh]{}% left header
+%    \fancyhf[ch]{}% centre header
+%    \renewcommand\headrulewidth{0.5pt}
+\usepackage[margin=80pt]{geometry}
+%% Table of Contents
+\setcounter{tocdepth}{3}
+\renewcommand*\contentsname{Sumário}
+%% References
+%\usepackage[backend=biber]{biblatex}
+
+% TEXT
+%% Font
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+%% Symbols
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{tipa} %for \esh
+%% Diagrams
+\usepackage{tikz-cd}
+    \tikzset{%
+        symbol/.style={%
+            draw=none,
+            every to/.append style={%
+                edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+                    }
+            }
+    \usetikzlibrary{babel}
+\usepackage{/home/yxm/files/config/tex/quiver}
+%% Figures
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs, float, epsfig, epstopdf}
+%% Hyperlinks
+\usepackage{hyperref}
+        \hypersetup{
+        colorlinks=true,
+        linkcolor=blue,
+        filecolor=blue,      
+        urlcolor=black,
+        citecolor=blue,
+        linktocpage=true,
+        pdfauthor=author,}
+%% Quotation
+\usepackage{csquotes}
+%% Boxes
+\usepackage{tcolorbox}
+%% Environments
+\usepackage{amsthm}
+        \newtheorem{theorem}{Teorema}[section]
+        \newtheorem{acknowledgement}[theorem]{Agradecimentos}
+        \newtheorem{algorithm}[theorem]{Algoritmo}
+        \newtheorem{axiom}[theorem]{Axioma}
+        \newtheorem{case}[theorem]{Caso}
+        \newtheorem{claim}[theorem]{Afirmação}
+        \newtheorem{conclusion}[theorem]{Conclusão}
+        \newtheorem{conjecture}[theorem]{Conjectura}
+        \newtheorem{corollary}[theorem]{Corolário}
+        \newtheorem{lemma}[theorem]{Lema}
+        \newtheorem{problem}[theorem]{Problema}
+        \newtheorem{proposition}[theorem]{Proposição}
+        \newtheorem{definition}[theorem]{Definição}
+        \newtheorem{notation}[theorem]{Notação}
+        \newtheorem{example}[theorem]{Exemplo}
+        \newtheorem{remark}[theorem]{Observação}
+        \newtheorem{exercise}[theorem]{Exercício}
+%% Spacing
+\usepackage{indentfirst} 
+\usepackage{parskip}
+    \setlength{\parindent}{15pt}
+\usepackage[letterspace=120]{microtype}
+
+% CUSTOM
+%% New Commands
+\usepackage{/home/yxm/files/config/tex/commands}

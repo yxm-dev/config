@@ -1,0 +1,39 @@
+# DISPLAY
+## set prompt to display only the colored current directory
+    time="33m`date +%H:%M`"
+    time1="\[\033[$time\]"
+    dir1="\[\033[32m\]\w\[\033[00m\]"
+    PS1="$dir1\$ "
+## unbolded colored directories in "ls" command
+    LS_COLORS=$LS_COLORS:'di=0;94:'
+    export LS_COLORS
+
+# PATHS
+    export EDITOR="/usr/bin/vim"
+    export SUDO_EDITOR="/usr/bin/vim"
+
+# ALIASES
+## include aliases file
+    source $HOME/files/config/linux/bash/bashrc_aliases
+    source $HOME/files/config/linux/bash/bashrc_particular
+
+# INCLUDES
+## sync files/dirs and git push
+    source $HOME/.config/sync-sh/sync.sh
+## intuitive cli for pandoc translator
+##    source $HOME/.config/cvt-sh/cvt.sh
+## intuitive cli for translate-shell
+    source $HOME/.config/trsl-sh/trsl.sh
+## easy command line for bash
+    source $HOME/.config/ecl-sh/ecl.sh
+## universal package manager client
+    source $HOME/.config/pm-sh/pm.sh
+## intuitive cli for rclone
+    source $HOME/.config/bkp-sh/bkp.sh
+## simple pandoc-based static website generator
+    source $HOME/.config/sw-sh/sw.sh
+## open pages and search from terminal
+    source $HOME/.config/web-sh/web.sh
+
+
+

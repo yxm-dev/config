@@ -1,0 +1,146 @@
+#! /bin/bash
+
+# WEB PAGES
+## "ff" to open "Firefox" in background
+    function ff(){
+            firefox -p apps -url=$1 & disown && exit
+            }
+## meet in jtsi
+    alias jitsi="firefox -p apps https://meet.jit.si/ & disown && exit"
+## meet with hugo
+    alias hugo="firefox -p apps https://meet.google.com/zbb-xsxg-swe & disown && exit"
+## open estante virtual
+    alias estante="firefox -p apps -url=https://www.estantevirtual.com.br/login & disown && exit"
+## open whatsapp
+    alias whats="firefox -p apps -url=web.whatsapp.com & disown && exit"
+## open spotify
+    alias spotify="firefox -p apps -url=https://open.spotify.com/?nd=1 & disown && exit"
+    alias spt="spotify"
+## open discord
+    alias disc="firefox -p apps -url=https://discord.com/channels/ & disown && exit"
+## open canva
+    alias canva="firefox -p light -url=https://www.canva.com/ & disown && exit"
+## open instagram
+    alias insta="firefox -p light --new-window https://www.instagram.com/insensatarigidez/ & disown && exit"
+## open linkedin
+    alias linkedin="firefox -p apps -url=https://www.linkedin.com/login & disown && exit"
+    alias lnkd="linkedin"
+## open jsfiddle
+    alias jsf="firefox -p light -url=https://jsfiddle.net & disown && exit"
+## open codeberg
+    alias codeberg="firefox -p apps -url=https://codeberg.org/user/login & disown && exit"
+    alias code="codeberg"
+    alias cdg="codeberg"
+## open github
+    alias github="firefox -p apps -url=https://www.github.com/login & disown && exit"
+    alias gith="githubs"
+## open IBM certification courses
+    function ibm(){
+        if [[ "$1" == "1" ]]; then
+            firefox -p apps https://www.coursera.org/learn/introduction-to-cloud/home/week/1  & disown && exit
+        elif [[ "$1" == "2" ]]; then
+            firefox -p apps https://www.coursera.org/learn/introduction-to-web-development-with-html-css-javacript/home/week/1  & disown && exit
+        elif [[ "$1" == "3" ]]; then
+            firefox -p apps https://www.coursera.org/learn/getting-started-with-git-and-github/home/week/1  & disown && exit
+        elif [[ "$1" == "4" ]]; then
+            firefox -p apps https://www.coursera.org/learn/developing-frontend-apps-with-react/home/week/1  & disown && exit
+        elif [[ "$1" == "5" ]]; then
+            firefox -p apps https://www.coursera.org/learn/developing-backend-apps-with-nodejs-and-express/home/week/1  & disown && exit
+        elif [[ "$1" == "6" ]]; then
+            firefox -p apps https://www.coursera.org/learn/python-for-applied-data-science-ai/home/week/1  & disown && exit
+        elif [[ "$1" == "7" ]]; then
+            firefox -p apps https://www.coursera.org/learn/python-project-for-ai-application-development/home/week/1  & disown && exit
+        elif [[ "$1" == "8" ]]; then
+            firefox -p apps https://www.coursera.org/learn/developing-applications-with-sql-databases-and-django/home/week/1  & disown && exit
+        elif [[ "$1" == "9" ]]; then
+            firefox -p apps https://www.coursera.org/learn/ibm-containers-docker-kubernetes-openshift/home/week/1  & disown && exit
+        elif [[ "$1" == "10" ]]; then
+            firefox -p apps https://www.coursera.org/learn/applications-development-microservices-serverless-o\penshift/home/week/1  & disown && exit
+        elif [[ "$1" == "11" ]]; then
+            firefox -p apps 
+        elif [[ "$1" == "12" ]]; then
+            firefox -p apps
+        else
+            echo "option not defined."
+        fi
+    }
+    alias IBM="ibm"
+
+# ALIASES
+## "org" to open the organization central
+    alias org="vim ~/files/org/index.md"
+## "tor" to start tor
+    alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
+## "p" to open the poem vimwiki directory
+    alias p="vim ~/files/poem/poem/index.md -c ":Lexplore""
+## "poem" to sync poem files and push them to the poem website
+    function poem(){
+    sudo rsync -av --progress --delete $HOME/files/poem/poem/ $HOME/files/poem/site/md/indice/
+    sw -c poem
+    sw -p poem
+    }
+## "s" to open the website vimwiki directory
+    alias s="vim ~/files/site/index.md -c ":Lexplore""
+## "site" to sync site files and push them to the website
+    function site(){
+    sw -c site
+    sw -p site
+    }
+## "r" and "rd" to open sketch docs
+    alias r="vim ~/files/org/rascunho.md -c ":Lexplore""
+    alias rd="vim ~/files/org/dev/rascunho.md -c ":Lexplore""
+## "b" to open the list of books
+    alias b="vim ~/files/nerd/bib"
+## "lib" to execute libby
+    libdir=$HOME/files/nerd/bib
+    pdfviewer="zathura"
+    function lib(){
+        libby --output-dir $libdir --viewer $pdfviewer $@
+    }
+## unzip files to post directories  
+    function post(){
+        format[0]=insta
+        format[1]=lnkd
+        format[2]=reels
+        N=(0 1 2)
+        dir[0]=~/files/poem/insta/posts
+        dir[1]=~/files/nerd/lnkd/posts
+        dir[2]=~/files/poem/insta/reels
+        downloaddir=~/tmp
+        function aux(){
+            if [[ -f "$downloaddir/${format[$i]}_$1.png" ]]; then
+                echo "identified a single .png file..."
+                echo "moving to \"${dir[$i]}/$1/\"..."
+                mv $downloaddir/${format[$i]}_$1.png ${dir[$i]}/$1/$1.png
+                echo "Done!"
+            elif [[ -f "$downloaddir/${format[$i]}_$1.zip" ]]; then
+                echo "identified a .zip file..."
+                echo "extracting in \"${dir[$i]}/$1/\"..."
+                unzip $downloaddir/${format[$i]}_$1 -d ${dir[$i]}/$1
+                echo "excluding \"${format[$i]}_$1.zip\"..."
+                rm $downloaddir/${format[$i]}_$1.zip
+                echo "Done!"
+            fi
+        }
+        for i in ${!N[@]}; do
+            if [[ "$1" == "${format[$i]}" ]]; then
+                if [[ -d ${dir[$i]}/$2 ]]; then
+                    echo  "${dir[$i]}/$2 already exists. Subscribe? (y/n)"
+                    read -e -p "> " subscribe
+                    if [[ "$subscribe" == "y" ]]; then
+                        echo "removing old files..."
+                        rm -r ${dir[$i]}/$2
+                        aux $2
+                    else
+                        return
+                    fi
+                else
+                    echo "creating dir \"${dir[$i]}/$2\"..."
+                    mkdir ${dir[$i]}/$2
+                    aux $2
+                fi
+            fi
+        done
+        unset -f aux
+    }
+

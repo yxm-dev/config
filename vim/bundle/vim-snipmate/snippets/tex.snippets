@@ -1,0 +1,411 @@
+
+
+# STRUCTURE #
+## Preamble
+### article template
+snippet \art article template
+	\\documentclass[twoside,a4paper, 11pt,openany]{article}
+	\\usepackage{$HOME/files/config/tex/preamble/basic.sty}
+snippet \art-pt article-pt template
+	\\documentclass[twoside,a4paper, 11pt,openany]{article}
+	\\usepackage{$HOME/files/config/tex/preamble/basic.sty}
+snippet \article article template
+	\\documentclass[twoside,a4paper, 11pt,openany]{article}
+	\\usepackage{$HOME/files/config/tex/preamble/basic.sty}
+snippet \article-pt article-pt template
+	\\documentclass[twoside,a4paper, 11pt,openany]{article}
+	\\usepackage{$HOME/files/config/tex/preamble/basic.sty}
+### book template 
+snippet \book book template
+	\\documentclass[twoside,a4paper, 11pt,openany]{book}
+	\\usepackage{$HOME/files/config/tex/preamble/basic.sty}
+snippet \book-pt book-pt template
+	\\documentclass[twoside,a4paper, 11pt,openany]{book}
+	\\usepackage{$HOME/files/config/tex/preamble/basic-pt.sty}
+### \newcommand
+snippet \newc \newcommand
+	\\newcommand{\\${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
+### \usepackage
+snippet \usep \usepackage
+	\\usepackage[${1:options}]{${2:package}} ${0}
+### begin/end document
+snippet \doc \begin{document}
+	\\begin{document}
+	${0}
+	\\end{document}
+
+## Title Page
+### title, autors and \maketitle
+snippet \title title page
+	\\title{...}
+	\\author{...}
+	\\maketitle
+
+## Sections
+### part
+snippet \part document \part
+	\\part{$0}
+### chapter
+snippet \chap \chapter
+	\\chapter{$0}
+snippet \ch \chapter
+	\\chapter{$0}
+### section
+snippet \sec \section
+	\\section{$0}
+### unordered section
+snippet \sec* \section*
+	\\section*{$0}
+### subsection
+snippet \subsec \subsection
+	\\subsection{$0}
+snippet \ssec \subsection
+	\\subsection{$0}
+### unordered subsection
+snippet \subsec* \subsection*
+	\\subsection*{$0}
+snippet \ssec* \subsection*
+	\\subsection*{$0}
+### subsubsection
+snippet \subsubsec \subsubsection
+	\\subsubsection{$0}
+snippet \sssec \subsection
+	\\subsubsection{$0}
+### unordered subsubsection
+snippet \subsubsec* \subsubsection*
+	\\subsubsection*{$0}
+snippet \sssec* \subsubsection*
+	\\subsubsection*{$0}
+
+## References
+### bibliography
+snippet \bibl \bibliography
+	\\bibliography{files/refs.bib}	
+	\\bibliographystyle{plain}
+snippet \bibli \bibliography
+	\\bibliography{files/refs.bib}	
+	\\bibliographystyle{plain}
+snippet \biblio \bibliography
+	\\bibliography{files/refs.bib}	
+	\\bibliographystyle{plain}
+### citations
+snippet \cit \cite
+	\\cite{$0 }
+snippet \ci \cite
+	\\cite{$0 }
+snippet \cite \cite
+	\\cite{$0 }
+
+### label
+snippet \lab \label
+	\\label{$0}
+### ref
+snippet \ref \ref
+	\\ref{$0}
+
+# TEXT #
+## Textstyle
+### italic
+snippet \it italic text
+	\\textit{${0}}
+### bold
+snippet \bf bold text
+	\\textbf{$0}
+### underline
+snippet \under underline text
+	\\underline{$0}
+### emphasize
+snippet \em emphasize text
+	\\emph{$0}
+### inline quotes
+snippet " quotes
+	\`\`$0''
+### display quotation
+snippet \quote csquote	
+	\\begin{displayquote}
+	$0
+	\\end{displayquote}
+### footnote
+snippet \foot \footnote
+	\\footnote{$0}
+### center	
+snippet \center center environment
+	\\begin{center}
+		${0}
+	\\end{center}
+
+## Fonts
+### sans serif
+snippet \sf sans serif
+	\\textsf{$0}
+### roman
+snippet \rm roman 
+	\\textrm{$0}
+### monospace
+snippet \tt typewriter
+	\\texttt{$0}
+	
+## Lists
+### ordered lists
+snippet \enu enumerate environment
+	\\begin{enumerate}
+		\\item $0
+	\\end{enumerate}
+### unordered lists
+snippet \itemi itemize environment
+	\\begin{itemize}
+		\\item $0
+	\\end{itemize}
+### new item
+snippet \i \item
+	\\item $0
+	
+## Indentation
+### do not indent
+snippet \noi \noindent
+	\\noindent
+	${0}
+snippet \noin \noindent
+	\\noindent
+	${0}
+
+## Environments
+### \begin 
+snippet \beg \begin{} ... \end{} block
+	\\begin{${1:env}}
+		${0:${VISUAL}}
+	\\end{$1}
+### tcolorbox
+snippet \box tcolorbox 
+	\\begin{tcolorbox}
+	${0}
+	\\end{tcolorbox}
+### figure
+snippet \fig figure environment (includegraphics)
+	\\begin{figure}
+	\\begin{center}
+		\\includegraphics[scale=${1}]{Figures/${2}}
+	\\end{center}
+	\\caption{${3}}
+	\\label{fig:${4}}
+	\\end{figure}
+	${0}
+### subfigure
+snippet \subfig subfigure environment
+	\\begin{subfigure}[${1}]{${2:\\textwidth}}
+	\\begin{center}
+		${3}
+	\\end{center}
+	\\caption{${4}}
+	\\label{fig:${5}}
+	\\end{subfigure}
+	${0}
+### tikz figure 
+	\\begin{figure}[htpb]
+	\\begin{center}
+	\\begin{tikzpicture}[scale=${1:1}, transform shape]
+		${2}
+	\\end{tikzpicture}
+	\\end{center}
+	\\caption{${3}}%
+	\\label{fig:${4}}
+	\\end{figure}
+	${0}
+### two columns
+snippet \col two-column 
+	\\begin{columns}
+		\\begin{column}{0.5\\textwidth}
+			${1}
+		\\end{column}
+		\\begin{column}{0.5\\textwidth}
+			${0}
+		\\end{column}
+	\\end{columns}
+### multi columns
+snippet \multicol multi columns
+	\\begin{multicols}{2}
+		${1}
+		\columnbreak
+		${0}
+	\\end{multicols}
+
+# MATH
+## Equations
+### equation environment
+snippet \eq equation
+	\\begin{equation}
+		$0
+	\\end{equation}
+### labeled equation environment
+snippet \eql labeled equation
+	\\begin{equation}
+		\\label{$0}
+		$1
+	\\end{equation}
+### unumbered equation environment
+snippet \eq* unnumbered equation 
+	\\begin{equation*}
+		$0
+	\\end{equation*}
+### unumbered equation
+snippet \[ unnumbered equation
+	\\[
+	   $0
+	\\]
+### equation array
+snippet \eqa eqnarray environment
+	\\begin{eqnarray}
+		${0}
+	\\end{eqnarray}
+
+## Diagrams
+### tikz in numbered equation
+snippet \tikz tikzcd environment in equation
+	\\begin{equation}
+	\\begin{tikzcd}
+		$0
+	\\end{tikzcd}
+	\\end{equation}
+### tikz in unumbered equation
+snippet \tikz* tikzcd environment in equation*
+	\\begin{equation*}
+	\\begin{tikzcd}
+		$0
+	\\end{tikzcd}
+	\\end{equation*}
+
+## Font
+### fraktur
+snippet \frak mathfrak
+	\\mathfrak{${0}}
+### caligraphic
+snippet \mc mathcal
+	\\mathcal{${0}}
+### script
+snippet \scr mathscr
+	\\mathscr{${0}}
+### sans serif
+snippet \ms mathsf
+	\\mathsf{${0}}
+### blackboard
+snippet \bb mathbb
+	\\mathbb{${0}}
+### typewritter
+snippet \mt mathtt
+	\\mathtt{${0}}
+### bold
+snippet \mf mathbf
+	\\mathbf{${0}}
+### operatorname
+snippet \op operatorname
+	\\operatorname{${0}}
+
+## Environments
+### examples
+snippet \exam example
+	\\begin{example}
+		$0
+	\\end{example}
+snippet \exm example
+	\\begin{example}
+		$0
+	\\end{example}
+## theorem
+snippet \thm theorem 
+	\\begin{theorem}
+		$0
+	\\end{theorem}
+### definition
+snippet \def definition 
+	\\begin{definition}
+		$0
+	\\end{definition}
+### lemma
+snippet \lem lemma
+	\\begin{lemma}
+		$0
+	\\end{lemma}
+### corollary
+snippet \cor corollary
+	\\begin{corollary}
+		$0
+	\\end{corollary}
+### proposition
+snippet \prop proposition
+	\\begin{proposition}
+		$0
+	\\end{proposition}
+### proof
+snippet \proof proof
+	\\begin{proof}
+		$0
+	\\end{proof}
+### remark
+snippet \rem remark
+	\\begin{remark}
+		$0
+	\\end{remark}
+
+## Symbols
+### fractions
+snippet \frac fractions
+	\\frac{${1}}{${2}} ${0}
+### sums
+snippet \sum summing
+	\\sum^{${1:n}}_{${2:i=1}} ${0}
+### limit
+snippet \lim limit
+	\\lim_{${1}} ${0}
+### bracket
+snippet \lra langle rangle
+	\\langle$0\\rangle
+### arrows
+snippet \ra rightarrow
+	\\rightarrow$0
+snippet \hra hookrightarrow
+	\\hookrightarrow$0
+snippet \Ra hookrightarrow
+	\\Rightarrow$0
+### bar
+snippet \bar bar
+	\\bar{{$0}}
+
+## Hyperlinks
+snippet \url
+	\\url{${1}} ${0}
+snippet \href
+	\\href{${1}}{${2}} ${0}
+
+## Specific
+snippet \cat
+	\\mathbf{Cat}${0}
+snippet \set
+	\\mathbf{Set}${0}
+snippet \grpd
+	\\mathbf{Grpd}${0}
+snippet \F
+	\\mathbf{C}\\rightarrow\\mathbf{D}${0}
+
+# BEAMER
+## General
+### pause
+snippet \p
+	\\pause
+## Equations
+### pause equation
+snippet \eqp
+	\\pause
+	\\begin{equation}
+	$0
+	\\end{equation}
+snippet \peq
+	\\pause
+	\\begin{equation}
+	$0
+	\\end{equation}
+## Diagrams
+### ampersand replacement
+snippet \amp ampersand replacement
+	[ampersand replacement=\\&,column sep=4em]
+
+

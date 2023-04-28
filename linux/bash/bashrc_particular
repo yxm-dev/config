@@ -1,7 +1,8 @@
 #! /bin/bash
 
-# APIs
-export OPENAI_API_KEY=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
+# API
+source $HOME/files/sec/API
+export OPENAI_API_KEY=$OPENAI_API_KEY
 
 # WEB PAGES
 ## "ff" to open "Firefox" in background

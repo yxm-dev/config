@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# APIs
+export OPENAI_API_KEY=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
+
 # WEB PAGES
 ## "ff" to open "Firefox" in background
     function ff(){
@@ -30,10 +33,10 @@
 ## open codeberg
     alias codeberg="firefox -p apps -url=https://codeberg.org/user/login & disown && exit"
     alias code="codeberg"
-    alias cdg="codeberg"
+    alias cdbg="codeberg"
 ## open github
     alias github="firefox -p apps -url=https://www.github.com/login & disown && exit"
-    alias gith="githubs"
+    alias gith="github"
 ## open IBM certification courses
     function ibm(){
         if [[ "$1" == "1" ]]; then
@@ -67,8 +70,30 @@
     alias IBM="ibm"
 
 # ALIASES
+## "gpt" to open gpt-chatbot-cli
+    alias gpt="gpt-chatbot-cli"
+## "vimrc", "vimra" and "vimrp" to open vim configuration files
+    alias vimrc="~/files/config/vim/vimrc -c ":Lexplore""
+    alias vimra="~/files/config/vim/vimrc_keybind -c ":Lexplore""
+    alias vimrp="~/files/config/vim/vimrc_plugin -c ":Lexplore""
 ## "org" to open the organization central
     alias org="vim ~/files/org/index.md"
+## "settings" or "sets" to open settings file
+    alias settings="vim ~/files/nerd/doc/linux/settings/index.md -c ":Lexplore""
+    alias sets="settings"
+## "QA" function to open QA files
+    function QA(){
+        QAdir=~/files/nerd/doc/linux/QA
+        declare -a QAdirs
+        QAdirs=$(find $QAdir -type d -printf "%f\n")
+        if [[ "${QAdirs[@]}" =~ "$1" ]]; then
+            vim $QAdir/$1/index.md -c ":Lexplore"
+        elif [[ -z "$1" ]]; then
+            vim $QAdir/index.md -c ":Lexplore"
+        else
+            echo "There is no such kind of QA."
+        fi
+    }
 ## "tor" to start tor
     alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
 ## "p" to open the poem vimwiki directory
@@ -90,11 +115,11 @@
     alias r="vim ~/files/org/rascunho.md -c ":Lexplore""
     alias rd="vim ~/files/org/dev/rascunho.md -c ":Lexplore""
 ## "b" to open the list of books
-    alias b="vim ~/files/nerd/bib"
+    alias b="find ~/files/nerd/bib -type f | fzf | xargs zathura"
 ## "lib" to execute libby
     libdir=$HOME/files/nerd/bib
-    pdfviewer="zathura"
     function lib(){
+        pdfviewer="zathura"
         libby --output-dir $libdir --viewer $pdfviewer $@
     }
 ## unzip files to post directories  

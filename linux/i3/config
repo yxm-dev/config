@@ -47,7 +47,7 @@ bar {
         bindsym e exec --no-startup-id i3-msg exit, mode "default"
         bindsym s exec --no-startup-id sh $i3lockwall && systemctl suspend, mode "default"
         bindsym r exec --no-startup-id reboot, mode "default"
-        bindsym d exec --no-startup-id shutdown -t now, mode "default"
+        bindsym d exec --no-startup-id shutdown -h now, mode "default"
 ### using "backspace" and "enter" to close menu
         bindsym Return mode "default"
         bindsym Escape mode "default"

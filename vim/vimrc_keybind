@@ -4,7 +4,7 @@
     nnoremap <esc> i
 ">> tab in normal mode
     nnoremap <tab> i<tab><right><esc>
-">> 'a','e' and '\left','\right' move to beggining,ending of line
+">> 'a','e' and '\left','\right' to move to beggining, ending of line
     nnoremap a ^
     nnoremap e $
     nnoremap \<left> ^
@@ -12,6 +12,14 @@
     vnoremap \<right> $
     inoremap \<left> <esc>^i
     inoremap \<right> <esc>$i
+">> '\up' and '\down' to move to the beggining and ending of file
+    nnoremap \<up> gg
+    nnoremap \<down> G
+    vnoremap \<up> gg
+    vnoremap \<down> G
+    inoremap \<up> <esc>ggi
+    inoremap \<down> <esc>Gi
+
 ">> use cursor arrows to move through long lines, ignoring wrapping.
     inoremap <silent> <down> <c-r>=pumvisible() ? "\<lt>down>" : "\<lt>c-o>gj"<cr>
     inoremap <silent> <up> <c-r>=pumvisible() ? "\<lt>up>" : "\<lt>c-o>gk"<cr>
@@ -37,10 +45,10 @@
 
 "> EDITING
 ">> 'space' and 'backspace' in normal mode and visual mode 
-    vnoremap <space> <esc>:startinsert<cr><space><right><esc>
-    nnoremap <space> :startinsert<cr><space><right><esc>
+    vnoremap <space> <esc>:startinsert<cr><space><right>
+    nnoremap <space> :startinsert<cr><space><right>
     vnoremap <bs> d<esc>:startinsert<cr>
-    nnoremap <bs> :startinsert<cr><bs><right><esc>
+    nnoremap <bs> :startinsert<cr><bs><right>
 ">> copy and paste directly to clipboard
     set clipboard+=unnamed
     set go+=a
@@ -76,7 +84,7 @@
 ">> 'ctrl+a' to select all
     nnoremap <c-a> ggvG$
     inoremap <c-a> <esc>ggvG$
-        
+      
 "> GENERAL
 ">> save with 'ctrl+s'
     nnoremap <c-s> :w!<cr>i

@@ -210,10 +210,19 @@
     autocmd filetype md,markdown,vimwiki,html inoremap \\, <esc>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>
 
 " COMMENTARY
-"> comment current line and paragraph with '\\l' and '\\p'
+">> comment current line and paragraph with '\\l' and '\\p'
     imap \\l <esc>gcc:startinsert<cr>
     imap \\p <esc>gcap:startinsert<cr>
     nmap \\l gcc:startinsert<cr>
     nmap \\p gcap:startinsert<cr>
 
-
+" INDENTLINE
+">> disabling in markdown and vimwiki
+    let g:indentLine_fileTypeExclude = ['vimwiki', 'markdown', 'md']
+    let g:indentLine_bufTypeExclude = ['help', 'terminal', 'vimwiki']
+">> avoid conflict with links conceal
+    let g:indentLine_concealcursor=""
+    let g:indentLine_conceallevel=2
+">> '\\d' to toggle indentline
+    inoremap \\d <esc>:IndentLinesToggle<cr>:startinsert<cr>
+    nnoremap \\d :IndentLinesToggle<cr>:startinsert<cr>

@@ -42,10 +42,24 @@
 ## "vi" and "v" to open vim with Netrw. 
     alias vi="vim -c ":Lexplore" ~/.tmp"
     alias v="vi"
+## "vimrc", "vimra" and "vimrp" to open vim configuration files
+    alias vimrc="vim ~/files/config/vim/vimrc -c ":Lexplore""
+    alias vimra="vim ~/files/config/vim/vimrc_keybind -c ":Lexplore""
+    alias vimrp="vim ~/files/config/vim/vimrc_plugin -c ":Lexplore""
 ## "z" to open .pdf with Zathura in the background
     function z(){
         zathura $1 & disown 
     }
+## "gpt" to open gpt-chatbot-cli
+    alias gpt="gpt-chatbot-cli"
+## "tor" to start tor
+    alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
+## "calc", "clc" to open "bc" in the interactive mode
+    function calc(){
+        echo "Welcome to bc calculator. Type \"quit\" to exit."
+        bc -q -i -l $@
+    }
+    alias clc="calc"
 ## "m" to open "Mutt" in default account. "mi" to open "ith" account.
     alias m="mutt"
     alias m1="mutt -e 'source ~/.mutt/accounts/1rc'"
@@ -54,12 +68,18 @@
     alias m4="mutt -e 'source ~/.mutt/accounts/4rc'"
     alias m5="mutt -e 'source ~/.mutt/accounts/5rc'"
     alias m6="mutt -e 'source ~/.mutt/accounts/6rc'"
-## "calc", "clc" to open "bc" in the interactive mode
-    function calc(){
-        echo "Welcome to bc calculator. Type \"quit\" to exit."
-        bc -q -i -l $@
+## "mon" to display HMDI-1 as the left monitor and rotate it
+    function mon(){
+        xrandr --output "HDMI-1" --auto
+        xrandr --output "eDP-1" --left-of "HDMI-1"
+        xrandr --output "HDMI-1" --rotate left
     }
-    alias clc="calc"
+## "lib" to execute libby
+    libdir=$HOME/files/nerd/bib
+    function lib(){
+        pdfviewer="zathura"
+        libby --output-dir $libdir --viewer $pdfviewer $@
+    }
 ## display the 256 colors
     function 256(){
         for i in {0..255} ; do

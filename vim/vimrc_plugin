@@ -137,41 +137,45 @@
                         \ 'options': '--ansi --layout=reverse-list --multi'})<cr> 
 
 " VIMWIKI
-">> setting wiki paths and names. setting Markdown syntax
-        let g:vimwiki_list = [
-                          \{ 'path': '~/files/org/',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'org' },
-                          \{ 'path': '~/files/me/dev',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'dev' },
-                          \{ 'path': '~/files/math/mpc',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'mpc' },
-                          \{ 'path': '~/files/math/ideas',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md', 
-                          \  'name': 'ideas' },
-                          \{ 'path': '~/files/nerd/doc',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'doc' },
-                          \{ 'path': '~/files/poem/poem',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'poem' },
-                          \{ 'path': '~/files/site',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'site' },
-                          \{ 'path': '~/files/autism',
-                          \  'syntax': 'markdown',
-                          \  'ext': '.md',
-                          \  'name': 'autism' }
-                          \ ]
+">> setting wiki paths and names
+    let org = {}
+    let org.path = '~/files/org/'
+"    let org.nested_syntaxes = {'python': 'python', 'c++': 'c++'}
+
+    let g:vimwiki_list = [
+                    \{ 'path': '~/files/org/',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'org' },
+                    \{ 'path': '~/files/me/dev',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'dev' },
+                    \{ 'path': '~/files/math/mpc',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'mpc' },
+                    \{ 'path': '~/files/math/ideas',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md', 
+                    \  'name': 'ideas' },
+                    \{ 'path': '~/files/nerd/doc',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'doc' },
+                    \{ 'path': '~/files/poem/poem',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'poem' },
+                    \{ 'path': '~/files/site',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'site' },
+                    \{ 'path': '~/files/autism',
+                    \  'syntax': 'markdown',
+                    \  'ext': '.md',
+                    \  'name': 'autism' }
+                \ ]
 ">> disabling some default keybindings
     let g:vimwiki_key_mappings =
                             \ { 'all_maps':1 ,
@@ -226,3 +230,9 @@
 ">> '\\d' to toggle indentline
     inoremap \\d <esc>:IndentLinesToggle<cr>:startinsert<cr>
     nnoremap \\d :IndentLinesToggle<cr>:startinsert<cr>
+
+syn region markdownLinkText matchgroup=markdownLinkTextDelimiter
+    \ start="!\=\[\%(\_[^]]*]\%( \=[[(]\)\)\@=" end="\]\%( \=[[(]\)\@="
+    \ nextgroup=markdownLink,markdownId skipwhite
+    \ contains=@markdownInline,markdownLineStart
+    \ concealends

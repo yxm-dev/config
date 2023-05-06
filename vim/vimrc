@@ -26,7 +26,7 @@
     autocmd SwapExists * let v:swapchoice = "e"
 ">> use bash in interactive mode to access .bashrc from vim
     set shellcmdflag=-ic
- 
+
 "TEXT config
 "> Indentation
 ">> auto indent for plugins and files. allow backspacing auto indented paragraphs.
@@ -40,9 +40,18 @@
     set tabstop=8                 
     set softtabstop=4           
     set expandtab
-"> Folding and Canceal
+"> Folding, Canceal and Wrap
 ">> prevent folding
     set nofoldenable
+">> wrap on the edge of the screen. move the cursor to the next line
+    set wrap
+    set whichwrap+=<,>,h,l
+">> prevent wrapping in the middle of a word
+    set linebreak
+">> in md,tex files, hard-wrap and add vertical line to identify the break point
+    autocmd FileType tex,md,markdown,vimwiki setlocal textwidth=110
+    autocmd FileType tex,md,markdown,vimwiki setlocal colorcolumn=+2
+    highlight ColorColumn ctermbg=darkgray
 "> Highlight
 ">> enable 256-colors. allow syntax/search highlight. highlight cursor line.
     set t_co=256

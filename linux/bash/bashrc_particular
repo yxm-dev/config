@@ -15,6 +15,10 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias hugo="firefox -p apps https://meet.google.com/zbb-xsxg-swe & disown && exit"
 ## open estante virtual
     alias estante="firefox -p apps -url=https://www.estantevirtual.com.br/login & disown && exit"
+## open poem website
+    alias insensatez="firefox -p apps -url=https://insensatarigidez.com & disown && exit"
+## open personal website
+    alias yxm="firefox -p apps -url=https://yxmartins.me & disown && exit"
 ## open whatsapp
     alias whats="firefox -p apps -url=web.whatsapp.com & disown && exit"
 ## open spotify
@@ -33,8 +37,9 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias jsf="firefox -p light -url=https://jsfiddle.net & disown && exit"
 ## open codeberg
     alias codeberg="firefox -p apps -url=https://codeberg.org/user/login & disown && exit"
-    alias code="codeberg"
-    alias cdbg="codeberg"
+    alias codeb="codeberg"
+    alias cdg="codeberg"
+    alias cdb="codeberg"
 ## open github
     alias github="firefox -p apps -url=https://www.github.com/login & disown && exit"
     alias gith="github"
@@ -70,13 +75,7 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     }
     alias IBM="ibm"
 
-# ALIASES
-## "gpt" to open gpt-chatbot-cli
-    alias gpt="gpt-chatbot-cli"
-## "vimrc", "vimra" and "vimrp" to open vim configuration files
-    alias vimrc="~/files/config/vim/vimrc -c ":Lexplore""
-    alias vimra="~/files/config/vim/vimrc_keybind -c ":Lexplore""
-    alias vimrp="~/files/config/vim/vimrc_plugin -c ":Lexplore""
+# Vim ALIASES
 ## "org" to open the organization central
     alias org="vim ~/files/org/index.md"
 ## "settings" or "sets" to open settings file
@@ -84,44 +83,60 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias sets="settings"
 ## "QA" function to open QA files
     function QA(){
-        QAdir=~/files/nerd/doc/linux/QA
+        QAdir=~/files/nerd/doc/doc/QA
         declare -a QAdirs
         QAdirs=$(find $QAdir -type d -printf "%f\n")
         if [[ "${QAdirs[@]}" =~ "$1" ]]; then
-            vim $QAdir/$1/index.md -c ":Lexplore"
+            vim $QAdir/$1
         elif [[ -z "$1" ]]; then
-            vim $QAdir/index.md -c ":Lexplore"
+            vim $QAdir
         else
             echo "There is no such kind of QA."
         fi
     }
-## "tor" to start tor
-    alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
+## "dev" function to open dev files
+    function dev(){
+        devdir=~/files/nerd/dev/
+        declare -a devdirs
+        devdirs=$(find $devdir -type d -printf "%f\n")
+        if [[ "${devdirs[@]}" =~ "$1" ]]; then
+            vim $devdir/$1
+        elif [[ -z "$1" ]]; then
+            vim $devdir
+        else
+            echo "There is no such kind of dev."
+        fi
+    }
+
 ## "p" to open the poem vimwiki directory
     alias p="vim ~/files/poem/poem/index.md -c ":Lexplore""
-## "poem" to sync poem files and push them to the poem website
-    function poem(){
-    sudo rsync -av --progress --delete $HOME/files/poem/poem/ $HOME/files/poem/site/md/indice/
-    sw -c poem
-    sw -p poem
-    }
 ## "s" to open the website vimwiki directory
     alias s="vim ~/files/site/index.md -c ":Lexplore""
-## "site" to sync site files and push them to the website
-    function site(){
-    sw -c site
-    sw -p site
-    }
 ## "r" and "rd" to open sketch docs
     alias r="vim ~/files/org/rascunho.md -c ":Lexplore""
     alias rd="vim ~/files/org/dev/rascunho.md -c ":Lexplore""
-## "b" to open the list of books
-    alias b="find ~/files/nerd/bib -type f | fzf | xargs zathura"
-## "lib" to execute libby
-    libdir=$HOME/files/nerd/bib
-    function lib(){
-        pdfviewer="zathura"
-        libby --output-dir $libdir --viewer $pdfviewer $@
+## "b" or "bib" to open the list of books
+    alias bib="find ~/files/nerd/bib -type f | fzf | xargs zathura"
+    alias b="bib"
+## "docs" to open refs list
+    alias docs="vim ~/files/nerd/doc/doc/settings/docs.md -c ":Lexplore""
+## "refs" to open list of documentations
+    alias refs="vim ~/files/org/dev/refs.md -c ":Lexplore""
+
+# OTHER
+## "site" to sync site files and push them to the website
+    function site(){
+        sudo rsync -av --progress --delete $HOME/files/nerd/doc/doc/ $HOME/files/site/md/doc/
+        sudo rsync -av --progress --delete $HOME/files/nerd/doc/lec/ $HOME/files/site/md/lec/
+        sudo rsync -av --progress --delete $HOME/files/nerd/doc/proj/ $HOME/files/site/md/dev/proj/
+        sw -c site
+        sw -p site
+    }
+## "poem" to sync poem files and push them to the poem website
+    function poem(){
+        sudo rsync -av --progress --delete $HOME/files/poem/poem/ $HOME/files/poem/site/md/indice/
+        sw -c poem
+        sw -p poem
     }
 ## unzip files to post directories  
     function post(){

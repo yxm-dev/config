@@ -81,6 +81,19 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
 ## "settings" or "sets" to open settings file
     alias settings="vim ~/files/nerd/doc/linux/settings/index.md -c ":Lexplore""
     alias sets="settings"
+## "lec" function to open lec files
+    function lec(){
+        lecdir=~/files/nerd/doc/lec/
+        declare -a lecdirs
+        lecdirs=$(find $lecdir -type d -printf "%f\n")
+        if [[ "${lecdirs[@]}" =~ "$1" ]]; then
+            vim $lecdir/$1
+        elif [[ -z "$1" ]]; then
+            vim $lecdir
+        else
+            echo "There is no such kind of lec."
+        fi
+    }
 ## "QA" function to open QA files
     function QA(){
         QAdir=~/files/nerd/doc/doc/QA

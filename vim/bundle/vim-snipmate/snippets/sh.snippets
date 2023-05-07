@@ -53,37 +53,42 @@ snippet decA declare associative array
 # LOOPS
 ## if
 snippet if
-	if $0; then
+	if [[ $0 ]]; then
 
 	fi
 snippet ef
-	elif $0; then
+	elif [[ $0 ]]; then
 snippet elif
 	elif $0; then
 snippet el
 	else
 ## for
 snippet for
-	for $0; do
+	for $0 in $1; do
 
 	done
 ## while
 snippet wh
-	while $0; do
+	while [[ $0 ]]; do
 
 	done
 snippet whi
-	while $0; do
+	while [[ $0 ]]; do
 
 	done
 snippet while
-	while $0; do
+	while [[ $0 ]]; do
 
 	done
 ## conditionals
 snippet [=
 	[[ "$0" == "$1" ]] 
 snippet [~
-	[[ "$0" =~ "$1" ]] 
+	[[ "$0" =~ "$1" ]]
+snippet [[
+	[[ "$0" ]]
+## interval
+snippet	((
+	(( i=0; i<=n; i++ )) 
 
 

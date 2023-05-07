@@ -35,6 +35,9 @@
     source $HOME/.config/sw-sh/sw.sh
 ## open pages and search from terminal
     source $HOME/.config/web-sh/web.sh
+## simple package creator for bash packages
+    source $HOME/.config/pkg-sh/pkg.sh
+
 
 
 

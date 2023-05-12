@@ -15,7 +15,7 @@
         let g:netrw_browse_split = 4
     endif
 ">> sync current and browsing directories
-    let g:netrw_keepdir = 1
+    let g:netrw_keepdir = 0
 ">> directories on the top, files below
     let g:netrw_sort_sequence = '[\/]$,*'
 ">> change of directory when opening a file

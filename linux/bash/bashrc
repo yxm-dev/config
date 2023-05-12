@@ -20,24 +20,21 @@
 
 # INCLUDES
 ## sync files/dirs and git push
-    source $HOME/.config/sync-sh/sync.sh
+    source $HOME/.config/sync.sh/sync.sh
 ## intuitive cli for pandoc translator
-    source $HOME/.config/cvt-sh/cvt.sh
+    source $HOME/.config/cvt.sh/cvt.sh
 ## intuitive cli for translate-shell
-    source $HOME/.config/trsl-sh/trsl.sh
+    source $HOME/.config/trsl.sh/trsl.sh
 ## easy command line for bash
-    source $HOME/.config/ecl-sh/ecl.sh
+    source $HOME/.config/ecl.sh/ecl.sh
 ## universal package manager client
-    source $HOME/.config/pm-sh/pm.sh
+    source $HOME/.config/pm.sh/pm.sh
 ## intuitive cli for rclone
-    source $HOME/.config/bkp-sh/bkp.sh
+    source $HOME/.config/bkp.sh/bkp.sh
 ## simple pandoc-based static website generator
-    source $HOME/.config/sw-sh/sw.sh
+    source $HOME/.config/sw.sh/sw.sh
 ## open pages and search from terminal
-    source $HOME/.config/web-sh/web.sh
+    source $HOME/.config/web.sh/web.sh
 ## simple package creator for bash packages
-    source $HOME/.config/pkg-sh/pkg.sh
-
-
-
+    source $HOME/.config/pkg.sh/pkg.sh
 

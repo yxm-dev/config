@@ -1,5 +1,5 @@
 #! /bin/bash
 
-source $HOME/.config/ecl-sh/bkl
+source $HOME/.config/ecl.sh/files/bkl
 
 bkl -dec

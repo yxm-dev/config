@@ -120,7 +120,19 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
             echo "There is no such kind of dev."
         fi
     }
-
+## "snip" function to open dev files
+    function snip(){
+        snipdir=~/files/config/vim/bundle/vim-snipmate/snippets
+        declare -a snipfiles
+        snipfiles=$(find $snipdir -type f -exec basename -s '.snippets' {} +)
+        if [[ "${snipfiles[@]}" =~ "$1" ]]; then
+            vim $snipdir/$1.snippets
+        elif [[ -z "$1" ]]; then
+            vim $snipdir
+        else
+            echo "There is no such kind of snipt."
+        fi
+    }
 ## "p" to open the poem vimwiki directory
     alias p="vim ~/files/poem/poem/index.md -c ":Lexplore""
 ## "s" to open the website vimwiki directory

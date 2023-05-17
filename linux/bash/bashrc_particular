@@ -42,7 +42,6 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias cdb="codeberg"
 ## open github
     alias github="firefox -p apps -url=https://www.github.com/login & disown && exit"
-    alias gith="github"
 ## open IBM certification courses
     function ibm(){
         if [[ "$1" == "1" ]]; then
@@ -83,56 +82,68 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias sets="settings"
 ## "lec" function to open lec files
     function lec(){
-        lecdir=~/files/nerd/doc/lec/
-        declare -a lecdirs
-        lecdirs=$(find $lecdir -type d -printf "%f\n")
-        if [[ "${lecdirs[@]}" =~ "$1" ]]; then
-            vim $lecdir/$1
+        lec_dir=~/files/nerd/doc/lec/
+        declare -a lec_dirs
+        lec_dirs=$(find $lec_dir -type d -printf "%f\n")
+        if [[ "${lec_dirs[@]}" =~ "$1" ]]; then
+            vim $lec_dir/$1
         elif [[ -z "$1" ]]; then
-            vim $lecdir
+            vim $lec_dir
         else
             echo "There is no such kind of lec."
         fi
     }
 ## "QA" function to open QA files
     function QA(){
-        QAdir=~/files/nerd/doc/doc/QA
-        declare -a QAdirs
-        QAdirs=$(find $QAdir -type d -printf "%f\n")
-        if [[ "${QAdirs[@]}" =~ "$1" ]]; then
-            vim $QAdir/$1
+        QA_dir=~/files/nerd/doc/doc/QA
+        declare -a QA_dirs
+        QA_dirs=$(find $QA_dir -type d -printf "%f\n")
+        if [[ "${QA_dirs[@]}" =~ "$1" ]]; then
+            vim $QA_dir/$1
         elif [[ -z "$1" ]]; then
-            vim $QAdir
+            vim $QA_dir
         else
             echo "There is no such kind of QA."
         fi
     }
 ## "dev" function to open dev files
     function dev(){
-        devdir=~/files/nerd/dev/
-        declare -a devdirs
-        devdirs=$(find $devdir -type d -printf "%f\n")
-        if [[ "${devdirs[@]}" =~ "$1" ]]; then
-            vim $devdir/$1
+        dev_dir=~/files/nerd/dev/
+        declare -a dev_dirs
+        dev_dirs=$(find $dev_dir -type d -printf "%f\n")
+        if [[ "${dev_dirs[@]}" =~ "$1" ]]; then
+            vim $dev_dir/$1
         elif [[ -z "$1" ]]; then
-            vim $devdir
+            vim $dev_dir
         else
             echo "There is no such kind of dev."
         fi
     }
-## "snip" function to open dev files
+## "snip" function to open .snippet files
     function snip(){
-        snipdir=~/files/config/vim/bundle/vim-snipmate/snippets
+        snip_dir=~/files/config/vim/bundle/vim-snipmate/snippets
         declare -a snipfiles
-        snipfiles=$(find $snipdir -type f -exec basename -s '.snippets' {} +)
-        if [[ "${snipfiles[@]}" =~ "$1" ]]; then
-            vim $snipdir/$1.snippets
+        snip_files=$(find $snip_dir -type f -exec basename -s '.snippets' {} +)
+        if [[ "${snip_files[@]}" =~ "$1" ]]; then
+            vim $snip_dir/$1.snippets
         elif [[ -z "$1" ]]; then
-            vim $snipdir
+            vim $snip_dir
         else
             echo "There is no such kind of snipt."
         fi
     }
+## "ghb" function to open github README.md files
+    function ghb(){
+        ghbdir=$HOME/bkp/github
+        if [[ -z $1 ]]; then
+            vim $ghbdir
+        elif [[ -n $1 ]] && [[ -z $2 ]]; then 
+            vim $ghbdir/$1/README.md
+        elif [[ -n $1 ]] && [[ -n $2 ]]; then
+            vim $ghbdir/$1/$2/README.md
+        fi
+    }
+
 ## "p" to open the poem vimwiki directory
     alias p="vim ~/files/poem/poem/index.md -c ":Lexplore""
 ## "s" to open the website vimwiki directory

@@ -124,23 +124,48 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
         snip_dir=~/files/config/vim/bundle/vim-snipmate/snippets
         declare -a snipfiles
         snip_files=$(find $snip_dir -type f -exec basename -s '.snippets' {} +)
-        if [[ "${snip_files[@]}" =~ "$1" ]]; then
-            vim $snip_dir/$1.snippets
-        elif [[ -z "$1" ]]; then
+        if [[ -z "$1" ]]; then
             vim $snip_dir
+        elif [[ "${snip_files[@]}" =~ "$1" ]]; then
+            vim $snip_dir/$1.snippets
         else
             echo "There is no such kind of snipt."
         fi
     }
 ## "ghb" function to open github README.md files
     function ghb(){
-        ghbdir=$HOME/bkp/github
+        ghb_dir=$HOME/bkp/github
         if [[ -z $1 ]]; then
-            vim $ghbdir
+            vim $ghb_dir
         elif [[ -n $1 ]] && [[ -z $2 ]]; then 
-            vim $ghbdir/$1/README.md
+            vim $ghb_dir/$1/README.md
         elif [[ -n $1 ]] && [[ -n $2 ]]; then
-            vim $ghbdir/$1/$2/README.md
+            vim $ghb_dir/$1/$2/README.md
+        fi
+    }
+## "cv" function to open curriculum files
+    function cv(){
+        cv_dir=$HOME/files/site/md/edu/curriculum
+        if [[ -z "$1" ]]; then
+            vim $cv_dir
+        elif [[ "$1" = "res" ]] || [[ "$1" = "-r" ]]; then
+            vim $cv_dir/yxm-cv.md
+        elif [[ "$1" = "dev" ]] || [[ "$1" = "-d" ]]; then
+            if [[ "$2" == "pt" ]] || [[ "$2" == "-pt" ]]; then
+                vim $cv_dir/yxm-dev-pt.md
+            elif [[ "$2" == "en" ]] || [[ "$2" == "-en" ]]; then
+                vim $cv_dir/yxm-dev-en.md
+            else
+                echo "option not defined."
+            fi
+        else
+            echo -e -n "
+Try \"cv option argument\" 
+
+* option = -r, res; -d, -dev
+* argument = -pt, pt; -en, en.
+
+"
         fi
     }
 
@@ -152,11 +177,13 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias r="vim ~/files/org/rascunho.md -c ":Lexplore""
     alias rd="vim ~/files/org/dev/rascunho.md -c ":Lexplore""
 ## "b" or "bib" to open the list of books
-    alias bib="find ~/files/nerd/bib -type f | fzf | xargs zathura"
+    alias bib="vim ~/files/nerd/bib"
     alias b="bib"
-## "docs" to open refs list
+## "docs" to open list of documentations
     alias docs="vim ~/files/nerd/doc/doc/settings/docs.md -c ":Lexplore""
-## "refs" to open list of documentations
+## "cert" to open list of certifications
+    alias cert="vim ~/files/nerd/cert/info.md -c ":Lexplore""
+## "refs" to open list of references
     alias refs="vim ~/files/org/dev/refs.md -c ":Lexplore""
 
 # OTHER

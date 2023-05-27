@@ -80,6 +80,23 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
 ## "settings" or "sets" to open settings file
     alias settings="vim ~/files/nerd/doc/linux/settings/index.md -c ":Lexplore""
     alias sets="settings"
+## "config" function to open config files
+    function config(){
+        config_dir=~/files/config/
+        declare -a config_dirs
+        if [[ -z "$1" ]]; then
+            vim $config_dir
+        elif [[ -n $1 ]] && [[ -z $2 ]]; then
+            vim $config_dir/$1
+        elif [[ -n $1 ]] && [[ -n $2 ]]; then
+            vim $config_dir/$1/$2
+        else
+            echo "There is no such kind of config."
+        fi
+    }
+    alias cfg="config"
+    alias c="config"
+
 ## "lec" function to open lec files
     function lec(){
         lec_dir=~/files/nerd/doc/lec/
@@ -145,7 +162,7 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     }
 ## "cv" function to open curriculum files
     function cv(){
-        cv_dir=$HOME/files/site/md/edu/curriculum
+        cv_dir=$HOME/files/nerd/cv
         if [[ -z "$1" ]]; then
             vim $cv_dir
         elif [[ "$1" = "res" ]] || [[ "$1" = "-r" ]]; then
@@ -168,7 +185,6 @@ Try \"cv option argument\"
 "
         fi
     }
-
 ## "p" to open the poem vimwiki directory
     alias p="vim ~/files/poem/poem/index.md -c ":Lexplore""
 ## "s" to open the website vimwiki directory
@@ -189,6 +205,7 @@ Try \"cv option argument\"
 # OTHER
 ## "site" to sync site files and push them to the website
     function site(){
+        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/curriculum/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/doc/ $HOME/files/site/md/doc/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/lec/ $HOME/files/site/md/lec/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/proj/ $HOME/files/site/md/dev/proj/

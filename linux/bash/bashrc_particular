@@ -209,7 +209,7 @@ Try \"cv option argument\"
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/doc/ $HOME/files/site/md/doc/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/lec/ $HOME/files/site/md/lec/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/proj/ $HOME/files/site/md/dev/proj/
-        sw -c site
+        sw -c site --toc
         sw -p site
     }
 ## "poem" to sync poem files and push them to the poem website

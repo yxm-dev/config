@@ -43,7 +43,7 @@ source ~/files/sec/mutt
     mailboxes =Drafts 
     mailboxes =Sent 
     mailboxes =Trash 
-    mailboxes ~/tmp/attach
+    mailboxes =Spam
 ### simplify the mailboxes names
     set sidebar_short_path 
     set sidebar_delim_chars="/" 

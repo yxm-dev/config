@@ -13,10 +13,14 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias jitsi="firefox -p apps https://meet.jit.si/ & disown && exit"
 ## meet with hugo
     alias hugo="firefox -p apps https://meet.google.com/zbb-xsxg-swe & disown && exit"
+## open tabela de gastos
+    alias gastos="firefox -p apps https://docs.google.com/spreadsheets/d/1HRt9HyZ2DzIhvQSjz5hoKAcsdbZmEZoaQwA52BtK5Gs/edit#gid=1739762735 & disown && exit"
+    alias gast="gastos"
 ## open estante virtual
     alias estante="firefox -p apps -url=https://www.estantevirtual.com.br/login & disown && exit"
 ## open poem website
     alias insensatez="firefox -p apps -url=https://insensatarigidez.com & disown && exit"
+    alias insen="insensatez"
 ## open personal website
     alias yxm="firefox -p apps -url=https://yxmartins.me & disown && exit"
 ## open whatsapp
@@ -205,6 +209,14 @@ Try \"cv option argument\"
 # OTHER
 ## "site" to sync site files and push them to the website
     function site(){
+        cv_dir=$HOME/files/nerd/cv/
+        cv=$(find $cv_dir -type f -name "*.md")
+        for f in ${cv[@]}; do
+            echo "Converting $f to .pdf..."
+            cvt -mmd -pdf $f
+            g=$(basename $f .md)
+            mv $g.pdf $cv_dir
+        done
         sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/curriculum/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/doc/ $HOME/files/site/md/doc/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/lec/ $HOME/files/site/md/lec/

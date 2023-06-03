@@ -44,8 +44,8 @@
     mailboxes =Inbox 
     mailboxes =Drafts 
     mailboxes =Sent 
-    mailboxes =Trash 
-    mailboxes ~/tmp/attach
+    mailboxes =Trash
+    mailboxes =Spam
 ### simplify the mailboxes names
     set sidebar_short_path 
     set sidebar_delim_chars="/" 

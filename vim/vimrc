@@ -19,9 +19,7 @@
 ">> set left margin. Show filename in the terminal tab/window title 
     set numberwidth=2 
     set title
-"> Other 
-">> open hyperlinks in zathura 
-    let g:netrw_browsex_viewer= "zathura" 
+"> Other  
 ">> skip .swp files message 
     autocmd SwapExists * let v:swapchoice = "e"
 ">> use bash in interactive mode to access .bashrc from vim
@@ -73,7 +71,7 @@
     inoremap \\m <esc>z=i
 "> Mailing
 ">> set up syntax highlighting for mutt
-    au bufread,bufnewfile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail
+    au bufread,bufnewfile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=vimwiki
 
 " KEYBIND config 
     source $HOME/files/config/vim/vimrc_keybind

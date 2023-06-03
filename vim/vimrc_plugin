@@ -20,6 +20,8 @@
     let g:netrw_sort_sequence = '[\/]$,*'
 ">> change of directory when opening a file
     set autochdir
+">> set the default application to be called with "x"
+    let g:netrw_browsex_viewer= "zathura" 
 "> Hotkeys
 ">> '\.'  to switch focus between Netrw and file windows. '\\.' to toggle the Netrw window
     nnoremap \. :winc h<cr>cd
@@ -56,7 +58,7 @@
         au FileType netrw nmap <buffer> cp cd:AsyncRun cp -r 
 ">> 'z' to open with zathura. 'pdf' ...
         au FileType netrw nmap <buffer> z cd:AsyncRun zathura  
-        au FileType netrw nmap <buffer> latex cd:AsyncRun pdflatex 
+        au FileType netrw nmap <buffer> tex cd:AsyncRun pdflatex 
         au FileType netrw nmap <buffer> cvt cd:AsyncRun cvt -md
         au FileType netrw nmap <buffer> beamer cd:AsyncRun cvt -md -beamer
         au FileType netrw nmap <buffer> w3m cd:AsyncRun w3m

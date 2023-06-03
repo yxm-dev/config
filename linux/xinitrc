@@ -1,0 +1,14 @@
+#! /bin/bash
+
+# including config file
+    xrdb -merge $HOME/.Xresources
+# starting xterm
+    xterm &
+# starting networkmanager 
+    NetworkManager
+# fixing touchpad
+    xinput set-prop 12 350 0
+    xinput set-prop 12 361 1 1 1 1 1 1 1
+    xinput set-prop 12 362 1 2 3
+# starting i3
+    i3

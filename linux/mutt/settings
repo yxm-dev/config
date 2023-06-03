@@ -105,6 +105,6 @@
     bind index,pager,compose \Cc noop
 ## 'u' to use w3m to see links
     bind index,pager u noop
-    macro index,pager u ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
-
+ #   macro index,pager u ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
+    macro index,pager u "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 

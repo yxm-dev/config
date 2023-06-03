@@ -3,7 +3,7 @@
 ">> esc in normal mode move to insert mode
     nnoremap <esc> i
 ">> tab in normal mode
-    nnoremap <tab> i<tab><right><esc>
+    nnoremap <tab> i<tab>
 ">> 'a','e' and '\left','\right' to move to beggining, ending of line
     nnoremap a ^
     nnoremap e $
@@ -97,10 +97,15 @@
 
 "> WINDOWS, TABS, BUFFERS and TABLINES
 ">> '\\\left' and '\\\right' to change tab
-    nnoremap \\\<right> gt
-    inoremap \\\<right> <esc>gt
-    nnoremap \\\<left> gT
-    inoremap \\\<left> <esc>gT
+    nnoremap \\\<right> gt :startinsert<cr>
+    inoremap \\\<right> <esc>gt :startinsert<cr>
+    nnoremap \\\<left> gT :startinsert<cr>
+    inoremap \\\<left> <esc>gT :startinsert<cr>
+">> 'shif+tab' and 'alt+tab' to change tab
+    nnoremap <s-tab> gt :startinsert<cr>
+    inoremap <s-tab> <esc>gt :startinsert<cr>
+    nnoremap <m-tab> gT :startinsert<cr>
+    inoremap <m-tab> <esc>gT :startinsert<cr>
 ">> '\\left', '\\right', '\\up' and '\\down' to change window
     nnoremap \\<right> :winc l<cr>
     inoremap \\<right> <esc>:winc l<cr>
@@ -110,6 +115,15 @@
     inoremap \\<down> <esc>:winc j<cr>
     nnoremap \\<up> :winc k<cr>
     inoremap \\<up> <esc>:winc k<cr>
+">> 'alt+left', 'alt+right', 'alt+up' and 'alt+down' to change window
+    nnoremap <m-right> :winc l<cr>
+    inoremap <m-right> <esc>:winc l<cr>
+    nnoremap <m-left> :winc h<cr>
+    inoremap <m-left> <esc>:winc h<cr>
+    nnoremap <m-down> :winc j<cr>
+    inoremap <m-down> <esc>:winc j<cr>
+    nnoremap <m-up> :winc k<cr>
+    inoremap <m-up> <esc>:winc k<cr>
 ">> '\;' to open/close a terminal session. 'ctrl+q' to close it.
     nnoremap \; :term ++close<cr>
     inoremap \; <esc>:term ++close<cr>

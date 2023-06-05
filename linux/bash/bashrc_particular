@@ -79,11 +79,6 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias IBM="ibm"
 
 # Vim ALIASES
-## "org" to open the organization central
-    alias org="vim ~/files/org/index.md"
-## "settings" or "sets" to open settings file
-    alias settings="vim ~/files/nerd/doc/linux/settings/index.md -c ":Lexplore""
-    alias sets="settings"
 ## "config" function to open config files
     function config(){
         config_dir=~/files/config/
@@ -189,22 +184,25 @@ Try \"cv option argument\"
 "
         fi
     }
+## "org" to open the organization central
+    alias org="vim ~/files/org/index.md"
+## "settings" or "sets" to open settings file
+    alias settings="vim ~/files/nerd/doc/doc/settings/index.md"
+    alias sets="settings"
 ## "p" to open the poem vimwiki directory
-    alias p="vim ~/files/poem/poem/index.md -c ":Lexplore""
+    alias p="vim ~/files/poem/poem/index.md"
 ## "s" to open the website vimwiki directory
-    alias s="vim ~/files/site/index.md -c ":Lexplore""
+    alias s="vim ~/files/site/index.md"
 ## "r" and "rd" to open sketch docs
-    alias r="vim ~/files/org/rascunho.md -c ":Lexplore""
-    alias rd="vim ~/files/org/dev/rascunho.md -c ":Lexplore""
+    alias r="vim ~/files/org/rascunho.md -c"
+    alias rd="vim ~/files/org/dev/rascunho.md"
 ## "b" or "bib" to open the list of books
     alias bib="vim ~/files/nerd/bib"
     alias b="bib"
 ## "docs" to open list of documentations
-    alias docs="vim ~/files/nerd/doc/doc/settings/docs.md -c ":Lexplore""
+    alias docs="vim ~/files/nerd/doc/doc/settings/docs.md -c"
 ## "cert" to open list of certifications
-    alias cert="vim ~/files/nerd/cert/info.md -c ":Lexplore""
-## "refs" to open list of references
-    alias refs="vim ~/files/org/dev/refs.md -c ":Lexplore""
+    alias cert="vim ~/files/nerd/cert/info.md -c"
 
 # OTHER
 ## "site" to sync site files and push them to the website

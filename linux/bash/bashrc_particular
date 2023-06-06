@@ -194,7 +194,7 @@ Try \"cv option argument\"
 ## "s" to open the website vimwiki directory
     alias s="vim ~/files/site/index.md"
 ## "r" and "rd" to open sketch docs
-    alias r="vim ~/files/org/rascunho.md -c"
+    alias r="vim ~/files/org/rascunho.md"
     alias rd="vim ~/files/org/dev/rascunho.md"
 ## "b" or "bib" to open the list of books
     alias bib="vim ~/files/nerd/bib"

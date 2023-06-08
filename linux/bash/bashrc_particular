@@ -32,13 +32,6 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
     alias disc="firefox -p apps -url=https://discord.com/channels/ & disown && exit"
 ## open canva
     alias canva="firefox -p light -url=https://www.canva.com/ & disown && exit"
-## open instagram
-    alias insta="firefox -p light --new-window https://www.instagram.com/insensatarigidez/ & disown && exit"
-## open linkedin
-    alias linkedin="firefox -p apps -url=https://www.linkedin.com/login & disown && exit"
-    alias lnkd="linkedin"
-## open jsfiddle
-    alias jsf="firefox -p light -url=https://jsfiddle.net & disown && exit"
 ## open codeberg
     alias codeberg="firefox -p apps -url=https://codeberg.org/user/login & disown && exit"
     alias codeb="codeberg"
@@ -205,6 +198,36 @@ Try \"cv option argument\"
     alias cert="vim ~/files/nerd/cert/info.md -c"
 
 # OTHER
+## "lnkd" function
+    function lnkd(){
+        if [[ -z "$1" ]]; then
+            firefox -p apps -url=https://www.linkedin.com/login & disown && exit
+        elif [[ "$1" == "-p" ]] || [[ "$1" == "--post" ]]; then
+            vim ~/files/nerd/lnkd/posts/
+        elif [[ "$1" == "-o" ]] || [[ "$1" == "--org" ]]; then
+            vim ~/files/nerd/lnkd/org/
+        elif [[ "$1" == "-c" ]] || [[ "$1" == "--column" ]]; then
+            vim ~/files/site/md/lec/dev/colums/index.md
+        else
+            echo "option not defined for \"lnkd\" function."
+        fi
+    }
+    alias lnkdp="lnkd -p"
+    alias lnkp="lnkd -p"
+    alias lnko="lnkd -o"
+    alias lnkc="lnkd -c"
+## "insta" function
+    function insta(){
+        if [[ -z "$1" ]]; then
+            firefox -p light --new-window https://www.instagram.com/insensatarigidez/ & disown && exit 
+        elif [[ "$1" == "-p" ]] || [[ "$1" == "--post" ]]; then
+            vim ~/files/poem/insta/posts/    
+        else
+            echo "option not defined for \"insta\" function."
+        fi
+    }
+    alias instap="insta -p"
+        
 ## "site" to sync site files and push them to the website
     function site(){
         cv_dir=$HOME/files/nerd/cv/

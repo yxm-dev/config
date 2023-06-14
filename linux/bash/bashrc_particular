@@ -3,6 +3,7 @@
 # API
 source $HOME/files/sec/API
 export OPENAI_API_KEY=$OPENAI_API_KEY
+export CHAT_GPT_KEY=$OPENAI_API_KEY
 
 # WEB PAGES
 ## "ff" to open "Firefox" in background
@@ -21,6 +22,8 @@ export OPENAI_API_KEY=$OPENAI_API_KEY
 ## open poem website
     alias insensatez="firefox -p apps -url=https://insensatarigidez.com & disown && exit"
     alias insen="insensatez"
+## open magazine luiza opportunites
+    alias luiza="firefox -p apps -url=https://carreiras.magazineluiza.com.br/vagas & disown && exit"
 ## open personal website
     alias yxm="firefox -p apps -url=https://yxmartins.me & disown && exit"
 ## open whatsapp
@@ -193,9 +196,11 @@ Try \"cv option argument\"
     alias bib="vim ~/files/nerd/bib"
     alias b="bib"
 ## "docs" to open list of documentations
-    alias docs="vim ~/files/nerd/doc/doc/settings/docs.md -c"
+    alias docs="vim ~/files/nerd/doc/doc/settings/docs.md"
 ## "cert" to open list of certifications
-    alias cert="vim ~/files/nerd/cert/info.md -c"
+    alias cert="vim ~/files/nerd/cert/info.md"
+## "col" to open colums list
+    alias col="vim ~/files/nerd/doc/lec/dev/colums/index.md"
 
 # OTHER
 ## "lnkd" function

@@ -43,9 +43,9 @@
     alias vi="vim -c ":Lexplore" ~/.tmp"
     alias v="vi"
 ## "vimrc", "vimra" and "vimrp" to open vim configuration files
-    alias vimrc="vim ~/files/config/vim/vimrc -c ":Lexplore""
-    alias vimra="vim ~/files/config/vim/vimrc_keybind -c ":Lexplore""
-    alias vimrp="vim ~/files/config/vim/vimrc_plugin -c ":Lexplore""
+    alias vimrc="vim ~/files/config/vim/vimrc"
+    alias vimra="vim ~/files/config/vim/vimrc_keybind"
+    alias vimrp="vim ~/files/config/vim/vimrc_plugin"
 ## "z" to open .pdf with Zathura in the background
     function z(){
         zathura $1 & disown 

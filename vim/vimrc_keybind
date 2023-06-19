@@ -96,25 +96,16 @@
     vnoremap <c-q> <esc> :q!<cr>
 
 "> WINDOWS, TABS, BUFFERS and TABLINES
-">> '\\\left' and '\\\right' to change tab
-    nnoremap \\\<right> gt :startinsert<cr>
-    inoremap \\\<right> <esc>gt :startinsert<cr>
-    nnoremap \\\<left> gT :startinsert<cr>
-    inoremap \\\<left> <esc>gT :startinsert<cr>
+">> '\\left' and '\\right' to change tab
+    nnoremap \\<right> gt :startinsert<cr>
+    inoremap \\<right> <esc>gt :startinsert<cr>
+    nnoremap \\<left> gT :startinsert<cr>
+    inoremap \\<left> <esc>gT :startinsert<cr>
 ">> 'shif+tab' and 'alt+tab' to change tab
     nnoremap <s-tab> gt :startinsert<cr>
     inoremap <s-tab> <esc>gt :startinsert<cr>
     nnoremap <m-tab> gT :startinsert<cr>
     inoremap <m-tab> <esc>gT :startinsert<cr>
-">> '\\left', '\\right', '\\up' and '\\down' to change window
-    nnoremap \\<right> :winc l<cr>
-    inoremap \\<right> <esc>:winc l<cr>
-    nnoremap \\<left> :winc h<cr>
-    inoremap \\<left> <esc>:winc h<cr>
-    nnoremap \\<down> :winc j<cr>
-    inoremap \\<down> <esc>:winc j<cr>
-    nnoremap \\<up> :winc k<cr>
-    inoremap \\<up> <esc>:winc k<cr>
 ">> 'alt+left', 'alt+right', 'alt+up' and 'alt+down' to change window
     nnoremap <m-right> :winc l<cr>
     inoremap <m-right> <esc>:winc l<cr>

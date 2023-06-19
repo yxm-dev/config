@@ -12,6 +12,7 @@
     export EDITOR="/usr/bin/vim"
     export SUDO_EDITOR="/usr/bin/vim"
     PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+    export GOPATH=$HOME/.go
 
 # ALIASES
 ## include aliases file

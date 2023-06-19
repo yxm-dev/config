@@ -4,7 +4,7 @@
     let g:netrw_banner = 0
 ">> allow toggle hide
     let g:netrw_hide= 1
-">> hide dot files in startup
+">> hide dot files by default
     let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 ">> windows size
     let g:netrw_winsize = 15
@@ -21,7 +21,11 @@
 ">> change of directory when opening a file
     set autochdir
 ">> set the default application to be called with "x"
-    let g:netrw_browsex_viewer= "zathura" 
+    let g:netrw_browsex_viewer= "zathura"
+">> keep cursor position
+    let g:netrw_fastbrowse = 2
+">> change the highlight of markded files
+    hi! link netrwMarkFile Search
 "> Hotkeys
 ">> '\.'  to switch focus between Netrw and file windows. '\\.' to toggle the Netrw window
     nnoremap \. :winc h<cr>cd
@@ -34,8 +38,8 @@
         au FileType netrw nmap <buffer> \. :winc l<cr>:startinsert<cr>
         au FileType netrw nmap <buffer> \\. :Lexplore<cr>:startinsert<cr>
         au FileType netre  nmap [29~ :Lexplore<cr>:startinsert<cr>
-">> 'pp' to display the current directory. 'h' to toggle hidden files
-        au FileType netrw nmap <buffer> pp :pwd<cr>
+">> 'p' to display the current directory. 'h' to toggle hidden files
+        au FileType netrw nmap <buffer> p :pwd<cr>
         au FileType netrw nmap <buffer> h gh
 ">> 'a' to mark files. 'w', and  'e' to execute command for marked files.
         au FileType netrw nmap <buffer> a mf

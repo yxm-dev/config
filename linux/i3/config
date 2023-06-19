@@ -107,10 +107,8 @@ bar {
     bindsym Ctrl+plus exec i3-sensible-terminal
     bindsym Ctrl+minus kill
 ## Menu
-### "ctrl+d" to open dmenu
-    bindsym Ctrl+d exec --no-startup-id dmenu_run
 ### "alt+d" to open rofi menu
-    bindsym Mod1+d exec "rofi -modi drun,run -show drun"
+    bindsym Mod1+d exec ""
 ## Other
 ### "ctrl+shift+r" to restart i3
     bindsym $mod+Shift+r restart

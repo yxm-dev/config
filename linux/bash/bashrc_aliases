@@ -51,7 +51,7 @@
         zathura $1 & disown 
     }
 ## "gpt" to open gpt-chatbot-cli
-    alias gpt="gpt-chatbot-cli"
+    alias gpt="gpterm"
 ## "tor" to start tor
     alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
 ## "calc", "clc" to open "bc" in the interactive mode

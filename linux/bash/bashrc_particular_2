@@ -1,0 +1,123 @@
+#! /bin/bash
+
+# OTHER
+## "lnkd" function
+    function lnkd(){
+        if [[ -z "$1" ]]; then
+            firefox -p apps -url=https://www.linkedin.com/login & disown && exit
+        elif [[ "$1" == "-p" ]] || [[ "$1" == "--post" ]]; then
+            vim ~/files/nerd/lnkd/posts/
+        elif [[ "$1" == "-o" ]] || [[ "$1" == "--org" ]]; then
+            vim ~/files/nerd/lnkd/org/
+        elif [[ "$1" == "-c" ]] || [[ "$1" == "--column" ]]; then
+            vim ~/files/site/md/lec/dev/colums/index.md
+        else
+            echo "option not defined for \"lnkd\" function."
+        fi
+    }
+    alias lnkdp="lnkd -p"
+    alias lnkp="lnkd -p"
+    alias lnko="lnkd -o"
+    alias lnkc="lnkd -c"
+## "insta" function
+    function insta(){
+        if [[ -z "$1" ]]; then
+            firefox -p light --new-window https://www.instagram.com/insensatarigidez/ & disown && exit 
+        elif [[ "$1" == "-p" ]] || [[ "$1" == "--post" ]]; then
+            vim ~/files/poem/insta/posts/    
+        else
+            echo "option not defined for \"insta\" function."
+        fi
+    }
+    alias instap="insta -p"
+        
+## "site" to sync site files and push them to the website
+    function site(){
+        cv_dir=$HOME/files/nerd/cv/
+        cv=$(find $cv_dir -type f -name "*.md")
+        for f in ${cv[@]}; do
+            echo "Converting $f to .pdf..."
+            cvt -mmd -pdf $f
+            g=$(basename $f .md)
+            mv $g.pdf $cv_dir
+        done
+        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/curriculum/
+        sudo rsync -av --progress --delete $HOME/files/nerd/doc/doc/ $HOME/files/site/md/doc/
+        sudo rsync -av --progress --delete $HOME/files/nerd/doc/lec/ $HOME/files/site/md/lec/
+        sudo rsync -av --progress --delete $HOME/files/nerd/doc/proj/ $HOME/files/site/md/dev/proj/
+        sw -c site --toc
+        sw -p site
+    }
+## "poem" to sync poem files and push them to the poem website
+    function poem(){
+        sudo rsync -av --progress --delete $HOME/files/poem/poem/ $HOME/files/poem/site/md/indice/
+        sw -c poem
+        sw -p poem
+    }
+## unzip files to post directories  
+    function post(){
+        format[0]=insta
+        format[1]=lnkd
+        format[2]=reels
+        N=(0 1 2)
+        dir[0]=~/files/poem/insta/posts
+        dir[1]=~/files/nerd/lnkd/posts
+        dir[2]=~/files/poem/insta/reels
+        downloaddir=~/tmp
+        function aux(){
+            if [[ -f "$downloaddir/${format[$i]}_$1.png" ]]; then
+                echo "identified a single .png file..."
+                echo "moving to \"${dir[$i]}/$1/\"..."
+                mv $downloaddir/${format[$i]}_$1.png ${dir[$i]}/$1/$1.png
+                echo "Done!"
+            elif [[ -f "$downloaddir/${format[$i]}_$1.zip" ]]; then
+                echo "identified a .zip file..."
+                echo "extracting in \"${dir[$i]}/$1/\"..."
+                unzip $downloaddir/${format[$i]}_$1 -d ${dir[$i]}/$1
+                echo "excluding \"${format[$i]}_$1.zip\"..."
+                rm $downloaddir/${format[$i]}_$1.zip
+                echo "Done!"
+            fi
+        }
+        for i in ${!N[@]}; do
+            if [[ "$1" == "${format[$i]}" ]]; then
+                if [[ -d ${dir[$i]}/$2 ]]; then
+                    echo  "${dir[$i]}/$2 already exists. Subscribe? (y/n)"
+                    read -e -p "> " subscribe
+                    if [[ "$subscribe" == "y" ]]; then
+                        echo "removing old files..."
+                        rm -r ${dir[$i]}/$2
+                        aux $2
+                    else
+                        return
+                    fi
+                else
+                    echo "creating dir \"${dir[$i]}/$2\"..."
+                    mkdir ${dir[$i]}/$2
+                    aux $2
+                fi
+            fi
+        done
+        unset -f aux
+    }
+
+## up function
+
+function up(){
+
+    PKG_main_dir=$HOME/.config/pkg.sh
+
+    declare -a PKG_base_files
+
+    PKG_base_files[0]=${PKG_main_dir}/pkg.sh
+    PKG_base_files[1]=${PKG_main_dir}/config/config
+    PKG_base_files[2]=${PKG_main_dir}/install/install
+    PKG_base_files[3]=${PKG_main_dir}/install/uninstall
+
+    for file in ${PKG_base_files[@]}; do
+        sed -i "2i\\ \nPKG_install_dir=${PKG_main_dir}\n" $file
+    done
+    echo "Done."   
+}
+
+

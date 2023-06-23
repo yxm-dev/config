@@ -11,6 +11,9 @@
     alias basha="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_aliases"
 ## "bashp" to open "bashrc_particular" file
     alias bashp="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_particular"
+ ## "bashpp" to open "bashrc_particular_2" file
+    alias bashpp="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_particular_2"
+
 ## running "makepkg" as a root 
     function mkp(){
         x=/home/build

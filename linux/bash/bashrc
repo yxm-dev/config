@@ -18,6 +18,7 @@
 ## include aliases file
     source $HOME/files/config/linux/bash/bashrc_aliases
     source $HOME/files/config/linux/bash/bashrc_particular
+    source $HOME/files/config/linux/bash/bashrc_particular_2
 
 # INCLUDES
 ## sync files/dirs and git push

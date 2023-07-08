@@ -120,7 +120,7 @@ export CHAT_GPT_KEY=$OPENAI_API_KEY
     }
 ## "dev" function to open dev files
     function dev(){
-        dev_dir=~/files/nerd/dev/
+        dev_dir=~/files/nerd/dev
         declare -a dev_dirs
         dev_dirs=$(find $dev_dir -type d -printf "%f\n")
         if [[ "${dev_dirs[@]}" =~ "$1" ]]; then

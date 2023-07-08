@@ -40,6 +40,13 @@
     alias shdw="synca && syncp && bkps && shutdown -h now"
 ## "kill" to kill applications
     alias kill="pkill -9"
+## "restart" or "rst" restart xorg
+    alias restart="xrdb -merge $HOME/.Xresources"
+    alias rst="restart"
+## "pt" to set abnt2 keyboard layout
+    alias pt="setxkbmap -model abnt2 -layout br -variant abnt2"
+## "en" to set en-us keyboard layout
+    alias en="setxkbmap -layout us -variant intl" 
 
 # APPLICATIONS
 ## "vi" and "v" to open vim with Netrw. 

@@ -6,9 +6,14 @@
     xterm &
 # starting networkmanager 
     NetworkManager
+# starting pulseaudio
+    pulseaudio --start
+# fixing keyboard speed
+    xset r rate 130 35
 # fixing touchpad
-    xinput set-prop 12 350 0
-    xinput set-prop 12 361 1 1 1 1 1 1 1
-    xinput set-prop 12 362 1 2 3
+    touchpad=$(xinput list --id-only "SYNA3602:00 0911:5288 Touchpad")
+    xinput set-prop $touchpad 350 0
+    xinput set-prop $touchpad 361 1 1 1 1 1 1 1
+    xinput set-prop $touchpad 362 1 2 3
 # starting i3
     i3

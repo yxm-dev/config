@@ -72,8 +72,7 @@
     macro index,pager <f5> "<change-folder>=Inbox<enter>"
 ## "D" to delete tagged or the current mail
     bind index,pager,compose d noop
-    bind index,pager,compose D noop
-    macro index,pager,compose D ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Trash\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n"
+    macro index,pager,compose d ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Trash\n<sync-mailbox>"
 ## "r" to reply. "R" to reply to all
     bind index,pager r reply 
     bind index,pager R group-reply

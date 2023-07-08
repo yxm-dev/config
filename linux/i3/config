@@ -31,12 +31,6 @@ bar {
     }
 }
 
-# KEYBOARD
-## set keyboard layout
-    exec_always setxkbmap -model abnt2 -layout br -variant abnt2
-## set keyboard typeset rate and delay
-    exec_always xset r rate 130 35 
-
 # POWER MENU
 ## taking the script that takes a screenshot, pixels it and send to i3lock
     set $i3lockwall ~/.config/i3/scripts/lock.sh
@@ -58,9 +52,7 @@ bar {
     exec_always xss-lock $i3lockwall
 
 # MIDIA
-## execute pulseaudio at start
-    exec_always pulseaudio --start
-## "ctrl+0" and "ctrl+9" to adjust volume. "ctrl+m" to toggle mute.
+## ctrl+0" and "ctrl+9" to adjust volume. "ctrl+m" to toggle mute.
     bindsym Ctrl+0 exec amixer set Master 5%+ 
     bindsym Ctrl+9 exec amixer set Master 5%-
     bindsym Ctrl+m exec amixer set Master toggle

@@ -41,11 +41,14 @@
             g=$(basename $f .md)
             mv $g.pdf $cv_dir
         done
-        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/curriculum/
+        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/cv/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/doc/ $HOME/files/site/md/doc/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/lec/ $HOME/files/site/md/lec/
         sudo rsync -av --progress --delete $HOME/files/nerd/doc/proj/ $HOME/files/site/md/dev/proj/
-        sw -c site --toc
+        sudo rsync -av --progress --delete $HOME/files/nerd/dev/devs/ $HOME/files/site/md/dev/devs/
+        mv $HOME/files/site/md/dev/devs/README.md $HOME/files/site/md/dev/devs/index.md
+        sed -i '1s/^/---\ntitle: \"\dev\/devs\"\n---\n\n/' $HOME/files/site/md/dev/devs/index.md
+        sw -c site
         sw -p site
     }
 ## "poem" to sync poem files and push them to the poem website

@@ -131,6 +131,19 @@ export CHAT_GPT_KEY=$OPENAI_API_KEY
             echo "There is no such kind of dev."
         fi
     }
+## "mint" function to open mint files
+    function mint(){
+        mint_dir=~/files/nerd/doc/mint
+        declare -a mint_dirs
+        mint_dirs=$(find $mint_dir -type d -printf "%f\n")
+        if [[ "${mint_dirs[@]}" =~ "$1" ]]; then
+            vim $mint_dir/$1
+        elif [[ -z "$1" ]]; then
+            vim $mint_dir
+        else
+            echo "There is no such kind of dev."
+        fi
+    }
 ## "snip" function to open .snippet files
     function snip(){
         snip_dir=~/files/config/vim/bundle/vim-snipmate/snippets
@@ -142,17 +155,6 @@ export CHAT_GPT_KEY=$OPENAI_API_KEY
             vim $snip_dir/$1.snippets
         else
             echo "There is no such kind of snipt."
-        fi
-    }
-## "ghb" function to open github README.md files
-    function ghb(){
-        ghb_dir=$HOME/bkp/github
-        if [[ -z $1 ]]; then
-            vim $ghb_dir
-        elif [[ -n $1 ]] && [[ -z $2 ]]; then 
-            vim $ghb_dir/$1/README.md
-        elif [[ -n $1 ]] && [[ -n $2 ]]; then
-            vim $ghb_dir/$1/$2/README.md
         fi
     }
 ## "cv" function to open curriculum files

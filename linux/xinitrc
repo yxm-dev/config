@@ -1,0 +1,21 @@
+#! /bin/bash
+
+# including config file
+    xrdb -merge $HOME/.Xresources
+# starting xterm
+    xterm &
+# starting networkmanager 
+    NetworkManager
+# starting pulseaudio
+    pulseaudio --start
+# fixing keyboard layout
+    setxkbmap -layout us -variant intl
+# fixing keyboard speed
+    xset r rate 130 35
+# fixing touchpad
+    touchpad=$(xinput list --id-only "SYNA3602:00 0911:5288 Touchpad")
+    xinput set-prop $touchpad 350 0
+    xinput set-prop $touchpad 361 1 1 1 1 1 1 1
+    xinput set-prop $touchpad 362 1 2 3
+# starting i3
+    i3

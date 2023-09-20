@@ -1,0 +1,146 @@
+
+"> MOVING
+">> esc in normal mode move to insert mode
+    nnoremap <esc> i
+">> tab in normal mode
+    nnoremap <tab> i<tab>
+">> 'a','e' and '\left','\right' to move to beggining, ending of line
+    nnoremap a ^
+    nnoremap e $
+    nnoremap \<left> ^
+    nnoremap \<right> $
+    vnoremap \<right> $
+    inoremap \<left> <esc>^i
+    inoremap \<right> <esc>$i
+">> '\up' and '\down' to move to the beggining and ending of file
+    nnoremap \<up> gg
+    nnoremap \<down> G
+    vnoremap \<up> gg
+    vnoremap \<down> G
+    inoremap \<up> <esc>ggi
+    inoremap \<down> <esc>Gi
+
+">> use cursor arrows to move through long lines, ignoring wrapping.
+    inoremap <silent> <down> <c-r>=pumvisible() ? "\<lt>down>" : "\<lt>c-o>gj"<cr>
+    inoremap <silent> <up> <c-r>=pumvisible() ? "\<lt>up>" : "\<lt>c-o>gk"<cr>
+    nnoremap <down> gj
+    nnoremap <up> gk
+    vnoremap <up> gk
+    vnoremap <down> gj
+">> 'home/end' goes to to/end of the page
+    inoremap <home> <esc> ggi
+    nnoremap <home> ggi
+    inoremap <end> <esc> GGi
+    nnoremap <end> GGi
+
+"> SEARCHING
+">> 'ctrl+f' or '\\f' to search.
+    nnoremap <c-f> /
+    inoremap <c-f> <esc>/
+    nnoremap \\f /
+    inoremap \\f <esc>/
+">> '\\s' to search and reply
+    nnoremap \\s :%s/foo/bar/g
+    inoremap \\s <esc>:%s/foo/bar/g
+
+"> EDITING
+">> 'space' and 'backspace' in normal mode and visual mode 
+    vnoremap <space> <esc>:startinsert<cr><space><right>
+    nnoremap <space> :startinsert<cr><space><right>
+    vnoremap <bs> d<esc>:startinsert<cr>
+    nnoremap <bs> :startinsert<cr><bs><right>
+">> copy and paste directly to clipboard
+    set clipboard+=unnamed
+    set go+=a
+">> 'ctrl+x' to cut, 'crtl+c' to copy and 'ctrl+v' to paste
+    vnoremap <c-x> "+c
+    vnoremap <c-c> "+yi
+    nnoremap <c-v> "+pi
+    inoremap <c-v> <esc> "+pi
+">> 'ctrl+z' to undo and 'ctrl+r' to redo 
+    noremap <c-z> u
+    inoremap <c-z> <c-o>u
+    inoremap <c-r> <esc><c-r>i
+">> in markdown and html, '\enter' to break a line
+    autocmd filetype md,markdown,vimwiki,html inoremap \<cr> <br>
+
+"> SELECTING
+">> use 'shift+arrows' to select text.
+    nnoremap <s-up> vgk
+    nnoremap <s-down> vgj
+    nnoremap <s-left> v<left>
+    nnoremap <s-right> v<right>
+    vnoremap <s-left> <left>
+    vnoremap <s-right> <right>
+    vnoremap <s-up> gk
+    vnoremap <s-down> gj
+    inoremap <s-up> <esc>vgk
+    inoremap <s-down> <esc>vgj
+    inoremap <s-left> <esc>v<left>
+    inoremap <s-right> <esc>v<right>
+">> 'ctrl+l' to select current line
+    nnoremap <c-l> ^v$
+    inoremap <c-l> <esc>^v$
+">> 'ctrl+a' to select all
+    nnoremap <c-a> ggvG$
+    inoremap <c-a> <esc>ggvG$
+      
+"> GENERAL
+">> save with 'ctrl+s'
+    nnoremap <c-s> :w!<cr>i
+    inoremap <c-s> <esc> :w!<cr>i
+    vnoremap <c-s> <esc> :w!<cr>
+">> quit without saving with 'ctrl+q'
+    nnoremap <c-q> :q!<cr>
+    inoremap <c-q> <esc> :q!<cr>
+    vnoremap <c-q> <esc> :q!<cr>
+
+"> WINDOWS, TABS, BUFFERS and TABLINES
+">> '\\left' and '\\right' to change tab
+    nnoremap \\<right> gt :startinsert<cr>
+    inoremap \\<right> <esc>gt :startinsert<cr>
+    nnoremap \\<left> gT :startinsert<cr>
+    inoremap \\<left> <esc>gT :startinsert<cr>
+">> 'shif+tab' and 'alt+tab' to change tab
+    nnoremap <s-tab> gt :startinsert<cr>
+    inoremap <s-tab> <esc>gt :startinsert<cr>
+    nnoremap <m-tab> gT :startinsert<cr>
+    inoremap <m-tab> <esc>gT :startinsert<cr>
+">> 'alt+left', 'alt+right', 'alt+up' and 'alt+down' to change window
+    nnoremap <m-right> :winc l<cr>
+    inoremap <m-right> <esc>:winc l<cr>
+    nnoremap <m-left> :winc h<cr>
+    inoremap <m-left> <esc>:winc h<cr>
+    nnoremap <m-down> :winc j<cr>
+    inoremap <m-down> <esc>:winc j<cr>
+    nnoremap <m-up> :winc k<cr>
+    inoremap <m-up> <esc>:winc k<cr>
+">> '\;' to open/close a terminal session. 'ctrl+q' to close it.
+    nnoremap \; :term ++close<cr>
+    inoremap \; <esc>:term ++close<cr>
+    tnoremap \; <c-d>
+    tnoremap <c-q> <c-d>
+
+"> SHELL COMMANDS
+">> '!' to execute a shell command 
+    nnoremap ! :! 
+">> '!!' to execute command in background. '!1' to display output
+    nnoremap !! :AsyncRun
+    nnoremap !1 :copen<cr>:AsyncRun
+
+"> OTHER
+">> 'ctrl+x' to omnicompletion
+    inoremap <c-x> <c-x><c-o>
+
+"> DISABLING
+">> uppercase and lowercase 
+    xnoremap u <nop>
+    xnoremap U <nop>
+    nnoremap gu <nop>
+    nnoremap gU <nop>
+">> replace mode
+    inoremap <insert> <nop>
+    nnoremap r <nop>
+    nnoremap R <nop>
+"> search cursor word
+    nnoremap # <nop>

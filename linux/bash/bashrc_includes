@@ -1,0 +1,30 @@
+#!/bin/bash
+
+## sync files/dirs
+    source $HOME/.config/sync.sh/sync.sh
+## intuitive cli for pandoc translator
+    source $HOME/.config/cvt.sh/cvt.sh
+## intuitive cli for translate-shell
+    source $HOME/.config/trsl.sh/trsl.sh
+## easy command line for bash
+    source $HOME/.config/ecl.sh/ecl.sh
+## intuitive cli for rclone
+    source $HOME/.config/bkp.sh/bkp.sh
+## simple pandoc-based static website generator
+    source $HOME/.config/sw.sh/sw.sh
+## open pages and search from terminal
+    source $HOME/.config/web.sh/web.sh
+## simple package creator for bash packages
+    source $HOME/.config/pkg.sh/pkg.sh
+## interactive interface for git
+    source $HOME/.config/g.sh/g.sh
+## manager for git projects
+    source $HOME/.config/gpp.sh/gpp.sh
+## manage dev.to posts
+    source $HOME/.config/devto.sh/devto.sh 
+## create pdf files from directories
+    source $HOME/.config/pdf.sh/pdf.sh
+## crete .gif files from selected screen area
+    source $HOME/.config/gif.sh/gif.sh
+## manage and config buckets in AWS S3 service
+    source $HOME/.config/s3.sh/s3.sh

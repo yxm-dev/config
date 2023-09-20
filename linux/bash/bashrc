@@ -1,0 +1,32 @@
+# DISPLAY
+## set prompt to display only the colored current directory
+    time="33m`date +%H:%M`"
+    time1="\[\033[$time\]"
+    dir1="\[\033[32m\]\w\[\033[00m\]"
+    PS1="$dir1\$ "
+## unbolded colored directories in "ls" command
+    LS_COLORS=$LS_COLORS:'di=0;94:'
+    export LS_COLORS
+
+# PATHS
+    export EDITOR="/usr/bin/vim"
+    export SUDO_EDITOR="/usr/bin/vim"
+    PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+    export GOPATH=$HOME/.go
+
+# API
+    source $HOME/files/sec/API
+    export OPENAI_API_KEY=$OPENAI_API_KEY
+    export DEVTO_TOKEN=$DEVTO_TOKEN
+
+# COMPLETION
+    complete -C '/usr/bin/aws_completer' aws
+
+# ADDITIONAL FILES
+    source $HOME/files/config/linux/bash/bashrc_aliases
+    source $HOME/files/config/linux/bash/bashrc_functions
+    source $HOME/files/config/linux/bash/bashrc_vim
+    source $HOME/files/config/linux/bash/bashrc_includes
+
+
+

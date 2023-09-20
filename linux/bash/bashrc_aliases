@@ -1,0 +1,61 @@
+#! /bin/bash
+
+# SYSTEM
+## "ls" to list colored files with directories first
+    alias ls="ls --color=auto --group-directories-first"
+## "la" to list hidden files
+    alias la="ls -a"
+## "shutdown" to shutdown quickly
+    alias shutdown="shutdown -h now"
+## "shtdw" and "shdw" to push, make a bkp and then shutdown quickly 
+    alias shtdw="synca && gps && gp -p && bkps && shutdown -h now"
+    alias shdw="synca && gps && gp -p && bkps && shutdown -h now"
+## "restart" or "rst" restart xorg
+    alias restart="xrdb $HOME/.Xresources"
+    alias rst="restart"
+## "pt" to set abnt2 keyboard layout
+    alias pt="setxkbmap -model abnt2 -layout br -variant abnt2"
+## "en" to set en-us keyboard layout
+    alias en="setxkbmap -layout us -variant intl" 
+
+# APPLICATIONS
+## "vi" and "v" to open vim with Netrw. 
+    alias vi="vim -c ":Lexplore" ~/.tmp"
+    alias v="vi"
+## "z" to open zathura
+    alias z="zathura"    
+## "gpt" to open gpt-chatbot-cli
+    alias gpt="gpterm"
+## "xrn" and "xournal" to open xournalpp
+    alias xournal="xournalpp & disown" 
+    alias xrn="xournal & disown && exit"
+## "buds" to connect to my headphone
+    alias buds="bluetoothctl connect 40:35:E6:04:8E:66"
+## "tor" to start tor
+    alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
+## "calc", "clc" to open "bc" in the interactive mode
+    function calc(){
+        echo "Welcome to bc calculator. Type \"quit\" to exit."
+        bc -q -i -l $@
+    }
+    alias clc="calc"
+## "m" to open "Mutt" in default account. "mi" to open "ith" account.
+    alias m="mutt"
+    alias m1="mutt -e 'source ~/.mutt/accounts/1rc'"
+    alias m2="mutt -e 'source ~/.mutt/accounts/2rc'"
+    alias m3="mutt -e 'source ~/.mutt/accounts/3rc'"
+    alias m4="mutt -e 'source ~/.mutt/accounts/4rc'"
+    alias m5="mutt -e 'source ~/.mutt/accounts/5rc'"
+    alias m6="mutt -e 'source ~/.mutt/accounts/6rc'"
+## "lib" to execute libby
+    libdir=$HOME/files/nerd/bib
+    function lib(){
+        pdfviewer="zathura"
+        libby --output-dir $libdir --viewer $pdfviewer $@
+    }
+## "wb", "w", etc. to manage "web"
+    alias w="web"
+    alias wb="web -b"
+    alias wa="web -a"
+    alias wl="web -l"
+    alias ws="web -s"

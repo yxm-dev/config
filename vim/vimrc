@@ -1,0 +1,108 @@
+" BASIC config
+"> Modes  
+">> do not use vi compatibility mode.  
+    set nocompatible 
+"> Cursor and Mouse  
+">> show cursor in any mode. allow use of mouse in any mode. fast scroll. 
+    set ruler
+    set mouse=a
+    set ttyfast
+"> Search
+">> make search case-insensitive. capital letters make search case-sensitive
+    set ignorecase 
+    set smartcase
+"> Window
+">> show line numbers. show current mode. allow reuse the same windows.   
+    set number 
+    set laststatus=2 
+    set hidden 
+">> set left margin. Show filename in the terminal tab/window title 
+    set numberwidth=2 
+    set title
+"> Other  
+">> skip .swp files message 
+    autocmd SwapExists * let v:swapchoice = "e"
+">> use bash in interactive mode to access .bashrc from vim
+    set shellcmdflag=-ic
+
+"TEXT config
+"> Indentation
+">> auto indent for plugins and files. allow backspacing auto indented paragraphs.
+    filetype plugin indent on  
+    filetype indent on
+    set autoindent
+    set breakindent
+    set backspace=indent,eol,start
+    set shiftwidth=4 
+">> tab maximal/default space size. convert tab space in white space.  
+    set tabstop=8                 
+    set softtabstop=4           
+    set expandtab
+">> in .go files, change default indentation to 8 spaces
+    autocmd FileType go set softtabstop=8 shiftwidth=8
+"> Folding, Canceal and Wrap
+">> prevent folding
+    set nofoldenable
+">> wrap on the edge of the screen. move the cursor to the next line
+    set wrap
+    set whichwrap+=<,>,h,l
+">> prevent wrapping in the middle of a word
+    set linebreak
+">> in md,tex files, hard-wrap and add vertical line to identify the break point
+    autocmd FileType tex,md,markdown,vimwiki setlocal textwidth=110
+    autocmd FileType tex,md,markdown,vimwiki setlocal colorcolumn=+2
+    highlight ColorColumn ctermbg=darkgray
+"> Highlight
+">> enable 256-colors. allow syntax/search highlight. highlight cursor line.
+    set t_co=256
+    syntax enable
+    set hlsearch
+    set cursorline    
+">> set default color scheme.
+    colorscheme essence
+">> allowing to set a color scheme for a fixed filetype.
+    autocmd BufWinEnter,FileType tex colorscheme vimtex-colors
+"> Spelling
+">> enable spell checker in specific programming languages. setting spelling languages.
+    autocmd FileType tex,md,markdown,vimwiki setlocal spell
+    set spelllang=en_us,pt_br
+">> '\\n' to add word to dictionary. '\\m' to display the spell hints
+    nnoremap \\n zgi
+    inoremap \\n <esc>zg i
+    nnoremap \\m z=i
+    inoremap \\m <esc>z=i
+"> Mailing
+">> set up syntax highlighting for mutt
+    au bufread,bufnewfile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=vimwiki
+
+" KEYBIND config 
+    source $HOME/files/config/vim/vimrc_keybind
+
+" PLUGIN config
+"> Plugins list
+    call plug#begin()
+">> autocompletion
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+">> snippets
+    Plug 'SirVer/ultisnips'
+">> Language Server Protocol (LSP)
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'thomasfaingnaert/vim-lsp-snippets'
+    Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+">> LSP with ALE (syntax checker)
+    Plug 'dense-analysis/ale' 
+    Plug 'rhysd/vim-lsp-ale' 
+">> basic stuff
+    Plug 'tpope/vim-commentary'
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'Yggdroot/indentLine'
+    Plug 'vimwiki/vimwiki'
+
+    call plug#end()
+"> Include config file
+    source $HOME/files/config/vim/vimrc_plugin
+
+

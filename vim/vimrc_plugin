@@ -1,0 +1,221 @@
+" NETRW
+"> Layout
+">> hide banner
+    let g:netrw_banner = 0
+">> allow toggle hide
+    let g:netrw_hide= 1
+">> hide dot files by default
+    let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+">> windows size
+    let g:netrw_winsize = 15
+">> open files in new window
+    if argv(0) ==# '.'
+        let g:netrw_browse_split = 0
+    else
+        let g:netrw_browse_split = 4
+    endif
+">> sync current and browsing directories
+    let g:netrw_keepdir = 0
+">> directories on the top, files below
+    let g:netrw_sort_sequence = '[\/]$,*'
+">> change of directory when opening a file
+    set autochdir
+">> set the default application to be called with "x"
+    let g:netrw_browsex_viewer= "zathura"
+">> keep cursor position
+    let g:netrw_fastbrowse = 2
+">> change the highlight of markded files
+    hi! link netrwMarkFile Search
+"> Hotkeys
+">> '\.'  to switch focus between Netrw and file windows. '\\.' to toggle the Netrw window
+    nnoremap \. :winc h<cr>cd
+    inoremap \. <esc>:winc h<cr>cd
+    nnoremap \\. :Lexplore<cr>cd
+    inoremap \\. <esc>:Lexplore<cr>cd
+    nnoremap [29~ :Lexplore<cr>cd
+    inoremap [29~ <esc>:Lexplore<cr>cd
+    augroup netrw_setup | au!
+        au FileType netrw nmap <buffer> \. :winc l<cr>:startinsert<cr>
+        au FileType netrw nmap <buffer> \\. :Lexplore<cr>:startinsert<cr>
+        au FileType netre  nmap [29~ :Lexplore<cr>:startinsert<cr>
+">> 'p' to display the current directory. 'h' to toggle hidden files
+        au FileType netrw nmap <buffer> p :pwd<cr>
+        au FileType netrw nmap <buffer> h gh
+">> 'a' to mark files. 'w', and  'e' to execute command for marked files.
+        au FileType netrw nmap <buffer> a mf
+        au FileType netrw nmap <buffer> w mx
+        au FileType netrw nmap <buffer> e mX
+">> 'left' and 'right'/'enter' to change directory.
+        au FileType netrw nmap <buffer> <right> <cr>cd
+        au FileType netrw nmap <buffer> <left> -cd
+">> '\\[' or 'o' to open file with its default application
+        au FileType netrw nmap <buffer> \\[ x
+        au FileType netrw nmap <buffer> o x 
+">> 'r' to refresh Netrw
+        au FileType netrw nmap <buffer> r <c-l>
+">> 'mkf', 'd', 'D' , 'mv' and 'cp' to do the basic stuff
+        au FileType netrw nmap <buffer> mkf cd:AsyncRun touch 
+        au FileType netrw nmap <buffer> mkd cd:AsyncRun mkdir 
+        au FileType netrw nmap <buffer> d cd:AsyncRun d 
+        au FileType netrw nmap <buffer> D cd:AsyncRun Dy 
+        au FileType netrw nmap <buffer> mv cd:AsyncRun mv 
+        au FileType netrw nmap <buffer> cp cd:AsyncRun cp -r 
+">> 'z' to open with zathura. 'pdf' ...
+        au FileType netrw nmap <buffer> z cd:AsyncRun zathura  
+        au FileType netrw nmap <buffer> tex cd:AsyncRun pdflatex 
+        au FileType netrw nmap <buffer> cvt cd:AsyncRun cvt -md
+        au FileType netrw nmap <buffer> beamer cd:AsyncRun cvt -md -beamer
+        au FileType netrw nmap <buffer> w3m cd:AsyncRun w3m
+    augroup END
+
+" VIMTEX
+">> choosing the pdf reader and the compiler configuration. avoiding the log box.
+    let g:tex_flavor = 'latex'          
+    let g:vimtex_view_method = 'zathura'  
+    let g:vimtex_compiler_latexmk= {'options' : [ 
+        \'-pdf', 
+        \'-shell-escape',
+        \'-verbose', 
+        \'-file-line-error', 
+        \'-synctex=1', 
+        \'-interaction=nonstopmode',
+        \],}
+">> 'F5' to compile and open the resulting .pdf
+    autocmd filetype tex nnoremap <buffer> <f5> :VimtexCompile<cr>:startinsert<cr>
+    autocmd filetype tex inoremap <buffer> <f5> <esc> :VimtexCompile<cr>:startinsert<cr>
+">> 'F6' to open the compile .pdf
+    autocmd filetype tex nnoremap <buffer> <f6> :VimtexView<cr>:startinsert<cr>
+    autocmd filetype tex inoremap <buffer> <f6> <esc>:VimtexView<cr>:startinsert<cr>
+">> 'ctrl+ee' to select inside of an environment. 'ctrl+ea' to select the whole environment.
+    autocmd filetype tex imap <c-e><c-e> <esc>vie
+    autocmd filetype tex imap <c-e><c-a> <esc>vae
+    autocmd filetype tex nmap <c-e><c-e> vie
+    autocmd filetype tex nmap <c-e><c-a> vae
+" SNIPMATE
+">> setting the newer version to avoid 'SnipMate deprecated' message.
+    let g:snipMate = { 'snippet_version' : 1 }
+">> 'ctrl+e', 'ctrl+b', 'ctrl+t', 'ctrl+i' and 'ctrl+u' to style selection
+    autocmd filetype tex vnoremap <buffer> <c-e> c\emph{}<esc>h"+pi
+    autocmd filetype tex vnoremap <buffer> <c-b> c\textbf{}<esc>h"+pi
+    autocmd filetype tex vnoremap <buffer> <c-i> c\textit{}<esc>h"+pi
+    autocmd filetype tex vnoremap <buffer> <c-u> c\underline{}<esc>h"+pi
+
+" FZF-BIBTEX
+">> setting the location of fzf binary
+    set rtp+=~/.fzf
+">> set the directory containing the .bib files.
+    let $REFS=$HOME.'/files/config/tex/refs/'
+    let $FZF_BIBTEX_SOURCES = $REFS.'refs.bib'
+">> 'f4' to join all .bib files into a single file
+    autocmd filetype tex,bib nnoremap <f4> :AsyncRun sh $HOME/files/nerd/dev/tex/bib.sh<cr>
+    autocmd filetype tex,bib inoremap <f4> <esc>:AsyncRun sh $HOME/files/nerd/dev/tex/bib.sh<cr>
+">> '@@' to introduce a single citation in latex files and then move to insert mode
+    function! s:bibtex_latex_sink(lines)
+        let r=system("bibtex-cite -prefix='' -postfix='' -separator=','", a:lines)
+        execute ':normal! a'.r
+        execute ':call feedkeys("i")'
+    endfunction
+    autocmd filetype tex inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_latex_sink'),
+                        \ 'down': '40%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --color=dark,fg:15,bg:0,bg+:8,fg+:15,info:0,spinner:4,pointer:4,hl:9,hl+:9'})<cr>
+    autocmd filetype tex nnoremap <silent> @@ :call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_latex_sink'),
+                        \ 'up': '50%',
+                        \ 'options': '--ansi --layout=reverse-list --multi --color=dark,fg:7,bg:0,bg+:7,fg+:0,info:0'})<cr>
+">> '@@' to introduce single markdown-style citation in markdown files
+    function! s:bibtex_markdown_sink(lines)
+        let r=system("bibtex-markdown ", a:lines)
+        execute ':normal! a' . r
+    endfunction
+    autocmd filetype md,markdown inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_cite_sink'),
+                        \ 'up': '50%',
+                        \ 'options': '--ansi --layout=reverse-list --multi'})<cr>
+
+    autocmd filetype md,markdown nnoremap <silent> @@ :call fzf#run({
+                        \ 'source': 'bibtex-ls',
+                        \ 'sink*': function('<sid>bibtex_cite_sink'),
+                        \ 'up': '50%',
+                        \ 'options': '--ansi --layout=reverse-list --multi'})<cr> 
+
+" VIMWIKI
+">> disabling some default keybindings
+    let g:vimwiki_key_mappings =
+                            \ { 'all_maps':1 ,
+                            \   'global': 0,
+                            \   'headers': 1,
+                            \  'text_objs': 0,
+                            \   'table_format': 0,
+                            \   'table_mappings': 0,
+                            \   'lists': 1,
+                            \   'links': 0,
+                            \   'html': 0,
+                            \   'mouse': 0,
+                            \ }
+">> '[' , '\[' and 'ctrl+[' to follow links. ']', '\]' and 'ctrl+]' to go back
+    autocmd filetype vimwiki nnoremap <c-[> :VimwikiFollowLink<cr>
+    autocmd filetype vimwiki nnoremap \[ :VimwikiFollowLink<cr>:startinsert<cr>
+    autocmd filetype vimwiki nnoremap [ :VimwikiFollowLink<cr>:startinsert<cr>
+    autocmd filetype vimwiki inoremap <c-[> <esc>:VimwikiFollowLink<cr>
+    autocmd filetype vimwiki inoremap \[ <esc>:VimwikiFollowLink<cr>:startinsert<cr>
+    autocmd filetype vimwiki nnoremap <c-]> :VimwikiGoBackLink<cr>
+    autocmd filetype vimwiki nnoremap \] :VimwikiGoBackLink<cr>:startinsert<cr>
+    autocmd filetype vimwiki nnoremap ] :VimwikiGoBackLink<cr>:startinsert<cr>
+    autocmd filetype vimwiki inoremap <c-]> <esc>:VimwikiGoBackLink<cr>
+    autocmd filetype vimwiki inoremap \] <esc>:VimwikiGoBackLink<cr>:startinsert<cr>
+">> 'R' to rename opened file. 'D' to delete it
+    autocmd filetype vimwiki nnoremap R :VimwikiRenameFile<cr>
+    autocmd filetype vimwiki nnoremap D :VimwikiDeleteFile<cr>
+">> '\\o' to open the main index file
+    nnoremap \\o :VimwikiIndex<cr>
+    inoremap \\o <esc>:VimwikiIndex<cr>
+">> '\,' to set 'tex' filetype and disable conceal
+    autocmd filetype md,markdown,vimwiki nnoremap \, :set filetype=tex<cr>:setl conceallevel=0<cr>
+    autocmd filetype md,markdown,vimwiki,html inoremap \, <esc>:set filetype=tex<cr>:setl conceallevel=0<cr>
+">> '\\,' to set 'vimwiki' syntax, enable conceal and fix textwidth to 0
+    autocmd filetype md,markdown,vimwiki,html nnoremap \\, :set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set nowrap<cr>:set wrap<cr>:startinsert<cr>
+    autocmd filetype md,markdown,vimwiki,html inoremap \\, <esc>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set texwidth=0<cr>:startinsert<cr> 
+
+" COMMENTARY
+">> comment current line and paragraph with '\\l' and '\\p'
+    imap \\l <esc>gcc:startinsert<cr>
+    imap \\p <esc>gcap:startinsert<cr>
+    nmap \\l gcc:startinsert<cr>
+    nmap \\p gcap:startinsert<cr>
+
+" INDENTLINE
+">> disabling in markdown and vimwiki
+    let g:indentLine_fileTypeExclude = ['vimwiki', 'markdown', 'md']
+    let g:indentLine_bufTypeExclude = ['help', 'terminal', 'vimwiki']
+">> avoid conflict with links conceal
+    let g:indentLine_concealcursor=""
+    let g:indentLine_conceallevel=2
+">> '\\d' to toggle indentline
+    inoremap \\d <esc>:IndentLinesToggle<cr>:startinsert<cr>
+    nnoremap \\d :IndentLinesToggle<cr>:startinsert<cr>
+
+" ALE
+">> configuring fixers
+    let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'md': ['markdownlint', 'prettier'],
+    \   'sh': ['bashate'],
+    \}
+">> configuring linters
+let g:ale_linters = {
+    \   'go' : ['vim-lsp'],
+    \   'sh' : ['vim-lsp'],
+    \}
+let g:airline#extensions#ale#enabled = 1
+
+" ULTISNIPETS
+">> set the key to expand the snippets
+let g:UltiSnipsExpandTrigger="<s-tab>"
+
+" ASYNCOMPLETE
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"

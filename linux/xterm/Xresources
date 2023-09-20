@@ -1,0 +1,87 @@
+
+! COLORS
+!! Allow 256 colors
+    *termName: xterm-256color
+!! default background and forebround
+    *background: #262626
+    *foreground: #D0D0D0
+!! defining 16 colors pallete among 256 colors
+!!! (black 0)=235, (dark gray 8)=240
+    *color0: #262626
+    *color8: #464646
+!!! (red 1)=203, (red 9)=209
+    *color1: #ff5f5f
+    *color9: #ff875f
+!!! (green 2)=108, (green 10)=150
+    *color2: #87af87   
+    *color10: #afd787
+!!! (yellow 3)=186, (yellow 11)=184
+    *color3: #d7d787
+    *color11: #d7d700
+!!! (blue 4)=110, (blue 12)=109 
+    *color4: #87afd7
+    *color12: #87afaf	
+!!! (purple 5)=140, (purple 13)=180
+    *color5: #af87d7
+    *color13: #d7af87
+!!! (orange 6)=215, (brown 14)=137
+    *color6: #ffaf5f
+    *color14: #af875f
+!!! (light gray 7)=242, (white 15)=252
+    *color7: #6c6c6c
+    *color15: #D0D0D0
+
+! LAYOUT
+!! Menu
+!!! prevent opening menu from mause
+    *omitTranslation: default,wheel-mouse,popup-menu
+!! Borders
+!!! remove internal border
+    *internalBorder: 0
+!!! remove border between elements
+    *BorderColor: #262626
+    *BorderWidth: 0
+!! Title
+!!! Dont change title
+    *allowTitleOps: false
+    *allowFontOps: false
+!! Font
+!!! Liberation Mono as base font
+    *faceName:  Liberation Mono:size=14:antialias=true
+!!! Liberation Mono Bold as bold font
+    *boldFont:  Liberation Mono:size=14:antialias=true:style=bold
+!! Cursor
+    *cursorBlink: true
+    *cursorOffTime: 500
+    *cursorOnTime: 500
+    *cursorColor: #D0D0D0
+
+
+    *eightBitInput: false
+  
+! USAGE
+!! Mouse
+    *allowMouseOps: true
+!! Scroll
+    *scrollTtyOutput: false
+    *scrollKey: true
+    *scrollBar: false
+! Selection
+!!! avoid empty spaces
+    *highlightSelection: true
+!!! select entire word with a double click
+    *charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+!!! allow selection directly to clipboard
+    *selectToClipboard: true
+
+! KEYBIND
+!! 'ctrl+j' to scroll down. 'ctrl+k' to scroll up
+!! 'shif+ctrl+c' to copy, 'shift+ctrl+v' to paste
+!! 'shift+ctrl+o' to open selected text as a url in firefox.
+    *VT100.Translations: #override \n\
+        Ctrl <Key>k: scroll-back(1) \n\
+        Ctrl <Key>j: scroll-forw(1) \n\
+        Shift Ctrl <Key>c: selected-end(CLIPBOARD) \n\
+        Shift Ctrl <Key>v: insert-selection(CLIPBOARD)\n\
+        Shift Ctrl <Key>o: exec-formatted("open_sel", CLIPBOARD) select-start() select-end() 
+       

@@ -1,0 +1,187 @@
+#! /bin/bash
+
+# FUNCTIONS
+## "config" to open configuration dirs
+    function config(){
+        config_dir=~/files/config/
+        declare -a config_dirs
+        if [[ -z "$1" ]]; then
+            vim $config_dir
+        elif [[ -n $1 ]] && [[ -z $2 ]]; then
+            vim $config_dir/$1
+        elif [[ -n $1 ]] && [[ -n $2 ]]; then
+            vim $config_dir/$1/$2
+        else
+            echo "There is no such kind of config."
+        fi
+    }
+    alias cfg="config"
+    alias c="config"
+## "lec" function to open lec files
+    function lec(){
+        lec_dir=~/files/nerd/dev/lec/notes
+        declare -a lec_dirs
+        lec_dirs=$(find $lec_dir -type d -printf "%f\n")
+        if [[ "${lec_dirs[@]}" =~ "$1" ]]; then
+            cd $lec_dir
+            vim $lec_dir/$1
+        elif [[ -z "$1" ]]; then
+            cd $lec_dir
+            vim $lec_dir
+        else
+            echo "There is no such kind of lec."
+        fi
+    }
+## "wiki" function to open QA files
+    function lab(){
+        LAB_dir=~/bkp/github/collab.wiki/
+        editor_cmd="vim -c 'startinsert'"
+        function LAB_init(){
+            declare -a LAB_subdirs
+            mapfile -d '' LAB_subdirs < <(find $LAB_dir -maxdepth 5 -type d -print0)
+            cd $LAB_dir
+            git add .
+            git commit -m "..."
+            git pull collab.wiki master
+        }
+        function LAB_index_QA(){
+            declare -a LAB_QA_topics
+            mapfile -d '' LAB_QA_topics < <(find $LAB_dir/QA -maxdepth 1 -type d -print0)
+            for topic in ${LAB_QA_topics}; do
+                topic_name=${topic##*/}
+                declare -a LAB_QA_${topic_name}_files
+                mapfile -d '' LAB_QA_files < <(find $LAB_dir/QA/$topic_name/files -maxdepth 1 -type f -print0)
+                echo "Lists of questions and answers about \`$topic_name\`, by categories, in alphabetical ordering:" > $LAB_dir/QA/$topic_name/QA_${topic_name}.md
+                echo "" >> $LAB_dir/QA/$topic_name/QA_${topic_name}.md
+                for i in ${!LAB_QA_files}; do
+                    file=${LAB_QA_files[$i]}
+                    name=${file%.*}
+                    base_name=${name##*_}
+                    echo "* \[${base_name}\](${name})" >> $LAB_dir/QA/$topic_name/QA_${topic_name}.md
+                done
+            done
+        }
+        if [[ -z "$1" ]]; then
+            eval "$editor_cmd $LAB_dir"
+            cd $wiki_dir
+        elif [[ "${LAB_subdirs[@]}" =~ "$1" ]]; then
+            eval "$editor_cmd $LAB_dir/$1"
+            cd $LAB_dir/$1      
+        elif [[ "$1" == "-p" ]] || [[ "$1" == "--push" ]]; then
+
+            cd $wiki_dir
+            git push wiki master
+        else
+            echo "error: Option not defined for the \"lab()\" function."
+        fi
+    }
+    alias labp="lab -p"
+    alias QA="lab QA"
+    alias docs="lab docs"
+# "dv" function to open dev files
+    function dv(){
+        dev_dir=~/files/nerd/dev
+        declare -a dev_dirs
+        dev_dirs=$(find $dev_dir -type d -printf "%f\n")
+        if [[ "${dev_dirs[@]}" =~ "$1" ]]; then
+            vim $dev_dir/$1
+            cd $dev_dir/$1
+        elif [[ -z "$1" ]]; then
+            vim $dev_dir
+            cd $dev_dir
+        else
+            echo "There is no such kind of dev."
+        fi
+    }
+## "dvto" function to open dev files
+    function dvto(){
+        devto_dir=~/files/nerd/dev/lec/dev.to
+        declare -a devto_dirs
+        devto_dirs=$(find $devto_dir/posts -type d -printf "%f\n")
+        if [[ -z "$1" ]]; then
+            vim $devto_dir/posts
+            cd $devto_dir
+        elif [[ "${devto_dirs[@]}" =~ "$1" ]]; then
+            vim $devto_dir/posts/$1
+            cd $devto_dir/posts/$1
+        else
+            echo "There is no such kind of dev."
+        fi
+    }
+    alias dvt="dvto"
+
+## "snip" function to open .snippet files
+    function snip(){
+        snip_dir=~/files/config/vim/bundle/vim-snipmate/snippets
+        declare -a snipfiles
+        snip_files=$(find $snip_dir -type f -exec basename -s '.snippets' {} +)
+        if [[ -z "$1" ]]; then
+            vim $snip_dir
+            cd $snip_dir
+        elif [[ "${snip_files[@]}" =~ "$1" ]]; then
+            vim $snip_dir/$1.snippets
+            cd $snip_dir
+        else
+            echo "There is no such kind of snipt."
+        fi
+    }
+## "cv" function to open curriculum files
+    function cv(){
+        cv_dir=$HOME/files/nerd/cv
+        if [[ -z "$1" ]]; then
+            vim $cv_dir
+            cd $cv_dir
+        elif [[ "$1" = "res" ]] || [[ "$1" = "-r" ]]; then
+            vim $cv_dir/yxm-cv.md
+            cd $cv_dir
+        elif [[ "$1" = "dev" ]] || [[ "$1" = "-d" ]]; then
+            if [[ "$2" == "pt" ]] || [[ "$2" == "-pt" ]]; then
+                vim $cv_dir/yxm-dev-pt.md
+                cd $cv_dir
+            elif [[ "$2" == "en" ]] || [[ "$2" == "-en" ]]; then
+                vim $cv_dir/yxm-dev-en.md
+                cd $cv_dir
+            else
+                echo "option not defined."
+            fi
+        fi
+    }
+
+# ALIASES
+## "bashrc", "bashc", etc, to open bash configuration files
+    alias bashrc="vim -c 'startinsert' $HOME/.bashrc"
+    alias bashc="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc"
+    alias basha="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_aliases"
+    alias bashv="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_vim"
+    alias bashf="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_functions"
+    alias bashw="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_web"
+    alias bashi="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_includes"
+## "vimrc", "vimra" and "vimrp" to open vim configuration files
+    alias vimrc="vim -c 'startinsert' ~/files/config/vim/vimrc"
+    alias vimrk="vim -c 'startinsert' ~/files/config/vim/vimrc_keybind"
+    alias vimrp="vim -c 'startinsert' ~/files/config/vim/vimrc_plugin"
+## "settings", "sets" or "stk" to open settings file
+    alias settings="vim ~/files/nerd/doc/stk/README.md && cd ~/files/nerd/doc/stk/"
+    alias sets="settings"
+    alias stk="settings"
+## "sec" to oppen sec dir
+    alias sec="vim ~/files/sec/ && cd ~/files/sec/"
+## "p" to open the poem vimwiki directory
+    alias p="vim ~/files/poem/poem/index.md && cd ~/files/poem/poem/"
+## "s" to open the website vimwiki directory
+    alias s="vim ~/files/site/index.md && cd ~/files/site/"
+## "r" and "rd" to open sketch docs
+    alias r="vim ~/files/org/rascunho.md"
+## "b" or "bib" to open the list of books
+    alias bib="vim ~/files/nerd/bib && cd ~/files/nerd/bib/"
+    alias b="bib"
+## "cert" to open list of certifications
+    alias cert="vim ~/files/nerd/cert/info.m &&d cd ~/files/nerd/cert"
+## "devs" or "list" to open devs list
+    alias dvl="vim ~/files/nerd/dev/list/README.md && cd ~/files/nerd/dev/list/"
+    alias list="dvl"
+## "me" to open my github description
+    alias me="vim ~/bkp/github/yxm-dev/README.md && cd ~/bkp/github/yxm-dev/"
+## "collab" 
+
+

@@ -1,0 +1,195 @@
+#! /bin/bash
+
+# 256 FUNCTION
+## display the 256 colors
+    function 256(){
+        for i in {0..255} ; do
+            printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
+            if (( i == 15 )) || (( i > 15 )) && (( (i-15) % 6 == 0 )); then
+                printf "\n";
+            fi
+        done
+    }
+
+# MKP FUNCTION
+## running "makepkg" as a root
+    function mkp(){
+        x=/home/build
+        function aux(){
+            chgrp nobody $x
+            chmod g+ws $x
+            cp -r $1 $x
+            cd $x
+            sudo -u nobody makepkg $1
+            cd $HOME
+        }
+        if [[ -d "$x" ]]; then
+            aux $1
+        else
+            mkdir $x
+            aux $1
+        fi
+        unset -f aux
+    }
+
+# SITE FUNCTION
+## "site" to sync site files and push them to the website
+    function site(){
+        cv_dir=$HOME/files/nerd/cv/
+        cv=$(find $cv_dir -type f -name "*.md")
+        for f in ${cv[@]}; do
+            echo "Converting $f to .pdf..."
+            cvt -mmd -pdf $f
+        done
+        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/cv/
+        sudo rsync -av --progress --delete $HOME/files/nerd/dev/proj/README.md $HOME/files/site/md/dev/proj.md
+        sudo rsync -av --progress --delete $HOME/files/nerd/dev/list/README.md $HOME/files/site/md/dev/list.md
+        sed -i '1s/^/---\ntitle: \"\dev\/list\"\n---\n\n/' $HOME/files/site/md/dev/list.md
+        sw -c site
+        sw -p site
+    }
+
+# POEM FUNCTION
+## "poem" to sync poem files and push them to the poem website
+    function poem(){
+        sudo rsync -av --progress --delete $HOME/files/poem/poem/ $HOME/files/poem/site/md/indice/
+        sw -c poem
+        sw -p poem
+    }
+
+# POST FUNCTION
+## unzip files to post directories  
+    function post(){
+        format[0]=insta
+        format[1]=lnkd
+        format[2]=reels
+        format[3]=dev
+        dir[0]=~/files/poem/insta/posts
+        dir[1]=~/files/nerd/lnkd/posts
+        dir[2]=~/files/poem/insta/reels
+        dir[3]=~/files/nerd/dev/lec/dev.to/img
+        downloaddir=~/tmp
+        function aux(){
+            if [[ -f "$downloaddir/${format[$i]}_$1.png" ]]; then
+                echo "identified a single .png file..."
+                echo "moving to \"${dir[$i]}/$1/\"..."
+                mv $downloaddir/${format[$i]}_$1.png ${dir[$i]}/$1/$1.png
+                echo "uploading \"$1.png\" to imgur..."
+                imgur ${dir[$i]}/$1/$1.png
+                echo "Done!"
+            elif [[ -f "$downloaddir/${format[$i]}_$1.zip" ]]; then
+                echo "identified a .zip file..."
+                echo "extracting in \"${dir[$i]}/$1/\"..."
+                unzip $downloaddir/${format[$i]}_$1 -d ${dir[$i]}/$1
+                files=$(find ${dir[$i]}/$1 -type f)
+                for f in ${files[@]}; do
+                    echo "uploading \"$f\" to imgur..."
+                    imgur $f
+                done
+                echo "excluding \"${format[$i]}_$1.zip\"..."
+                rm $downloaddir/${format[$i]}_$1.zip
+                echo "Done!"
+            fi
+        }
+        function aux_img(){
+            if [[ -f "$downloaddir/${format[$i]}_$1_img.png" ]]; then
+                echo "identified a single secondary image .png file..."
+                echo "moving to \"${dir[$i]}/$1/\"..."
+                mv $downloaddir/${format[$i]}_$1_img.png ${dir[$i]}/$1/$1_img.png
+                echo "uploading \"$1_img.png\" to imgur..."
+                imgur ${dir[$i]}/$1/$1_img.png
+                echo "Done!"
+            elif [[ -f "$downloaddir/${format[$i]}_$1_img.zip" ]]; then
+                echo "identified a .zip file with secondary images..."
+                echo "extracting in \"${dir[$i]}/$1/img\"..."
+                unzip $downloaddir/${format[$i]}_$1_img -d ${dir[$i]}/$1/img
+                files=$(find ${dir[$i]}/$1/img -type f)
+                for f in ${files[@]}; do
+                    echo "uploading \"$f\" to imgur..."
+                    imgur $f
+                done
+                echo "excluding \"${format[$i]}_$1_img.zip\"..."
+                rm $downloaddir/${format[$i]}_$1_img.zip
+                echo "Done!"
+            fi
+        }
+        for i in ${!format[@]}; do
+            if [[ "$1" == "${format[$i]}" ]]; then
+                if [[ -d ${dir[$i]}/$2 ]]; then
+                    echo  "${dir[$i]}/$2 already exists. Subscribe? (y/n)"
+                    read -e -p "> " subscribe
+                    if [[ "$subscribe" == "y" ]]; then
+                        echo "removing old files..."
+                        rm -r ${dir[$i]}/$2
+                        aux $2
+                        aux_img $2
+                    else
+                        return
+                    fi
+                else
+                    echo "creating dir \"${dir[$i]}/$2\"..."
+                    mkdir ${dir[$i]}/$2
+                    aux $2
+                    aux_img $2
+                fi
+            fi
+        done
+        unset -f aux
+    }
+
+# UP FUNCTION
+function up(){
+## Auxiliary Functions
+### update the install files of each .sh project
+    function UP_pkg_install(){
+        dev_dir=$HOME/files/nerd/dev/sh
+        mapfile -d '' dev_dirs < <(find $dev_dir -maxdepth 1 -type d -name "*.sh" -print0)
+        for d in ${dev_dirs[@]}; do
+            name=${d##*/}
+            if [[ ! "$d" == "$dev_dir/pkg.sh" ]] &&   
+               [[ -f $d/install/configure ]]; then
+                cp -r $dev_dir/pkg.sh/files/configure $d/install/configure
+                echo "configure file of \"$name\" updated..."
+            fi
+            if [[ ! "$d" == "$dev_dir/pkg.sh" ]] && 
+               [[ -f $d/install/install ]]; then
+                cp -r $dev_dir/pkg.sh/files/install $d/install/install
+                echo "install file of \"$name\" updated..."
+            fi
+            if [[ ! "$d" == "$dev_dir/pkg.sh" ]] && 
+               [[ -f $d/install/uninstall ]]; then
+                cp -r $dev_dir/pkg.sh/files/uninstall $d/install/uninstall
+                echo "uninstall file of \"$name\" updated..."
+            fi
+        done
+        echo "Done..."
+    }
+### update the pkgfile of each .sh project in $HOME/.config
+    function UP_pkgfile(){
+        install_dir=$HOME/.config
+        mapfile -d '' install_dirs < <(find $install_dir -maxdepth 1 -type d -name "*.sh" -print0)
+        for d in ${install_dirs[@]}; do
+            name=${d##*/}
+            if [[ -f "$d/pkgfile" ]]; then
+                printf "\n\nPKG_install_dir=$HOME/.config/$name" >> $d/pkgfile
+                echo "pkgfile of \"$name\" updated..."
+            fi
+        done
+        echo "Done..."
+    }
+### update the intui.sh project
+    function UP_intui(){
+        dev_dir=$HOME/files/nerd/dev/sh
+        cp -r $dev_dir/ecl.sh $dev_dir/intui.sh
+        cp -r $dev_dir/emutt.sh $dev_dir/intui.sh
+        cp -r $dev_dir/cvt.sh $dev_dir/intui.sh
+        cp -r $dev_dir/trsl.sh $dev_dir/intui.sh
+        echo "\"intui.sh\" has been updated"
+    }
+
+## UP Function Properly
+    UP_pkg_install
+    UP_pkgfile
+    UP_intui
+    echo "Done!"
+}

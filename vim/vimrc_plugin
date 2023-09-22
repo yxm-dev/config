@@ -26,6 +26,8 @@
     let g:netrw_fastbrowse = 2
 ">> change the highlight of markded files
     hi! link netrwMarkFile Search
+">> print in /tmp/vim_cwd the current working directory when Netrw is closed
+    autocmd BufDelete * if &ft ==# 'netrw' | let g:cwd = expand('%:p:h') | call writefile([g:cwd], '/tmp/vim_cwd') | endif
 "> Hotkeys
 ">> '\.'  to switch focus between Netrw and file windows. '\\.' to toggle the Netrw window
     nnoremap \. :winc h<cr>cd

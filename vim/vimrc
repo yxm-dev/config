@@ -105,4 +105,4 @@
 "> Include config file
     source $HOME/files/config/vim/vimrc_plugin
 
-
+autocmd VimLeave * if has('netrw') | silent! exe "lcd %:p:h" | endif

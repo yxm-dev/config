@@ -1,7 +1,10 @@
+
 #! /bin/bash
 
 # SYSTEM
-## "ls" to list colored files with directories first
+#
+#
+#."ls" to list colored files with directories first
     alias ls="ls --color=auto --group-directories-first"
 ## "la" to list hidden files
     alias la="ls -a"
@@ -19,7 +22,16 @@
     alias en="setxkbmap -layout us -variant intl" 
 
 # APPLICATIONS
-## "vi" and "v" to open vim with Netrw. 
+## "vi" and "v" to open vim with Netrw.
+    function vim(){
+        command vim "$@"
+        if [[ -f "/tmp/vim_cwd" ]]; then
+            cd $(cat /tmp/vim_cwd)
+            sudo rm /tmp/vim_cwd
+        else
+            return
+        fi
+    }
     alias vi="vim -c ":Lexplore" ~/.tmp"
     alias v="vi"
 ## "z" to open zathura

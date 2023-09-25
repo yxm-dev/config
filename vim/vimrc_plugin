@@ -176,11 +176,10 @@
     nnoremap \\o :VimwikiIndex<cr>
     inoremap \\o <esc>:VimwikiIndex<cr>
 ">> '\,' to set 'tex' filetype and disable conceal
-    autocmd filetype md,markdown,vimwiki nnoremap \, :set filetype=tex<cr>:setl conceallevel=0<cr>
-    autocmd filetype md,markdown,vimwiki,html inoremap \, <esc>:set filetype=tex<cr>:setl conceallevel=0<cr>
+"    autocmd filetype md,markdown,vimwiki nnoremap \, :set filetype=tex<cr>:setl conceallevel=0<cr>
+"    autocmd filetype md,markdown,vimwiki,html inoremap \, <esc>:set filetype=tex<cr>:setl conceallevel=0<cr>
 ">> '\\,' to set 'vimwiki' syntax, enable conceal and fix textwidth to 0
-    autocmd filetype md,markdown,vimwiki,html nnoremap \\, :set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set nowrap<cr>:set wrap<cr>:startinsert<cr>
-    autocmd filetype md,markdown,vimwiki,html inoremap \\, <esc>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set texwidth=0<cr>:startinsert<cr> 
+    autocmd filetype md,markdown,vimwiki,html inoremap \\, <esc>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set textwidth=0<cr>:startinsert<cr> 
 
 " COMMENTARY
 ">> comment current line and paragraph with '\\l' and '\\p'
@@ -204,7 +203,7 @@
 ">> configuring fixers
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'md': ['markdownlint', 'prettier'],
+    \   'md': ['prettier'],
     \   'sh': ['bashate'],
     \}
 ">> configuring linters

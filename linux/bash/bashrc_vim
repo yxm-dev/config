@@ -23,61 +23,13 @@
         declare -a lec_dirs
         lec_dirs=$(find $lec_dir -type d -printf "%f\n")
         if [[ "${lec_dirs[@]}" =~ "$1" ]]; then
-            cd $lec_dir
             vim $lec_dir/$1
         elif [[ -z "$1" ]]; then
-            cd $lec_dir
             vim $lec_dir
         else
             echo "There is no such kind of lec."
         fi
     }
-## "wiki" function to open QA files
-    function lab(){
-        LAB_dir=~/bkp/github/collab.wiki/
-        editor_cmd="vim -c 'startinsert'"
-        function LAB_init(){
-            declare -a LAB_subdirs
-            mapfile -d '' LAB_subdirs < <(find $LAB_dir -maxdepth 5 -type d -print0)
-            cd $LAB_dir
-            git add .
-            git commit -m "..."
-            git pull collab.wiki master
-        }
-        function LAB_index_QA(){
-            declare -a LAB_QA_topics
-            mapfile -d '' LAB_QA_topics < <(find $LAB_dir/QA -maxdepth 1 -type d -print0)
-            for topic in ${LAB_QA_topics}; do
-                topic_name=${topic##*/}
-                declare -a LAB_QA_${topic_name}_files
-                mapfile -d '' LAB_QA_files < <(find $LAB_dir/QA/$topic_name/files -maxdepth 1 -type f -print0)
-                echo "Lists of questions and answers about \`$topic_name\`, by categories, in alphabetical ordering:" > $LAB_dir/QA/$topic_name/QA_${topic_name}.md
-                echo "" >> $LAB_dir/QA/$topic_name/QA_${topic_name}.md
-                for i in ${!LAB_QA_files}; do
-                    file=${LAB_QA_files[$i]}
-                    name=${file%.*}
-                    base_name=${name##*_}
-                    echo "* \[${base_name}\](${name})" >> $LAB_dir/QA/$topic_name/QA_${topic_name}.md
-                done
-            done
-        }
-        if [[ -z "$1" ]]; then
-            eval "$editor_cmd $LAB_dir"
-            cd $wiki_dir
-        elif [[ "${LAB_subdirs[@]}" =~ "$1" ]]; then
-            eval "$editor_cmd $LAB_dir/$1"
-            cd $LAB_dir/$1      
-        elif [[ "$1" == "-p" ]] || [[ "$1" == "--push" ]]; then
-
-            cd $wiki_dir
-            git push wiki master
-        else
-            echo "error: Option not defined for the \"lab()\" function."
-        fi
-    }
-    alias labp="lab -p"
-    alias QA="lab QA"
-    alias docs="lab docs"
 # "dv" function to open dev files
     function dv(){
         dev_dir=~/files/nerd/dev
@@ -85,10 +37,8 @@
         dev_dirs=$(find $dev_dir -type d -printf "%f\n")
         if [[ "${dev_dirs[@]}" =~ "$1" ]]; then
             vim $dev_dir/$1
-            cd $dev_dir/$1
         elif [[ -z "$1" ]]; then
             vim $dev_dir
-            cd $dev_dir
         else
             echo "There is no such kind of dev."
         fi
@@ -100,10 +50,8 @@
         devto_dirs=$(find $devto_dir/posts -type d -printf "%f\n")
         if [[ -z "$1" ]]; then
             vim $devto_dir/posts
-            cd $devto_dir
         elif [[ "${devto_dirs[@]}" =~ "$1" ]]; then
             vim $devto_dir/posts/$1
-            cd $devto_dir/posts/$1
         else
             echo "There is no such kind of dev."
         fi
@@ -117,10 +65,8 @@
         snip_files=$(find $snip_dir -type f -exec basename -s '.snippets' {} +)
         if [[ -z "$1" ]]; then
             vim $snip_dir
-            cd $snip_dir
         elif [[ "${snip_files[@]}" =~ "$1" ]]; then
             vim $snip_dir/$1.snippets
-            cd $snip_dir
         else
             echo "There is no such kind of snipt."
         fi

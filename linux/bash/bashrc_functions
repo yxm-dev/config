@@ -180,6 +180,8 @@ function up(){
 ### update the intui.sh project
     function UP_intui(){
         dev_dir=$HOME/files/nerd/dev/sh
+        rm -r $dev_dir/intui.sh
+        mkdir $dev_dir/intui.sh
         cp -r $dev_dir/ecl.sh $dev_dir/intui.sh
         cp -r $dev_dir/emutt.sh $dev_dir/intui.sh
         cp -r $dev_dir/cvt.sh $dev_dir/intui.sh

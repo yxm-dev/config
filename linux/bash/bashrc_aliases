@@ -1,8 +1,7 @@
-
 #! /bin/bash
 
 # SYSTEM
-#."ls" to list colored files with directories first
+# "ls" to list colored files with directories first
     alias ls="ls --color=auto --group-directories-first"
 ## "la" to list hidden files
     alias la="ls -a"

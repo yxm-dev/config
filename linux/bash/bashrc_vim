@@ -60,7 +60,7 @@
 
 ## "snip" function to open .snippet files
     function snip(){
-        snip_dir=~/files/config/vim/bundle/vim-snipmate/snippets
+        snip_dir=~/files/config/vim/plugged/ultisnips/snippets
         declare -a snipfiles
         snip_files=$(find $snip_dir -type f -exec basename -s '.snippets' {} +)
         if [[ -z "$1" ]]; then

@@ -82,6 +82,7 @@
 "> Plugins list
     call plug#begin()
 ">> autocompletion
+    Plug 'maralla/completor.vim' 
     Plug 'prabirshrestha/asyncomplete.vim'
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -96,13 +97,23 @@
     Plug 'dense-analysis/ale' 
     Plug 'rhysd/vim-lsp-ale' 
 ">> basic stuff
+    Plug 'farmergreg/vim-lastplace'
     Plug 'tpope/vim-commentary'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'Yggdroot/indentLine'
     Plug 'vimwiki/vimwiki'
-
+">> language specific plugins
+    Plug 'lervag/vimtex'
+    Plug 'pangloss/vim-javascript'
+    Plug 'HerringtonDarkholme/yats.vim'
+">> highlight
+    Plug 'inkarkat/vim-ingo-library'
+    Plug 'inkarkat/vim-SyntaxRange'
     call plug#end()
-"> Include config file
-    source $HOME/files/config/vim/vimrc_plugin
-
-autocmd VimLeave * if has('netrw') | silent! exe "lcd %:p:h" | endif
+"> Automatically install missing plugins
+    autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+"> Include config file of plugins
+   source $HOME/files/config/vim/vimrc_plugin

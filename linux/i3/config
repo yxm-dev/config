@@ -103,7 +103,7 @@ bar {
     bindsym Ctrl+Shift+r restart
 
 # OTHER
-## fix keyboard delay
-
+## fix keyboard rate and layout
 exec_always xset r rate 130 35
+exec_always setxkbmap -layout us -variant intl
 

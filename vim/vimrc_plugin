@@ -93,71 +93,21 @@
     autocmd filetype tex imap <c-e><c-a> <esc>vae
     autocmd filetype tex nmap <c-e><c-e> vie
     autocmd filetype tex nmap <c-e><c-a> vae
-" SNIPMATE
-">> setting the newer version to avoid 'SnipMate deprecated' message.
-    let g:snipMate = { 'snippet_version' : 1 }
-">> 'ctrl+e', 'ctrl+b', 'ctrl+t', 'ctrl+i' and 'ctrl+u' to style selection
-    autocmd filetype tex vnoremap <buffer> <c-e> c\emph{}<esc>h"+pi
-    autocmd filetype tex vnoremap <buffer> <c-b> c\textbf{}<esc>h"+pi
-    autocmd filetype tex vnoremap <buffer> <c-i> c\textit{}<esc>h"+pi
-    autocmd filetype tex vnoremap <buffer> <c-u> c\underline{}<esc>h"+pi
-
-" FZF-BIBTEX
-">> setting the location of fzf binary
-    set rtp+=~/.fzf
-">> set the directory containing the .bib files.
-    let $REFS=$HOME.'/files/config/tex/refs/'
-    let $FZF_BIBTEX_SOURCES = $REFS.'refs.bib'
-">> 'f4' to join all .bib files into a single file
-    autocmd filetype tex,bib nnoremap <f4> :AsyncRun sh $HOME/files/nerd/dev/tex/bib.sh<cr>
-    autocmd filetype tex,bib inoremap <f4> <esc>:AsyncRun sh $HOME/files/nerd/dev/tex/bib.sh<cr>
-">> '@@' to introduce a single citation in latex files and then move to insert mode
-    function! s:bibtex_latex_sink(lines)
-        let r=system("bibtex-cite -prefix='' -postfix='' -separator=','", a:lines)
-        execute ':normal! a'.r
-        execute ':call feedkeys("i")'
-    endfunction
-    autocmd filetype tex inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
-                        \ 'source': 'bibtex-ls',
-                        \ 'sink*': function('<sid>bibtex_latex_sink'),
-                        \ 'down': '40%',
-                        \ 'options': '--ansi --layout=reverse-list --multi --color=dark,fg:15,bg:0,bg+:8,fg+:15,info:0,spinner:4,pointer:4,hl:9,hl+:9'})<cr>
-    autocmd filetype tex nnoremap <silent> @@ :call fzf#run({
-                        \ 'source': 'bibtex-ls',
-                        \ 'sink*': function('<sid>bibtex_latex_sink'),
-                        \ 'up': '50%',
-                        \ 'options': '--ansi --layout=reverse-list --multi --color=dark,fg:7,bg:0,bg+:7,fg+:0,info:0'})<cr>
-">> '@@' to introduce single markdown-style citation in markdown files
-    function! s:bibtex_markdown_sink(lines)
-        let r=system("bibtex-markdown ", a:lines)
-        execute ':normal! a' . r
-    endfunction
-    autocmd filetype md,markdown inoremap <silent> @@ <c-g>u<c-o>:call fzf#run({
-                        \ 'source': 'bibtex-ls',
-                        \ 'sink*': function('<sid>bibtex_cite_sink'),
-                        \ 'up': '50%',
-                        \ 'options': '--ansi --layout=reverse-list --multi'})<cr>
-
-    autocmd filetype md,markdown nnoremap <silent> @@ :call fzf#run({
-                        \ 'source': 'bibtex-ls',
-                        \ 'sink*': function('<sid>bibtex_cite_sink'),
-                        \ 'up': '50%',
-                        \ 'options': '--ansi --layout=reverse-list --multi'})<cr> 
 
 " VIMWIKI
 ">> disabling some default keybindings
     let g:vimwiki_key_mappings =
-                            \ { 'all_maps':1 ,
-                            \   'global': 0,
-                            \   'headers': 1,
-                            \  'text_objs': 0,
-                            \   'table_format': 0,
-                            \   'table_mappings': 0,
-                            \   'lists': 1,
-                            \   'links': 0,
-                            \   'html': 0,
-                            \   'mouse': 0,
-                            \ }
+        \ { 'all_maps':1 ,
+        \   'global': 0,
+        \   'headers': 1,
+        \   'text_objs': 0,
+        \   'table_format': 0,
+        \   'table_mappings': 0,
+        \   'lists': 1,
+        \   'links': 0,
+        \   'html': 0,
+        \   'mouse': 0,
+        \ }
 ">> '[' , '\[' and 'ctrl+[' to follow links. ']', '\]' and 'ctrl+]' to go back
     autocmd filetype vimwiki nnoremap <c-[> :VimwikiFollowLink<cr>
     autocmd filetype vimwiki nnoremap \[ :VimwikiFollowLink<cr>:startinsert<cr>
@@ -175,11 +125,6 @@
 ">> '\\o' to open the main index file
     nnoremap \\o :VimwikiIndex<cr>
     inoremap \\o <esc>:VimwikiIndex<cr>
-">> '\,' to set 'tex' filetype and disable conceal
-"    autocmd filetype md,markdown,vimwiki nnoremap \, :set filetype=tex<cr>:setl conceallevel=0<cr>
-"    autocmd filetype md,markdown,vimwiki,html inoremap \, <esc>:set filetype=tex<cr>:setl conceallevel=0<cr>
-">> '\\,' to set 'vimwiki' syntax, enable conceal and fix textwidth to 0
-    autocmd filetype md,markdown,vimwiki,html inoremap \\, <esc>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set textwidth=0<cr>:startinsert<cr> 
 
 " COMMENTARY
 ">> comment current line and paragraph with '\\l' and '\\p'
@@ -195,11 +140,21 @@
 ">> avoid conflict with links conceal
     let g:indentLine_concealcursor=""
     let g:indentLine_conceallevel=2
-">> '\\d' to toggle indentline
-    inoremap \\d <esc>:IndentLinesToggle<cr>:startinsert<cr>
-    nnoremap \\d :IndentLinesToggle<cr>:startinsert<cr>
+">> '\\i' to toggle indentline
+    inoremap \\i <esc>:IndentLinesToggle<cr>:startinsert<cr>
+    nnoremap \\i :IndentLinesToggle<cr>:startinsert<cr>
+
+" LSP
+">> avoid printing error messages anytime
+    let g:lsp_diagnostics_enabled = 0
+    set completeopt-=preview
 
 " ALE
+">> disable ALE LSP completion
+    let g:ale_virtualtext_cursor = 0
+    let g:ale_completion_enabled = 0
+    let g:ale_completion_tsserver_autoimport = 0
+    set signcolumn=number
 ">> configuring fixers
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -207,16 +162,26 @@
     \   'sh': ['bashate'],
     \}
 ">> configuring linters
-let g:ale_linters = {
+    let g:ale_linters = {
     \   'go' : ['vim-lsp'],
     \   'sh' : ['vim-lsp'],
+    \'javascript': ['eslint'],
+    \'typescript': ['eslint', 'tsserver', 'prettier'],
     \}
-let g:airline#extensions#ale#enabled = 1
 
 " ULTISNIPETS
 ">> set the key to expand the snippets
-let g:UltiSnipsExpandTrigger="<s-tab>"
+    let g:UltiSnipsExpandTrigger="<s-tab>"
+">> set the key to change the focus inside the snippet
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 " ASYNCOMPLETE
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+">> set the key to move to the next item in the list
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+">> set the ket to close select the item and close the popup
+    inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+" SYNTAX RANGE
+">> \tex to highlight .tex in vimwiki and md files
+autocmd BufWinEnter,FileType vimwiki call SyntaxRange#Include('\\hltex', '\\hltex', 'tex', 'NonText')
+

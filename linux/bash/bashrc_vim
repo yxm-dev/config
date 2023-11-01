@@ -19,7 +19,7 @@
     alias c="config"
 ## "lec" function to open lec files
     function lec(){
-        lec_dir=~/files/nerd/dev/lec/notes
+        lec_dir=~/files/nerd/dev/lec
         declare -a lec_dirs
         lec_dirs=$(find $lec_dir -type d -printf "%f\n")
         if [[ "${lec_dirs[@]}" =~ "$1" ]]; then
@@ -30,6 +30,9 @@
             echo "There is no such kind of lec."
         fi
     }
+    alias lc="lec"
+    alias lecc="lec courses"
+    alias lcc="lecc"
 # "dv" function to open dev files
     function dv(){
         dev_dir=~/files/nerd/dev

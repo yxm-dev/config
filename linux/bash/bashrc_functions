@@ -49,14 +49,6 @@
         sw -p site
     }
 
-# POEM FUNCTION
-## "poem" to sync poem files and push them to the poem website
-    function poem(){
-        sudo rsync -av --progress --delete $HOME/files/poem/poem/ $HOME/files/poem/site/md/indice/
-        sw -c poem
-        sw -p poem
-    }
-
 # POST FUNCTION
 ## unzip files to post directories  
     function post(){

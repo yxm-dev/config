@@ -32,6 +32,22 @@
         unset -f aux
     }
 
+## COURSES FUNCTIONS
+    courses_dir=$HOME/files/nerd/dev/lec/courses
+## "polig" function 
+    function polig(){
+         if [[ "$1" == "-a" ]]; then
+            name=${2%%.*}
+            pandoc -f markdown -t pdf --include-in-header=$courses_dir/polig/sty/ativ.sty -V colorlinks=true -o $name.pdf $2 && zathura $name.pdf
+        else
+             name=${1%%.*}
+            pandoc -f markdown -t beamer --pdf-engine=xelatex --include-in-header=$courses_dir/polig/sty/aula.sty -V colorlinks=true -o $name.pdf $1 && zathura $name.pdf
+        fi
+    }
+    alias poliga="polig -a"
+    alias dp="polig"
+    alias dpa="poliga"
+
 # SITE FUNCTION
 ## "site" to sync site files and push them to the website
     function site(){

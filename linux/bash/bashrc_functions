@@ -36,7 +36,7 @@
     courses_dir=$HOME/files/nerd/dev/lec/courses
 ## "polig" function 
     function polig(){
-         if [[ "$1" == "-a" ]]; then
+        if [[ "$1" == "-a" ]]; then
             name=${2%%.*}
             pandoc -f markdown -t pdf --include-in-header=$courses_dir/polig/sty/ativ.sty -V colorlinks=true -o $name.pdf $2 && zathura $name.pdf
         else

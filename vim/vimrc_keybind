@@ -63,8 +63,8 @@
 ">> in markdown and html, '\enter' to break a line
     autocmd filetype md,markdown,vimwiki,html inoremap \<cr> <br>
 ">> in md files \, to set ....
-    autocmd Filetype md,markdown,vimwiki inoremap \, <esc>:set syntax=markdown<cr>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set textwidth=0<cr>:startinsert<cr>
-    autocmd Filetype md,markdown,vimwiki nnoremap \, :set syntax=markdown<cr>:set syntax=vimwiki<cr>:setl conceallevel=2<cr>:set textwidth=0<cr>:startinsert<cr>
+    autocmd Filetype md,markdown,vimwiki inoremap \, <esc>:set syntax=markdown<cr>:set syntax=vimwiki<cr>:setl conceallevel=0<cr>:set textwidth=0<cr>:startinsert<cr>
+    autocmd Filetype md,markdown,vimwiki nnoremap \, :set syntax=markdown<cr>:set syntax=vimwiki<cr>:setl conceallevel=0<cr>:set textwidth=0<cr>:startinsert<cr>
 ">> in md files, '\\,' to update ordered lists numberings
     function UpdateOrderedList()
         let c=0|g/^\d\+\ze\./let c+=1|s//\=c
@@ -124,9 +124,9 @@
     nnoremap <m-up> :winc k<cr>
     inoremap <m-up> <esc>:winc k<cr>
 ">> '\;' to open/close a terminal session. 'ctrl+q' to close it.
-    nnoremap \; :term ++close<cr>
-    inoremap \; <esc>:term ++close<cr>
-    tnoremap \; <c-d>
+    nnoremap <c-t> :botright :term ++close<cr>
+    inoremap <c-t> <esc>:botright :term ++close<cr>
+    tnoremap <c-t> <c-d>
     tnoremap <c-q> <c-d>
 
 "> SHELL COMMANDS

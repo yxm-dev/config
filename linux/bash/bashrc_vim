@@ -111,7 +111,7 @@
     alias vimrp="vim -c 'startinsert' ~/files/config/vim/vimrc_plugin"
 ## "settings", "sets" or "stk" to open settings file
     alias settings="vim ~/files/nerd/doc/stk/README.md && cd ~/files/nerd/doc/stk/"
-    alias sets="settings"
+    alias set="settings"
     alias stk="settings"
 ## "sec" to oppen sec dir
     alias sec="vim ~/files/sec/ && cd ~/files/sec/"
@@ -125,10 +125,12 @@
     alias bib="vim ~/files/nerd/bib && cd ~/files/nerd/bib/"
     alias b="bib"
 ## "cert" to open list of certifications
-    alias cert="vim ~/files/nerd/cert/info.m &&d cd ~/files/nerd/cert"
+    alias cert="vim ~/files/nerd/cert/info.m && cd ~/files/nerd/cert"
 ## "devs" or "list" to open devs list
     alias dvl="vim ~/files/nerd/dev/list/README.md && cd ~/files/nerd/dev/list/"
     alias list="dvl"
+## "proj" to open list of dev projects
+    alias proj="vim ~/files/nerd/dev/proj/README.md"
 ## "me" to open my github description
     alias me="vim ~/bkp/github/yxm-dev/README.md && cd ~/bkp/github/yxm-dev/"
 ## "collab" 

@@ -8,8 +8,8 @@
 ## "shutdown" to shutdown quickly
     alias shutdown="shutdown -h now"
 ## "shtdw" and "shdw" to push, make a bkp and then shutdown quickly 
-    alias shtdw="synca && gps && gp -p && bkps && shutdown -h now"
-    alias shdw="synca && gps && gp -p && bkps && shutdown -h now"
+    alias shtdw="synca && gpps && gppp && s3 -ps yxm-bkp && shutdown -h now"
+    alias shdw="shtdw"
 ## "restart" or "rst" restart xorg
     alias restart="xrdb $HOME/.Xresources"
     alias rst="restart"

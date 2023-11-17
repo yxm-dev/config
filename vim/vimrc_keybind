@@ -1,3 +1,17 @@
+"> DISABLING
+">> uppercase and lowercase 
+    xnoremap u <nop>
+    xnoremap U <nop>
+    nnoremap gu <nop>
+    nnoremap gU <nop>
+">> replace mode
+    inoremap <insert> <nop>
+    nnoremap r <nop>
+    nnoremap R <nop>
+"> search cursor word
+    nnoremap # <nop>
+"> tab with ctrl+t
+    inoremap <c-t> <nop>
 
 "> MOVING
 ">> esc in normal mode move to insert mode
@@ -123,7 +137,7 @@
     inoremap <m-down> <esc>:winc j<cr>
     nnoremap <m-up> :winc k<cr>
     inoremap <m-up> <esc>:winc k<cr>
-">> '\;' to open/close a terminal session. 'ctrl+q' to close it.
+">> 'ctrl+t' to open/close a terminal session. 'ctrl+q' to close it.
     nnoremap <c-t> :botright :term ++close<cr>
     inoremap <c-t> <esc>:botright :term ++close<cr>
     tnoremap <c-t> <c-d>
@@ -135,16 +149,3 @@
 ">> '!!' to execute command in background. '!1' to display output
     nnoremap !! :AsyncRun
     nnoremap !1 :copen<cr>:AsyncRun
-
-"> DISABLING
-">> uppercase and lowercase 
-    xnoremap u <nop>
-    xnoremap U <nop>
-    nnoremap gu <nop>
-    nnoremap gU <nop>
-">> replace mode
-    inoremap <insert> <nop>
-    nnoremap r <nop>
-    nnoremap R <nop>
-"> search cursor word
-    nnoremap # <nop>

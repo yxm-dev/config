@@ -118,7 +118,7 @@
 ## "p" to open the poem vimwiki directory
     alias p="vim ~/files/poem/poem/index.md && cd ~/files/poem/poem/"
 ## "s" to open the website vimwiki directory
-    alias s="vim ~/files/site/index.md && cd ~/files/site/"
+    alias s="vim ~/files/site/md"
 ## "r" and "rd" to open sketch docs
     alias r="vim ~/files/org/rascunho.md"
 ## "b" or "bib" to open the list of books

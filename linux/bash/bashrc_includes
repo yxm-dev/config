@@ -24,3 +24,5 @@
     source $HOME/.config/gif.sh/gif.sh
 ## manage and config buckets in AWS S3 service
     source $HOME/.config/s3.sh/s3.sh
+## CLI for the lab project
+    source $HOME/.config/lab.sh/lab.sh

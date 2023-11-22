@@ -32,43 +32,6 @@
         unset -f aux
     }
 
-# LAB FUNCTION
-    LAB_DIR=$HOME/files/nerd/dev/lab 
-    function LAB_index(){
-        LAB_QA=$LAB_DIR/md/QA
-        mapfile -t LAB_QA_dirs < <(find $LAB_QA -maxdepth 1 -type d ! -name QA)
-        echo "# /lab/QA" > $LAB_QA/index.md
-        echo "" >> $LAB_QA/index.md
-        for dir in ${LAB_QA_dirs[@]}; do
-            name=${dir#"$LAB_DIR/md/QA/"}
-            echo "* [$name]($name/index)" >> $LAB_QA/index.md
-            mapfile -t LAB_QA_files < <(find $dir -type f ! -name index.md)
-            declare -A LAB_QA_files_title
-            echo "# /lab/QA/$name" > $dir/index.md
-            echo "" >> $dir/index.md
-            for file in ${LAB_QA_files[@]}; do
-                relative_path=${file#"$dir/"}
-                relative_path=${relative_path%.*}
-                name=${file##*/}
-                name=${name%.*}
-                echo "* [$name]($relative_path)" >> $dir/index.md
-            done
-        done
-    }
-    function lab(){
-        if [[ -z "$1" ]]; then
-            vim $LAB_DIR/md
-        elif [[ "$@" =~ "-i" ]]; then
-            LAB_index
-        elif [[ "$@" =~ "-c" ]]; then
-            sw -c lab
-            cp $LAB_DIR/.domains $LAB_DIR/html/.domains
-        elif [[ "$@" =~ "-p" ]]; then
-            sw --push-all lab
-        fi
-    }
-    alias labp="lab -i && lab -c && lab -p"
-
 ## COURSES FUNCTIONS
     courses_dir=$HOME/files/nerd/dev/lec/courses
 ## "polig" function 

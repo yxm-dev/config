@@ -159,7 +159,7 @@
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'md': ['prettier'],
-    \   'sh': ['bashate'],
+    \   'sh': ['shfmt'],
     \}
 ">> configuring linters
     let g:ale_linters = {

@@ -133,6 +133,6 @@
     alias proj="vim ~/files/nerd/dev/proj/README.md"
 ## "me" to open my github description
     alias me="vim ~/bkp/github/yxm-dev/README.md && cd ~/bkp/github/yxm-dev/"
-## "collab" 
-
+## "css" to open the css directory
+    alias css="vim ~/files/nerd/dev/css"
 

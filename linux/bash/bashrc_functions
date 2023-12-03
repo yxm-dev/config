@@ -52,15 +52,17 @@
 ## "site" to sync site files and push them to the website
     function site(){
         cv_dir=$HOME/files/nerd/cv/
+        posts_dir=$HOME/files/nerd/dev/lec/dev.to/posts/
         cv=$(find $cv_dir -type f -name "*.md")
         for f in ${cv[@]}; do
             echo "Converting $f to .pdf..."
             cvt -mmd -pdf $f
         done
-        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/site/md/edu/cv/
-        sudo rsync -av --progress --delete $HOME/files/nerd/dev/proj/README.md $HOME/files/site/md/dev/proj.md
-        sudo rsync -av --progress --delete $HOME/files/nerd/dev/list/README.md $HOME/files/site/md/dev/list.md
-        sed -i '1s/^/---\ntitle: \"\dev\/list\"\n---\n\n/' $HOME/files/site/md/dev/list.md
+        sudo rsync -av --progress --delete $HOME/files/nerd/cv/ $HOME/files/nerd/site/md/edu/cv/
+        sudo rsync -av --progress --delete $HOME/files/nerd/dev/proj/README.md $HOME/files/nerd/site/md/dev/proj.md
+        sudo rsync -av --progress --delete $HOME/files/nerd/dev/list/README.md $HOME/files/nerd/site/md/dev/list.md
+        sed -i '1s/^/---\ntitle: \"\/dev\/list\"\n---\n\n/' $HOME/files/nerd/site/md/dev/list.md
+        sed -i '1s/^/---\ntitle: \"\/dev\/proj\"\n---\n\n/' $HOME/files/nerd/site/md/dev/proj.m
         sw -c site
         sw -p site
     }

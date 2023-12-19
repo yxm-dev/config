@@ -138,4 +138,6 @@
 ## "trello" or "trl" to open vim in trello buffer
     alias trello="vim -c ':VimTrello'"
     alias trl="trello"
-
+## "color" and "clr" to open vim essence colorscheme
+    alias color="vim -c 'startinsert' $HOME/files/nerd/dev/vim/essence.vim/colors/essence.vim"
+    alias clr="color"

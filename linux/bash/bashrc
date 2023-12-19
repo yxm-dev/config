@@ -2,7 +2,7 @@
 ## set prompt to display only the colored current directory
     time="33m`date +%H:%M`"
     time1="\[\033[$time\]"
-    dir1="\[\033[32m\]\w\[\033[00m\]"
+    dir1="\[\033[37m\]\w\[\033[00m\]"
     PS1="$dir1\$ "
 ## unbolded colored directories in "ls" command
     LS_COLORS=$LS_COLORS:'di=0;94:'

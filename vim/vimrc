@@ -101,7 +101,6 @@
     Plug 'tpope/vim-commentary'
     Plug 'skywind3000/asyncrun.vim'
     Plug 'Yggdroot/indentLine'
-    Plug 'vimwiki/vimwiki'
 ">> language specific plugins
     Plug 'lervag/vimtex'
     Plug 'pangloss/vim-javascript'
@@ -109,6 +108,8 @@
 ">> highlight
     Plug 'inkarkat/vim-ingo-library'
     Plug 'inkarkat/vim-SyntaxRange'
+">> other
+    Plug 'yoshio15/vim-trello'
     call plug#end()
 "> Automatically install missing plugins
     autocmd VimEnter *
@@ -116,4 +117,8 @@
   \|   PlugInstall --sync | q
   \| endif
 "> Include config file of plugins
-   source $HOME/files/config/vim/vimrc_plugin
+    source $HOME/files/config/vim/vimrc_plugin
+
+" OTHER config
+"> Include secrets
+    source $HOME/files/sec/vimrc

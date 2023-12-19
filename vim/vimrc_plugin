@@ -94,38 +94,6 @@
     autocmd filetype tex nmap <c-e><c-e> vie
     autocmd filetype tex nmap <c-e><c-a> vae
 
-" VIMWIKI
-">> disabling some default keybindings
-    let g:vimwiki_key_mappings =
-        \ { 'all_maps':1 ,
-        \   'global': 0,
-        \   'headers': 1,
-        \   'text_objs': 0,
-        \   'table_format': 0,
-        \   'table_mappings': 0,
-        \   'lists': 1,
-        \   'links': 0,
-        \   'html': 0,
-        \   'mouse': 0,
-        \ }
-">> '[' , '\[' and 'ctrl+[' to follow links. ']', '\]' and 'ctrl+]' to go back
-    autocmd filetype vimwiki nnoremap <c-[> :VimwikiFollowLink<cr>
-    autocmd filetype vimwiki nnoremap \[ :VimwikiFollowLink<cr>:startinsert<cr>
-    autocmd filetype vimwiki nnoremap [ :VimwikiFollowLink<cr>:startinsert<cr>
-    autocmd filetype vimwiki inoremap <c-[> <esc>:VimwikiFollowLink<cr>
-    autocmd filetype vimwiki inoremap \[ <esc>:VimwikiFollowLink<cr>:startinsert<cr>
-    autocmd filetype vimwiki nnoremap <c-]> :VimwikiGoBackLink<cr>
-    autocmd filetype vimwiki nnoremap \] :VimwikiGoBackLink<cr>:startinsert<cr>
-    autocmd filetype vimwiki nnoremap ] :VimwikiGoBackLink<cr>:startinsert<cr>
-    autocmd filetype vimwiki inoremap <c-]> <esc>:VimwikiGoBackLink<cr>
-    autocmd filetype vimwiki inoremap \] <esc>:VimwikiGoBackLink<cr>:startinsert<cr>
-">> 'R' to rename opened file. 'D' to delete it
-    autocmd filetype vimwiki nnoremap R :VimwikiRenameFile<cr>
-    autocmd filetype vimwiki nnoremap D :VimwikiDeleteFile<cr>
-">> '\\o' to open the main index file
-    nnoremap \\o :VimwikiIndex<cr>
-    inoremap \\o <esc>:VimwikiIndex<cr>
-
 " COMMENTARY
 ">> comment current line and paragraph with '\\l' and '\\p'
     imap \\l <esc>gcc:startinsert<cr>
@@ -182,6 +150,20 @@
     inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
 " SYNTAX RANGE
-">> \tex to highlight .tex in vimwiki and md files
-autocmd BufWinEnter,FileType vimwiki call SyntaxRange#Include('\\hltex', '\\hltex', 'tex', 'NonText')
-
+">> \hltex to highlight .tex in  md files
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('\\hltex', '\\hltex', 'tex', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```bash', '```', 'bash', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c', '```', 'c', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```cpp', '```', 'cpp', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c++', '```', 'cpp', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c#', '```', 'cs', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```css', '```', 'css', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```html', '```', 'html', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```go', '```', 'go', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```java', '```', 'java', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```javascript', '```', 'javascript', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```js', '```', 'javascript', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```python', '```', 'python', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```ruby', '```', 'ruby', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```typescript', '```', 'typescript', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```ts', '```', 'typescript', 'NonText') 

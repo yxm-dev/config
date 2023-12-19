@@ -5,13 +5,13 @@
 !! default background and forebround
     *background: #262626
     *foreground: #D0D0D0
-!! defining 16 colors pallete among 256 colors
+!! defining 16 colors pallete
 !!! (black 0)=235, (dark gray 8)=240
     *color0: #262626
-    *color8: #464646
-!!! (red 1)=203, (red 9)=209
+    *color8: #2b2b2b
+!!! (red 1)=203, (light gray 9)=244
     *color1: #ff5f5f
-    *color9: #ff875f
+    *color9: #464646
 !!! (green 2)=108, (green 10)=150
     *color2: #87af87   
     *color10: #afd787
@@ -23,12 +23,12 @@
     *color12: #87afaf	
 !!! (purple 5)=140, (purple 13)=180
     *color5: #af87d7
-    *color13: #d7af87
+    *color13: #b6b3eb
 !!! (orange 6)=215, (brown 14)=137
-    *color6: #ffaf5f
+    *color6: #ea9c80
     *color14: #af875f
-!!! (light gray 7)=242, (white 15)=252
-    *color7: #6c6c6c
+!!! (bright gray 7)=242, (white 15)=252
+    *color7: #808080
     *color15: #D0D0D0
 
 ! LAYOUT

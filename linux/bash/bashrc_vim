@@ -135,4 +135,7 @@
     alias me="vim ~/bkp/github/yxm-dev/README.md && cd ~/bkp/github/yxm-dev/"
 ## "css" to open the css directory
     alias css="vim ~/files/nerd/dev/css"
+## "trello" or "trl" to open vim in trello buffer
+    alias trello="vim -c ':VimTrello'"
+    alias trl="trello"
 

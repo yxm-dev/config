@@ -40,6 +40,8 @@
     alias xrn="xournal & disown && exit"
 ## "buds" to connect to my headphone
     alias buds="bluetoothctl connect 40:35:E6:04:8E:66"
+## "mon" to configure the additional monitor
+    alias mon="xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1"
 ## "tor" to start tor
     alias tor="cd /usr/share/tor-browser/ && ./start-tor-browser.desktop"
 ## "calc", "clc" to open "bc" in the interactive mode
@@ -68,3 +70,4 @@
     alias wa="web -a"
     alias wl="web -l"
     alias ws="web -s"
+

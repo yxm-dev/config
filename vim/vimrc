@@ -60,8 +60,6 @@
     set cursorline    
 ">> set default color scheme.
     colorscheme essence
-">> allowing to set a color scheme for a fixed filetype.
-    autocmd BufWinEnter,FileType tex colorscheme vimtex-colors
 "> Spelling
 ">> enable spell checker in specific programming languages. setting spelling languages.
     autocmd FileType tex,md,markdown,vimwiki setlocal spell

@@ -10,14 +10,14 @@
     *color0: #262626
     *color8: #2b2b2b
 !!! (red 1)=203, (light gray 9)=244
-    *color1: #ff5f5f
+    *color1: #e14141
     *color9: #464646
 !!! (green 2)=108, (green 10)=150
     *color2: #87af87   
-    *color10: #afd787
+    *color10: #7be141
 !!! (yellow 3)=186, (yellow 11)=184
-    *color3: #d7d787
-    *color11: #d7d700
+    *color3: #e1d741
+    *color11: #d3a800
 !!! (blue 4)=110, (blue 12)=109 
     *color4: #87afd7
     *color12: #87afaf	

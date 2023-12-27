@@ -70,4 +70,8 @@
     alias wa="web -a"
     alias wl="web -l"
     alias ws="web -s"
+## "cdg", "ghb" to open the bkp directories
+    alias cdg="vim $HOME/bkp/codeberg"
+    alias ghb="vim $HOME/bkp/github"
+
 

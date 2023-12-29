@@ -15,7 +15,7 @@
 # fixing touchpad
     touchpad=$(xinput list --id-only "SYNA3602:00 0911:5288 Touchpad")
     xinput set-prop $touchpad 350 0
-    xinput set-prop $touchpad 361 1 1 1 1 1 1 1
-    xinput set-prop $touchpad 362 1 2 3
+    xinput set-prop $touchpad 359 1 1 1 1 1 1 1
+    xinput set-prop $touchpad 360 1 2 3
 # starting i3
     i3

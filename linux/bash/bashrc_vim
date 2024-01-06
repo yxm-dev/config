@@ -31,8 +31,6 @@
         fi
     }
     alias lc="lec"
-    alias lecc="lec courses"
-    alias lcc="lecc"
 # "dv" function to open dev files
     function dv(){
         dev_dir=~/files/nerd/dev
@@ -63,7 +61,7 @@
 
 ## "snip" function to open .snippet files
     function snip(){
-        snip_dir=~/files/config/vim/plugged/ultisnips/snippets
+        snip_dir=$HOME/.vim/plugged/ultisnips/snippets
         declare -a snipfiles
         snip_files=$(find $snip_dir -type f -exec basename -s '.snippets' {} +)
         if [[ -z "$1" ]]; then
@@ -134,10 +132,11 @@
 ## "me" to open my github description
     alias me="vim ~/bkp/github/yxm-dev/README.md && cd ~/bkp/github/yxm-dev/"
 ## "css" to open the css directory
-    alias css="vim ~/files/nerd/dev/css"
-## "trello" or "trl" to open vim in trello buffer
-    alias trello="vim -c ':VimTrello'"
-    alias trl="trello"
+    alias css="vim ~/files/nerd/dev/css && cd ~/files/nerd/dev/css"
+## "trl" to open vim in trello buffer
+    alias trl="vim -c ':VimTrello'"
 ## "color" and "clr" to open vim essence colorscheme
-    alias color="vim -c 'startinsert' $HOME/files/nerd/dev/vim/essence.vim/colors/essence.vim"
+    alias color="vim -c 'startinsert' $HOME/files/nerd/dev/vim/essence.vim/colors/essence.vim && cd $HOME/files/nerd/dev/vim/essence.vim"
     alias clr="color"
+## "int" to open inTui repository
+    alias int="vim $HOME/files/nerd/intui && cd $HOME/files/nerd/intui"

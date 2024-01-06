@@ -21,7 +21,7 @@
 ">> change of directory when opening a file
     set autochdir
 ">> set the default application to be called with "x"
-    let g:netrw_browsex_viewer= "zathura"
+    let g:netrw_browsex_viewer= "x"
 ">> keep cursor position
     let g:netrw_fastbrowse = 2
 ">> change the highlight of markded files
@@ -29,17 +29,10 @@
 ">> print in /tmp/vim_cwd the current working directory when Netrw is closed
     autocmd BufDelete * if &ft ==# 'netrw' | let g:cwd = expand('%:p:h') | call writefile([g:cwd], '/tmp/vim_cwd') | endif
 "> Hotkeys
-">> '\.'  to switch focus between Netrw and file windows. '\\.' to toggle the Netrw window
-    nnoremap \. :winc h<cr>cd
-    inoremap \. <esc>:winc h<cr>cd
-    nnoremap \\. :Lexplore<cr>cd
-    inoremap \\. <esc>:Lexplore<cr>cd
     nnoremap [29~ :Lexplore<cr>cd
     inoremap [29~ <esc>:Lexplore<cr>cd
-    augroup netrw_setup | au!
-        au FileType netrw nmap <buffer> \. :winc l<cr>:startinsert<cr>
-        au FileType netrw nmap <buffer> \\. :Lexplore<cr>:startinsert<cr>
-        au FileType netre  nmap [29~ :Lexplore<cr>:startinsert<cr>
+    augroup netrw_setup | au! 
+        au FileType netrw  nmap [29~ :Lexplore<cr>
 ">> 'p' to display the current directory. 'h' to toggle hidden files
         au FileType netrw nmap <buffer> p :pwd<cr>
         au FileType netrw nmap <buffer> h gh
@@ -50,24 +43,17 @@
 ">> 'left' and 'right'/'enter' to change directory.
         au FileType netrw nmap <buffer> <right> <cr>cd
         au FileType netrw nmap <buffer> <left> -cd
-">> '\\[' or 'o' to open file with its default application
-        au FileType netrw nmap <buffer> \\[ x
-        au FileType netrw nmap <buffer> o x 
 ">> 'r' to refresh Netrw
         au FileType netrw nmap <buffer> r <c-l>
 ">> 'mkf', 'd', 'D' , 'mv' and 'cp' to do the basic stuff
         au FileType netrw nmap <buffer> mkf cd:AsyncRun touch 
-        au FileType netrw nmap <buffer> mkd cd:AsyncRun mkdir 
+        au FileType netrw nmap <buffer> mkd cd:AsyncRun mkdir
+        au FileType netrw nmap <buffer> .f cd:AsyncRun touch
+        au FileType netrw nmap <buffer> .d cd:AsyncRun mkdir 
         au FileType netrw nmap <buffer> d cd:AsyncRun d 
         au FileType netrw nmap <buffer> D cd:AsyncRun Dy 
         au FileType netrw nmap <buffer> mv cd:AsyncRun mv 
         au FileType netrw nmap <buffer> cp cd:AsyncRun cp -r 
-">> 'z' to open with zathura. 'pdf' ...
-        au FileType netrw nmap <buffer> z cd:AsyncRun zathura  
-        au FileType netrw nmap <buffer> tex cd:AsyncRun pdflatex 
-        au FileType netrw nmap <buffer> cvt cd:AsyncRun cvt -md
-        au FileType netrw nmap <buffer> beamer cd:AsyncRun cvt -md -beamer
-        au FileType netrw nmap <buffer> w3m cd:AsyncRun w3m
     augroup END
 
 " VIMTEX
@@ -113,16 +99,34 @@
     nnoremap \\i :IndentLinesToggle<cr>:startinsert<cr>
 
 " LSP
-">> avoid printing error messages anytime
+">> disable diganostics
     let g:lsp_diagnostics_enabled = 0
+">> avoid automatically printing definitions
+    let g:lsp_hover_ui = 'preview'
     set completeopt-=preview
-
+    let g:lsp_document_highlight_enabled = 0
+    let g:lsp_completion_documentation_enabled = 0
+">> use aync completion
+    let g:lsp_async_completion = 1
+">> disable fold and conceal
+    let g:lsp_fold_enabled = 0
+    let g:lsp_hover_conceal = 0
+">> '\\d' to get the definition.
+    nnoremap \\d :LspPeekDefinition<cr>
+    inoremap \\d <esc>:LspPeekDefinition<cr>
+">> '\\r' to get the references 
+    nnoremap \\r :LspReferences<cr>
+    inoremap \\r <esc>:LspReferences<cr>
+    
 " ALE
 ">> disable ALE LSP completion
     let g:ale_virtualtext_cursor = 0
     let g:ale_completion_enabled = 0
     let g:ale_completion_tsserver_autoimport = 0
-    set signcolumn=number
+">> disable diagnostics in insert mode
+    let g:ale_lint_on_insert_leave = 0
+">> set diagnostics only when saving
+    let g:ale_lint_on_text_changed = 'never'
 ">> configuring fixers
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],

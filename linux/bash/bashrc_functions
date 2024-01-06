@@ -20,7 +20,7 @@
             chmod g+ws $x
             cp -r $1 $x
             cd $x
-            sudo -u nobody makepkg $1
+            sudo -u nobody makepkg -si $1
             cd $HOME
         }
         if [[ -d "$x" ]]; then
@@ -32,21 +32,17 @@
         unset -f aux
     }
 
-## COURSES FUNCTIONS
-    courses_dir=$HOME/files/nerd/dev/lec/courses
-## "polig" function 
-    function polig(){
-        if [[ "$1" == "-a" ]]; then
-            name=${2%%.*}
-            pandoc -f markdown -t pdf --include-in-header=$courses_dir/polig/sty/ativ.sty -V colorlinks=true -o $name.pdf $2 && zathura $name.pdf
-        else
-             name=${1%%.*}
-            pandoc -f markdown -t beamer --pdf-engine=xelatex --include-in-header=$courses_dir/polig/sty/aula.sty -V colorlinks=true -o $name.pdf $1 && zathura $name.pdf
+# GPT FUNCTION
+    function gpt(){
+        if [[ -z "$1" ]]; then
+            sed -i '/modelname/c\modelname = gpt-3.5-turbo-16k' $HOME/.config/gpterminator/config.ini
+            gpterm
+        elif [[ "$1" == "4" ]]; then
+            sed -i '/modelname/c\modelname = gpt-4-1106-preview' $HOME/.config/gpterminator/config.ini
+            gpterm
         fi
     }
-    alias poliga="polig -a"
-    alias dp="polig"
-    alias dpa="poliga"
+
 
 # SITE FUNCTION
 ## "site" to sync site files and push them to the website

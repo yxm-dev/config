@@ -21,7 +21,7 @@
 # APPLICATIONS
 ## "vi" and "v" to open vim with Netrw.
     function vim(){
-        command vim "$@"
+        command vim -c "syntax spell toplevel" "$@"
         if [[ -f "/tmp/vim_cwd" ]]; then
             cd $(cat /tmp/vim_cwd)
             sudo rm /tmp/vim_cwd
@@ -33,8 +33,6 @@
     alias v="vi"
 ## "z" to open zathura
     alias z="zathura"    
-## "gpt" to open gpt-chatbot-cli
-    alias gpt="gpterm"
 ## "xrn" and "xournal" to open xournalpp
     alias xournal="xournalpp & disown" 
     alias xrn="xournal & disown && exit"

@@ -26,3 +26,7 @@
     source $HOME/.config/s3.sh/s3.sh
 ## CLI for the lab project
     source $HOME/.config/lab.sh/lab.sh
+
+## courses script
+    source $HOME/files/nerd/intui/courses/src/sh/main.sh
+

@@ -49,8 +49,8 @@
 ">> prevent wrapping in the middle of a word
     set linebreak
 ">> in md,tex files, hard-wrap and add vertical line to identify the break point
-    autocmd FileType tex,md,markdown,vimwiki setlocal textwidth=0
-    autocmd FileType tex,md,markdown,vimwiki setlocal colorcolumn=+2
+    autocmd FileType tex,md,markdown setlocal textwidth=0
+    autocmd FileType tex,md,markdown setlocal colorcolumn=+2
     highlight ColorColumn ctermbg=darkgray
 "> Highlight
 ">> enable 256-colors. allow syntax/search highlight. highlight cursor line.
@@ -62,7 +62,8 @@
     colorscheme essence
 "> Spelling
 ">> enable spell checker in specific programming languages. setting spelling languages.
-    autocmd FileType tex,md,markdown,vimwiki setlocal spell
+    autocmd FileType tex,md,markdown setlocal spell
+    autocmd FileType tex,md,markdown syntax spell toplevel
     set spelllang=en_us,pt_br
 ">> '\\n' to add word to dictionary. '\\m' to display the spell hints
     nnoremap \\n zgi
@@ -71,7 +72,7 @@
     inoremap \\m <esc>z=i
 "> Mailing
 ">> set up syntax highlighting for mutt
-    au bufread,bufnewfile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=vimwiki
+    au bufread,bufnewfile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=markdown
 
 " KEYBIND config 
     source $HOME/files/config/vim/vimrc_keybind

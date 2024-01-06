@@ -75,17 +75,24 @@
     inoremap <c-z> <c-o>u
     inoremap <c-r> <esc><c-r>i
 ">> in markdown and html, '\enter' to break a line
-    autocmd filetype md,markdown,vimwiki,html inoremap \<cr> <br>
-">> in md files \, to set ....
-    autocmd Filetype md,markdown,vimwiki inoremap \, <esc>:set syntax=markdown<cr>:set syntax=vimwiki<cr>:setl conceallevel=0<cr>:set textwidth=0<cr>:startinsert<cr>
-    autocmd Filetype md,markdown,vimwiki nnoremap \, :set syntax=markdown<cr>:set syntax=vimwiki<cr>:setl conceallevel=0<cr>:set textwidth=0<cr>:startinsert<cr>
-">> in md files, '\\,' to update ordered lists numberings
+    autocmd filetype md,markdown,html inoremap \<cr> <br>
+">> in md files, '\.' to set spell
+    autocmd Filetype md,markdown inoremap \. <esc>:syntax spell toplevel<cr>:startinsert<cr>
+    autocmd Filetype md,markdown nnoremap \. :syntax spell toplevel<cr>:startinsert<cr>
+">> in md files '\,' to update ordered lists
     function UpdateOrderedList()
         let c=0|g/^\d\+\ze\./let c+=1|s//\=c
     endfunction
-    autocmd Filetype md,markdown,vimwiki inoremap \\, <esc>:call UpdateOrderedList()<cr>:startinsert<cr>
-    autocmd Filetype md,markdown,vimwiki nnoremap \\, :call UpdateOrderedList()<cr>:startinsert<cr>
-
+    autocmd Filetype md,markdown inoremap \, <esc>:call UpdateOrderedList()<cr>:startinsert<cr>
+    autocmd Filetype md,markdown nnoremap \, :call UpdateOrderedList()<cr>:startinsert<cr>
+">> in md files, '\\,' to update lab lists
+    function! UpdateLabsList()
+        let c=0 | g/^\*\s\+\*\*lab\s\+\zs\d\+\ze\*\*/let c+=1|s//\=c
+    endfunction
+ 
+    autocmd Filetype md,markdown inoremap \\, <esc>:call UpdateLabsList()<cr>:startinsert<cr>
+    autocmd Filetype md,markdown nnoremap \\, :call UpdateLabsList()<cr>:startinsert<cr>
+    
 "> SELECTING
 ">> use 'shift+arrows' to select text.
     nnoremap <s-up> vgk

@@ -74,9 +74,9 @@
     noremap <c-z> u
     inoremap <c-z> <c-o>u
     inoremap <c-r> <esc><c-r>i
-">> in markdown and html, '\enter' to break a line
-    autocmd filetype md,markdown,html inoremap \<cr> <br>
-">> in md files, '\.' to set spell
+">> in html, '\enter' to break a line
+    autocmd filetype html inoremap \<cr> <br>
+">> in md files, '\.' to set toplevel spell
     autocmd Filetype md,markdown inoremap \. <esc>:syntax spell toplevel<cr>:startinsert<cr>
     autocmd Filetype md,markdown nnoremap \. :syntax spell toplevel<cr>:startinsert<cr>
 ">> in md files '\,' to update ordered lists
@@ -87,7 +87,7 @@
     autocmd Filetype md,markdown nnoremap \, :call UpdateOrderedList()<cr>:startinsert<cr>
 ">> in md files, '\\,' to update lab lists
     function! UpdateLabsList()
-        let c=0 | g/^\*\s\+\*\*lab\s\+\zs\d\+\ze\*\*/let c+=1|s//\=c
+        let c=0 | g/^\*\s\+\`lab\s\+\zs\d\+\ze\`/let c+=1|s//\=c
     endfunction
  
     autocmd Filetype md,markdown inoremap \\, <esc>:call UpdateLabsList()<cr>:startinsert<cr>

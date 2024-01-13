@@ -137,6 +137,4 @@
     alias trl="vim -c ':VimTrello'"
 ## "color" and "clr" to open vim essence colorscheme
     alias color="vim -c 'startinsert' $HOME/files/nerd/dev/vim/essence.vim/colors/essence.vim && cd $HOME/files/nerd/dev/vim/essence.vim"
-    alias clr="color"
-## "int" to open inTui repository
-    alias int="vim $HOME/files/nerd/intui && cd $HOME/files/nerd/intui"
+    alias clr="color" 

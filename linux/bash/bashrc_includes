@@ -30,5 +30,5 @@
     source $HOME/.config/sr.sh/sr.sh
 
 ## courses script
-    source $HOME/files/nerd/intui/src/sh/main.sh
+    source /home/intui/src/sh/main.sh
 

@@ -71,5 +71,5 @@
 ## "cdg", "ghb" to open the bkp directories
     alias cdg="vim $HOME/bkp/codeberg"
     alias ghb="vim $HOME/bkp/github"
-
-
+## draw to open drawio
+    alias draw="cd /usr/bin/ && ./drawio.AppImage --no-sandbox & disown && exit"

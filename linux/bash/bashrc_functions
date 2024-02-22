@@ -42,7 +42,7 @@
             gpterm
         fi
     }
-
+    alias gpt4="gpt 4"
 
 # SITE FUNCTION
 ## "site" to sync site files and push them to the website

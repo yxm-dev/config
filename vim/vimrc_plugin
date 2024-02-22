@@ -145,7 +145,8 @@
 ">> set the key to expand the snippets
     let g:UltiSnipsExpandTrigger="<s-tab>"
 ">> set the key to change the focus inside the snippet
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<s-tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
 
 " ASYNCOMPLETE
 ">> set the key to move to the next item in the list
@@ -154,12 +155,12 @@
     inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
 " SYNTAX RANGE
-">> \hltex to highlight .tex in  md files
-    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('\\hltex', '\\hltex', 'tex', 'NonText')
+">> highlight languagens in markdown files
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```bash', '```', 'bash', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c', '```', 'c', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```cpp', '```', 'cpp', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c++', '```', 'cpp', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```csharp', '```', 'cs', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c#', '```', 'cs', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```css', '```', 'css', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```html', '```', 'html', 'NonText')
@@ -167,7 +168,14 @@
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```java', '```', 'java', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```javascript', '```', 'javascript', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```js', '```', 'javascript', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```kotlin', '```', 'kotlin', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```lua', '```', 'lua', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```php', '```', 'php', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```python', '```', 'python', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```ruby', '```', 'ruby', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```rust', '```', 'rust', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```swift', '```', 'swift', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('\\hltex', '\\hltex', 'tex', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```tex', '```', 'tex', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```typescript', '```', 'typescript', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```ts', '```', 'typescript', 'NonText') 

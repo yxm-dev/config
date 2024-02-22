@@ -19,3 +19,6 @@
     xinput set-prop $touchpad 360 1 2 3
 # starting i3
     i3
+# executing backup script
+    source $HOME.bashrc
+    xterm -hold -e "int bkp"

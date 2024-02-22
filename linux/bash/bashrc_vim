@@ -93,6 +93,29 @@
             fi
         fi
     }
+## "bkp" function to open backup files
+    function bkp(){
+        bkp_dir=/home/bkp
+        if [[ -z "$1" ]]; then
+            vim $bkp_dir
+            return 0
+        fi
+        mapfile -t bkp_paths < <(find $bkp_dir -mindepth 1 -maxdepth 1 -type d)
+        for path in ${bkp_paths[@]}; do
+            dir=${path##*/}
+            if [[ "$1" == "$dir" ]]; then
+                vim $path
+                has_dir="yes"
+                return 0
+            else
+                has_dir="no"
+            fi
+        done
+        if [[ "$has_dir" == "no" ]]; then
+            echo "error: There is no such kind of bkp dir."
+            return 1
+        fi    
+    }
 
 # ALIASES
 ## "bashrc", "bashc", etc, to open bash configuration files
@@ -119,9 +142,8 @@
     alias s="vim ~/files/nerd/site/md"
 ## "r" and "rd" to open sketch docs
     alias r="vim ~/files/org/rascunho.md"
-## "b" or "bib" to open the list of books
-    alias bib="vim ~/files/nerd/bib && cd ~/files/nerd/bib/"
-    alias b="bib"
+## "b" to open the list of books
+    alias b="vim ~/files/nerd/bib && cd ~/files/nerd/bib/"
 ## "cert" to open list of certifications
     alias cert="vim ~/files/nerd/cert/info.m && cd ~/files/nerd/cert"
 ## "devs" or "list" to open devs list
@@ -137,4 +159,5 @@
     alias trl="vim -c ':VimTrello'"
 ## "color" and "clr" to open vim essence colorscheme
     alias color="vim -c 'startinsert' $HOME/files/nerd/dev/vim/essence.vim/colors/essence.vim && cd $HOME/files/nerd/dev/vim/essence.vim"
-    alias clr="color" 
+    alias clr="color"
+

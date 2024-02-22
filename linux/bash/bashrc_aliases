@@ -8,7 +8,7 @@
 ## "shutdown" to shutdown quickly
     alias shutdown="shutdown -h now"
 ## "shtdw" and "shdw" to push, make a bkp and then shutdown quickly 
-    alias shtdw="synca && gpps && gppp && s3 -ps yxm-bkp && shutdown -h now"
+    alias shtdw="backup && shutdown -h now"
     alias shdw="shtdw"
 ## "restart" or "rst" restart xorg
     alias restart="xrdb $HOME/.Xresources"
@@ -21,18 +21,29 @@
 # APPLICATIONS
 ## "vi" and "v" to open vim with Netrw.
     function vim(){
-        command vim -c "syntax spell toplevel" "$@"
+        if [[ -f "$1" ]]; then
+            dir=${1%/*}
+            cd $dir
+            command vim -c "syntax spell toplevel" "$@"
+        elif [[ -d "$1" ]]; then
+            cd $1
+            command vim -c "syntax spell toplevel" "$@"
+        else
+            command vim -c "syntax spell toplevel" "$@"
+        fi
         if [[ -f "/tmp/vim_cwd" ]]; then
             cd $(cat /tmp/vim_cwd)
             sudo rm /tmp/vim_cwd
-        else
+        else            
             return
-        fi
+        fi  
     }
     alias vi="vim -c ":Lexplore" ~/.tmp"
     alias v="vi"
 ## "z" to open zathura
-    alias z="zathura"    
+    alias z="zathura"
+## "x" to to execute xdg-open
+    alias x="xdg-open"
 ## "xrn" and "xournal" to open xournalpp
     alias xournal="xournalpp & disown" 
     alias xrn="xournal & disown && exit"
@@ -68,8 +79,8 @@
     alias wa="web -a"
     alias wl="web -l"
     alias ws="web -s"
-## "cdg", "ghb" to open the bkp directories
-    alias cdg="vim $HOME/bkp/codeberg"
-    alias ghb="vim $HOME/bkp/github"
 ## draw to open drawio
-    alias draw="cd /usr/bin/ && ./drawio.AppImage --no-sandbox & disown && exit"
+    function draw(){
+        drawio.AppImage $1 --no-sandbox & disown
+        exit
+    }

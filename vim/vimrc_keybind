@@ -92,6 +92,14 @@
  
     autocmd Filetype md,markdown inoremap \\, <esc>:call UpdateLabsList()<cr>:startinsert<cr>
     autocmd Filetype md,markdown nnoremap \\, :call UpdateLabsList()<cr>:startinsert<cr>
+
+"> Preview
+">> in .gv files, 'f5' to preview the image
+    autocmd Filetype dot inoremap <f5> <esc>:AsyncRun dot -Txlib % &<cr>:startinsert<cr>
+    autocmd Filetype dot nnoremap <f5> :AsyncRun dot -Txlib % &<cr>:startinsert<cr>
+">> in .md files, 'f5' to preview pdf
+    autocmd Filetype md,markdown inoremap <f5> <esc>:AsyncRun dpc<cr>:startinsert<cr>
+    autocmd Filetype md,markdown nnoremap <f5> :AsyncRun dpc<cr>:startinsert<cr>
     
 "> SELECTING
 ">> use 'shift+arrows' to select text.
@@ -116,8 +124,8 @@
       
 "> GENERAL
 ">> save with 'ctrl+s'
-    nnoremap <c-s> :w!<cr>i
-    inoremap <c-s> <esc> :w!<cr>i
+    nnoremap <c-s> :w!<cr>:startinsert<cr>
+    inoremap <c-s> <esc> :w!<cr>:startinsert<cr>
     vnoremap <c-s> <esc> :w!<cr>
 ">> quit without saving with 'ctrl+q'
     nnoremap <c-q> :q!<cr>
@@ -130,9 +138,9 @@
     inoremap \\<right> <esc>gt :startinsert<cr>
     nnoremap \\<left> gT :startinsert<cr>
     inoremap \\<left> <esc>gT :startinsert<cr>
-">> 'shif+tab' and 'alt+tab' to change tab
-    nnoremap <s-tab> gt :startinsert<cr>
-    inoremap <s-tab> <esc>gt :startinsert<cr>
+">> 'ctrl+tab' and 'alt+tab' to change tab
+    nnoremap <c-tab> gt :startinsert<cr>
+    inoremap <c-tab> <esc>gt :startinsert<cr>
     nnoremap <m-tab> gT :startinsert<cr>
     inoremap <m-tab> <esc>gT :startinsert<cr>
 ">> 'alt+left', 'alt+right', 'alt+up' and 'alt+down' to change window

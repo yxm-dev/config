@@ -28,32 +28,3 @@
     source $HOME/files/config/linux/bash/bashrc_vim
     source $HOME/files/config/linux/bash/bashrc_includes
 
-## Auxiliary Data
-    declare -a SR_escapes
-    SR_espapes[0]="\\"
-    SR_espapes[1]="&"
-    SR_espapes[2]="/"
-    SR_espapes[3]="$"
-    SR_espapes[4]="["
-    SR_espapes[5]="]"
-    SR_espapes[6]="("
-    SR_espapes[7]=")"
-    SR_espapes[8]="*"
-    SR_espapes[9]="+"
-    SR_espapes[10]="."
-    SR_espapes[11]="?"
-    SR_espapes[12]="|"
-    SR_espapes[13]="^"
-    SR_espapes[14]="!"
-    SR_espapes[15]="\'"
-    SR_espapes[16]="\""
-    SR_espapes[17]="\`"
-
-## Auxiliary Functions
-    function SR_escape(){
-        escaped="$1"
-        for i in ${!SR_escapes[@]}; do
-            escaped=$(echo $escaped | sed "s/${SR_escapes[$i]}/\\${SR_escapes[$i]}")
-        done
-        echo "$escaped"
-    } 

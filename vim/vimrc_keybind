@@ -85,21 +85,11 @@
     endfunction
     autocmd Filetype md,markdown inoremap \, <esc>:call UpdateOrderedList()<cr>:startinsert<cr>
     autocmd Filetype md,markdown nnoremap \, :call UpdateOrderedList()<cr>:startinsert<cr>
-">> in md files, '\\,' to update lab lists
-    function! UpdateLabsList()
-        let c=0 | g/^\*\s\+\`lab\s\+\zs\d\+\ze\`/let c+=1|s//\=c
-    endfunction
- 
-    autocmd Filetype md,markdown inoremap \\, <esc>:call UpdateLabsList()<cr>:startinsert<cr>
-    autocmd Filetype md,markdown nnoremap \\, :call UpdateLabsList()<cr>:startinsert<cr>
 
 "> Preview
 ">> in .gv files, 'f5' to preview the image
     autocmd Filetype dot inoremap <f5> <esc>:AsyncRun dot -Txlib % &<cr>:startinsert<cr>
     autocmd Filetype dot nnoremap <f5> :AsyncRun dot -Txlib % &<cr>:startinsert<cr>
-">> in .md files, 'f5' to preview pdf
-    autocmd Filetype md,markdown inoremap <f5> <esc>:AsyncRun dpc<cr>:startinsert<cr>
-    autocmd Filetype md,markdown nnoremap <f5> :AsyncRun dpc<cr>:startinsert<cr>
     
 "> SELECTING
 ">> use 'shift+arrows' to select text.

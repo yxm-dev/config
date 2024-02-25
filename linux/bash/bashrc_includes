@@ -30,6 +30,3 @@
     source $HOME/.config/sr.sh/sr.sh
 ## to make bash more modular
     source $HOME/.config/bpm.sh/bpm.sh
-## courses script
-    source /home/intui/src/sh/main.sh
-

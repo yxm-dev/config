@@ -121,3 +121,5 @@
 " OTHER config
 "> Include secrets
     source $HOME/files/sec/vimrc
+"> Include inTui configs
+    source /home/intui/src/config/vim/vimrc

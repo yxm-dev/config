@@ -124,7 +124,6 @@
     alias basha="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_aliases"
     alias bashv="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_vim"
     alias bashf="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_functions"
-    alias bashw="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_web"
     alias bashi="vim -c 'startinsert' $HOME/files/config/linux/bash/bashrc_includes"
 ## "vimrc", "vimra" and "vimrp" to open vim configuration files
     alias vimrc="vim -c 'startinsert' ~/files/config/vim/vimrc"

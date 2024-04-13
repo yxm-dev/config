@@ -47,11 +47,11 @@
         au FileType netrw nmap <buffer> r <c-l>
 ">> 'mkf', 'd', 'D' , 'mv' and 'cp' to do the basic stuff
         au FileType netrw nmap <buffer> mkf cd:AsyncRun touch 
-        au FileType netrw nmap <buffer> mkd cd:AsyncRun mkdir
-        au FileType netrw nmap <buffer> .f cd:AsyncRun touch
+        au FileType netrw nmap <buffer> mkd cd:AsyncRun mkdir 
+        au FileType netrw nmap <buffer> .f cd:AsyncRun touch 
         au FileType netrw nmap <buffer> .d cd:AsyncRun mkdir 
         au FileType netrw nmap <buffer> d cd:AsyncRun d 
-        au FileType netrw nmap <buffer> D cd:AsyncRun Dy 
+        au FileType netrw nmap <buffer> rm cd:AsyncRun rm -r 
         au FileType netrw nmap <buffer> mv cd:AsyncRun mv 
         au FileType netrw nmap <buffer> cp cd:AsyncRun cp -r 
     augroup END
@@ -117,6 +117,14 @@
 ">> '\\r' to get the references 
     nnoremap \\r :LspReferences<cr>
     inoremap \\r <esc>:LspReferences<cr>
+
+if executable('bash-language-server')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'bash-language-server',
+        \ 'cmd': {server_info->['bash-language-server', 'start']},
+        \ 'allowlist': ['sh', 'bash'],
+        \ })
+endif
     
 " ALE
 ">> disable ALE LSP completion
@@ -163,8 +171,9 @@
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```csharp', '```', 'cs', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```c#', '```', 'cs', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```css', '```', 'css', 'NonText')
-    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```html', '```', 'html', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```fsharp', '```', 'fs', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```go', '```', 'go', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```html', '```', 'html', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```java', '```', 'java', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```javascript', '```', 'javascript', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```js', '```', 'javascript', 'NonText')
@@ -178,4 +187,11 @@
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('\\hltex', '\\hltex', 'tex', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```tex', '```', 'tex', 'NonText')
     autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```typescript', '```', 'typescript', 'NonText')
-    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```ts', '```', 'typescript', 'NonText') 
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```ts', '```', 'typescript', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```vim', '```', 'vim', 'NonText')
+    autocmd BufWinEnter,FileType markdown call SyntaxRange#Include('```yaml', '```', 'yaml', 'NonText')
+
+" VIM-CHATGPT
+">> 'ctrl+g' to ask a question
+    inoremap <c-g> <esc>:Ask 
+    nnoremap <c-g> :Ask 

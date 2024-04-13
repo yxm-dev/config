@@ -109,6 +109,7 @@
     Plug 'inkarkat/vim-SyntaxRange'
 ">> other
     Plug 'yoshio15/vim-trello'
+    Plug 'CoderCookE/vim-chatgpt'
     call plug#end()
 "> Automatically install missing plugins
     autocmd VimEnter *

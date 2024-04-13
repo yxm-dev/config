@@ -26,5 +26,4 @@
     source $HOME/files/config/linux/bash/bashrc_aliases
     source $HOME/files/config/linux/bash/bashrc_functions
     source $HOME/files/config/linux/bash/bashrc_vim
-    source $HOME/files/config/linux/bash/bashrc_includes
-
+    source $HOME/files/config/linux/bash/bashrc_includes    

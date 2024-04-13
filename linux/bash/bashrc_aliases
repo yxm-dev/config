@@ -8,7 +8,7 @@
 ## "shutdown" to shutdown quickly
     alias shutdown="shutdown -h now"
 ## "shtdw" and "shdw" to push, make a bkp and then shutdown quickly 
-    alias shtdw="backup && shutdown -h now"
+    alias shtdw="int bkp && shutdown -h now"
     alias shdw="shtdw"
 ## "restart" or "rst" restart xorg
     alias restart="xrdb $HOME/.Xresources"
@@ -47,6 +47,8 @@
 ## "xrn" and "xournal" to open xournalpp
     alias xournal="xournalpp & disown" 
     alias xrn="xournal & disown && exit"
+## "trsl" to use ltranslate
+    alias trsl="ltranslate"
 ## "buds" to connect to my headphone
     alias buds="bluetoothctl connect 40:35:E6:04:8E:66"
 ## "mon" to configure the additional monitor
@@ -84,3 +86,4 @@
         drawio.AppImage $1 --no-sandbox & disown
         exit
     }
+

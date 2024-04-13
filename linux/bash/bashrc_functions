@@ -34,15 +34,51 @@
 
 # GPT FUNCTION
     function gpt(){
-        if [[ -z "$1" ]]; then
-            sed -i '/modelname/c\modelname = gpt-3.5-turbo-16k' $HOME/.config/gpterminator/config.ini
-            gpterm
-        elif [[ "$1" == "4" ]]; then
-            sed -i '/modelname/c\modelname = gpt-4-1106-preview' $HOME/.config/gpterminator/config.ini
-            gpterm
-        fi
+        vim -c "let g:chat_gpt_model='gpt-3.5-turbo-16k'" -c "Ask $@" 
     }
-    alias gpt4="gpt 4"
+    function gpt4(){
+        vim -c "let g:chat_gpt_model='gpt-4-1106-preview'" -c "Ask $@"
+    }
+
+# BKP FUNCTION
+
+function bkp(){
+    cwd=$PWD
+    today=$(date +'%d-%m-%y')
+    echo "Pushing yxm files to S3..."
+    echo "> syncing $HOME/files/..."
+    rsync -av --delete --progress $HOME/files/ /home/bkp/s3/yxm/files/ > /dev/null 2>&1
+    echo "> syncing $HOME/.config..."
+    rsync -av --delete --progress $HOME/.config/ /home/bkp/s3/yxm/dot_config/ > /dev/null 2>&1
+    echo "> pushing to S3..."
+    aws s3 sync /home/bkp/s3/yxm s3://yxm-bkp --delete > /dev/null 2>&1
+    echo "Done!"
+    echo "----------"
+
+    echo "Pushing yxm files to pcloud..."
+    echo "> syncing $HOME/files/..."
+    rsync -av --delete --progress $HOME/files/ /home/bkp/pcloud/files/ > /dev/null 2>&1
+    echo "> syncing $HOME/.config/..."
+    rsync -av --delete --progress $HOME/.config/ /home/bkp/pcloud/dot_config/ > /dev/null 2>&1
+    echo "> pushing to pcloud..."
+    rclone sync /home/bkp/pcloud/ pcloud: > /dev/null 2>&1
+    echo "Done!"
+    echo "----------"
+
+    echo "Pushing yxm files to codeberg..."
+    echo "> syncing $HOME/files/..."
+    rsync -av --delete --progress --exclude '.git/*' --exclude='*.png' --exclude='*.jpeg' --exclude='*.webp' --exclude='*.mp4' --exclude='*.drawio' $HOME/files/ /home/bkp/cdg/backup/ > /dev/null 2>&1
+    cd /home/bkp/cdg/backup/
+    echo "> adding files to stage..."
+    git add . > /dev/null 2>&1
+    echo "> commiting..."
+    git commit -m "$today" > /dev/null 2>&1
+    echo "> pushing..."
+    git push backup master --force > /dev/null 2>&1
+    echo "Done!"
+    echo "----------"
+}
+
 
 # SITE FUNCTION
 ## "site" to sync site files and push them to the website

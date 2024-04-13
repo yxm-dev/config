@@ -20,5 +20,4 @@
 # starting i3
     i3
 # executing backup script
-    source $HOME.bashrc
-    xterm -hold -e "int bkp"
+    xterm -hold -e intui_bkp.sh
